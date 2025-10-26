@@ -1,0 +1,97 @@
+.table {
+  width: 100%;
+  border: 0.1vw rgba(217, 217, 217, 1) solid;
+  padding: 1vw;
+  border-radius: 0.8vw;
+
+  .orange {
+    color: rgba(213, 182, 130, 1);
+  }
+
+  .icons {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    height: 2.5vw;
+
+    .icon {
+      cursor: pointer;
+      background-size: 100% 100%;
+      margin: 0.2vw 0.4vw;
+
+      &.view {
+        background-image: url(/assets/images/view.png);
+        width: 2vw;
+      }
+
+      &.edit {
+        background-image: url(/assets/images/edit.png);
+        width: 2vw;
+      }
+
+      &.delete {
+        background-image: url(/assets/images/delete.png);
+        width: 1.8vw;
+      }
+    }
+  }
+
+
+}
+
+::ng-deep {
+  .p-datatable-thead>tr>th {
+    font-size: 1.2vw;
+    font-family: sans;
+    font-weight: bold;
+    color: black;
+  }
+
+  .p-datatable-tbody>tr>td {
+    p {
+      color: black;
+      font-size: 1.4vw;
+      font-weight: 700;
+      font-family: sans;
+    }
+  }
+
+  .p-datatable.p-datatable-striped .p-datatable-tbody>tr:nth-child(odd) {
+    background: rgba(241, 241, 241, 1);
+  }
+
+  p-paginator {
+    display: none !important;
+  }
+}
+
+.custom-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  margin-top: 2vw;
+
+  span {
+    border: 0.1vw rgba(217, 217, 217, 1) solid;
+    border-radius: 2vw;
+    padding: 0.8vw 3vw;
+    background: #fff;
+    font-size: 1.5vw;
+  }
+
+  button {
+    background: none;
+    border: none;
+    font-size: 2vw;
+    margin: 0vw 1vw;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 1);
+    font-weight: bold;
+
+
+    &:disabled {
+      color: rgba(187, 187, 187, 1);
+      cursor: not-allowed;
+    }
+  }
+}

@@ -1,0 +1,19 @@
+#container-colored{
+  width: 100%;
+  padding: 10% 6%;
+  border-radius: 0.5vw;
+  p{
+    color: rgba(255, 255, 255, 1);
+  }
+  .txt{
+    p{
+      font-size: 1.6vw;
+    }
+  }
+  .num{
+    p{
+      font-size: 1.9vw;
+      font-weight: 500;
+    }
+  }
+}

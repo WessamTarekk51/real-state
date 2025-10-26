@@ -1,0 +1,11 @@
+
+
+<div class="select">
+  <!-- [(ngModel)]="selectedOption" -->
+  <select (change)="getvalue($event)">
+    <option value="" disabled selected>{{placeholder}}</option>
+    <option *ngFor="let option of options" [value]="option">
+      {{option.name}}
+    </option>
+  </select>
+</div>

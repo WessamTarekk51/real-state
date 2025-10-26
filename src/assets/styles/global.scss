@@ -1,0 +1,202 @@
+// Include theming for Angular Material with `mat.theme()`.
+// This Sass mixin will define CSS variables that are used for styling Angular Material
+// components according to the Material 3 design spec.
+// Learn more about theming and how to use it for your application's
+// custom components at https://material.angular.dev/guide/theming
+@use '@angular/material'as mat;
+
+html {
+  @include mat.theme((color: (primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    ));
+}
+
+body {
+  // Default the application to a light color theme. This can be changed to
+  // `dark` to enable the dark color theme, or to `light dark` to defer to the
+  // user's system settings.
+  color-scheme: light;
+
+  // Set a default background, font and text colors for the application using
+  // Angular Material's system-level CSS variables. Learn more about these
+  // variables at https://material.angular.dev/guide/system-variables
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  font: var(--mat-sys-body-medium);
+
+  // Reset the user agent margin.
+  margin: 0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  src: url(src/assets/fonts/ProductSans-Regular.ttf);
+  font-family: sans;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+p,
+div,
+span {
+  font-size: 1.6vw;
+  font-family: sans !important;
+
+  &.big {
+    font-size: 2vw;
+    font-weight: 900;
+  }
+
+  &.blue {
+    color: rgba(16, 55, 70, 1);
+  }
+
+  &.white {
+    color: rgba(246, 246, 248, 1);
+  }
+}
+
+body {
+  direction: rtl;
+}
+
+#container-page {
+  width: 100%;
+  height: auto;
+  padding: 2%;
+}
+
+form {
+
+  label {
+    font-size: 1.4vw;
+    margin-bottom: 0.5%;
+
+    &.blue {
+      color: rgba(16, 55, 70, 1);
+    }
+
+    &.white {
+      color: rgba(246, 246, 248, 1);
+    }
+  }
+
+  input {
+    width: 98%;
+    height: 4.5vh;
+    padding: 1%;
+    border-radius: 0.4vw;
+    border: none;
+    outline: none;
+    background: rgba(255, 255, 255, 0.5);
+    color: #fff;
+    font-size: 1.2vw;
+  }
+
+  input::placeholder {
+    color: #ddd;
+  }
+}
+
+.subTitle {
+  margin: 0.5% 0%;
+
+  p {
+    font-size: 1.9vw;
+    color: rgba(0, 0, 0, 1);
+    font-weight: 700;
+  }
+}
+
+.container-filter {
+  width: 100%;
+  flex-direction: column;
+  padding: 2%;
+  background-color: rgba(246, 246, 248, 1);
+
+  .title-filter {
+    margin-bottom: 1vw;
+
+    p {
+      font-size: 1.8vw;
+      font-weight: 400;
+    }
+  }
+
+  .content-filter {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .thrid {
+      width: 32%;
+    }
+
+    .half {
+      width: 45%;
+    }
+  }
+
+}
+
+.container-table {
+  width: 100%;
+  height: auto;
+  overflow-y: auto;
+
+}
+
+.buttons {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: end;
+  margin: 1.5vw 0;
+}
+
+::-webkit-scrollbar {
+  width: 0.4vw;
+}
+
+::-webkit-scrollbar-track {
+  background: white;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(16, 55, 70, 1);
+  border-radius: 1vw;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
+
+.model-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1vw 8vw;
+  p{
+    font-family: sans !important;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+  }
+}

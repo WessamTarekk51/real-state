@@ -1,0 +1,35 @@
+<div id="container-page">
+  <div class="container-filter">
+    <div class="title-filter">
+      <p>البحث</p>
+    </div>
+    <div class="content-filter">
+      <div class="thrid">
+        <app-input-txt [placeholder]="'رقم الارض'"></app-input-txt>
+      </div>
+      <div class="thrid">
+        <app-input-txt [placeholder]="'اسم الأرض'"></app-input-txt>
+      </div>
+      <div class="thrid">
+        <app-input-select [placeholder]="'الموقع'"></app-input-select>
+      </div>
+      <div class="thrid">
+        <app-input-date [placeholder]="'تاريخ الانشاء'"></app-input-date>
+      </div>
+      <div class="thrid">
+        <app-input-txt [placeholder]="'المساحة (م2)'"></app-input-txt>
+      </div>
+
+      <div class="thrid">
+        <app-input-txt [placeholder]="'عدد العمارات'"></app-input-txt>
+      </div>
+    </div>
+  </div>
+  <div class="buttons">
+    <app-button [className]="'custom'" [buttonTxt]="'تصدير إلى Excel'"></app-button>
+    <app-button [className]="'main'" [buttonTxt]="'+ إضافة قطعة أرض جديدة'"></app-button>
+  </div>
+  <div class="container-table">
+    <app-table (delete)="deleteLand($event)"></app-table>
+  </div>
+</div>

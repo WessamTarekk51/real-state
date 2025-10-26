@@ -1,0 +1,45 @@
+.button {
+  width: auto;
+  padding: 1vw 1.5vw;
+  margin: 0 0.5vw;
+  border-radius: 0.5vw;
+  cursor: pointer;
+  min-width: 8vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.custom {
+    border: 0.1vw rgba(16, 55, 70, 1) solid;
+
+    p {
+      color: rgba(16, 55, 70, 1);
+    }
+  }
+
+  &.main {
+    background-color: rgba(16, 55, 70, 1);
+    border: none;
+
+    p {
+      color: white;
+    }
+  }
+
+  &.delete {
+    background-color: rgba(221, 43, 46, 1);
+
+    p {
+      color: white;
+    }
+  }
+
+  &.gray {
+    background-color: rgba(184, 184, 184, 1);
+
+    p {
+      color: white;
+    }
+  }
+
+}
