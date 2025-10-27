@@ -26,8 +26,8 @@
     </div>
   </div>
   <div class="buttons">
-    <app-button [className]="'custom'" [buttonTxt]="'تصدير إلى Excel'"></app-button>
-    <app-button [className]="'main'" [buttonTxt]="'+ إضافة قطعة أرض جديدة'"></app-button>
+    <app-button [className]="'custom'" [buttonTxt]="'تصدير إلى Excel'" ></app-button>
+    <app-button [className]="'main'" [buttonTxt]="'+ إضافة قطعة أرض جديدة'" (buttonClick)="createLand()"></app-button>
   </div>
   <div class="container-table">
     <app-table (delete)="deleteLand($event)"></app-table>

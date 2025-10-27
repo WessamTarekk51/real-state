@@ -6,6 +6,7 @@ import { Table } from "src/app/shared/components/table/table";
 import { Button } from "src/app/shared/components/button/button";
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteLand } from './delete-land/delete-land';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lands',
@@ -15,12 +16,11 @@ import { DeleteLand } from './delete-land/delete-land';
 })
 export class Lands {
 
-  constructor(private dialog:MatDialog){
+  constructor(private dialog: MatDialog, private router:Router) {
 
   }
 
-  deleteLand(data:any) {
-    console.log(data)
+  deleteLand(data: any) {
     const dialogRef = this.dialog.open(DeleteLand, {
       data: { ...data },
       panelClass: 'center-dialog'
@@ -31,6 +31,9 @@ export class Lands {
       }
     });
   }
+
+  createLand() {
+    this.router.navigate(['/real-state-management/lands/CreateLand']);
+  }
 }
-// InputTxt
-// , InputSelect, InputDate, Table
+
