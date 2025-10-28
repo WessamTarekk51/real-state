@@ -1,13 +1,13 @@
 import { NgClass, NgIf } from '@angular/common';
-import { Component, EventEmitter, Input, input, Output, output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-input-txt',
-  imports: [NgClass, NgIf],
-  templateUrl: './input-txt.html',
-  styleUrl: './input-txt.scss'
+  selector: 'app-input-num',
+  imports: [NgClass,NgIf],
+  templateUrl: './input-num.html',
+  styleUrl: './input-num.scss'
 })
-export class InputTxt {
+export class InputNum {
   @Input() placeholder: string;
   @Input() formStyle: boolean;
   @Input() required: boolean;

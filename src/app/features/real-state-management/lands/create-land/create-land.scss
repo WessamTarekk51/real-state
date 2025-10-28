@@ -11,21 +11,14 @@
 
     .half {
       width: 48%;
+      display: flex;
+      justify-content: space-between;
     }
 
     .full {
       width: 100%;
     }
-    .input{
-      display: flex;
-      width: 100%;
-      flex-direction: column;
-      label{
-        font-size: 1.4vw;
-      }
-      span{
-        color: rgba(255, 52, 52, 1);
-      }
-    }
+
+
   }
 }

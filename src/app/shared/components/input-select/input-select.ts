@@ -1,15 +1,19 @@
-import { NgForOf } from '@angular/common';
+import { NgForOf, NgIf, NgClass } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-input-select',
-  imports: [NgForOf],
+  imports: [NgForOf, NgIf, NgClass],
   templateUrl: './input-select.html',
   styleUrl: './input-select.scss'
 })
 export class InputSelect {
   @Input() options: any[]
   @Input() placeholder: string;
+  @Input() formStyle: boolean;
+  @Input() required: boolean;
+  @Input() labelTxt: string;
+
   @Output() selectValue = new EventEmitter<any>();
 
 

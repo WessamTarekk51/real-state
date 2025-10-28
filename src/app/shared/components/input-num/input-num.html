@@ -1,5 +1,5 @@
 <div class="input">
   <label>{{labelTxt}} <span *ngIf="required">*</span></label>
-  <input type="text" [ngClass]="{'inputForm':formStyle}" pInputText [placeholder]="placeholder"
+  <input type="number" [ngClass]="{'inputForm':formStyle}" pInputText [placeholder]="placeholder" min="0"
     (input)="getvalue($event)" />
 </div>
