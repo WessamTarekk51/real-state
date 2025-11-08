@@ -1,13 +1,17 @@
+import { NgClass, NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-input-date',
-  imports: [],
+  imports: [NgClass,NgIf],
   templateUrl: './input-date.html',
   styleUrl: './input-date.scss'
 })
 export class InputDate {
   @Input() placeholder: string;
+  @Input() formStyle: boolean;
+  @Input() required: boolean;
+  @Input() labelTxt: string
   @Output() inputValue = new EventEmitter<any>();
   inputType: string = 'text';
 

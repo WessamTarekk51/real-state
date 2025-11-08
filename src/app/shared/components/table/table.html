@@ -1,4 +1,4 @@
-<div class="table">
+<div class="table" *ngIf="products">
   <p-table [columns]="cols" [value]="products" [rows]="14" [paginator]="true" [lazy]="false" [(first)]="first"
     (onPage)="onPageChange($event)" stripedRows [tableStyle]="{'min-width': '50rem'}">
     <ng-template #header let-columns>
@@ -24,10 +24,21 @@
           }
           @if(col.control){
           <div class="icons">
-            <div class="icon view" ></div>
-            <div class="icon edit"></div>
+            <div class="icon view" (click)="viewItem(rowData)"></div>
+            <div class="icon edit" (click)="editItem(rowData)"></div>
             <div class="icon delete" (click)="deleteItem(rowData)"></div>
           </div>
+          }
+          @if(col.status){
+          @if(rowData.status == 1){
+          <div class="status red">
+            <p>تحت الإنشاء</p>
+          </div>
+          }@else {
+          <div class="status green">
+            <p>مكتملة</p>
+          </div>
+          }
           }
         </td>
         }

@@ -1,0 +1,16 @@
+  <div class="input">
+    <label>{{labelTxt}} <span *ngIf="required">*</span></label>
+
+    <div class="upload-box" (click)="fileInput.click()" [ngClass]="{'inputForm':formStyle}">
+
+      <span class="file-name">{{ fileName || placeholder }}</span>
+
+      <div class="upload-btn">
+        <img src="assets/images/upload.png" alt="upload" />
+      </div>
+
+      <input type="file" #fileInput (change)="onFileSelected($event)" hidden accept=".pdf,.jpg,.jpeg,.png,.docx" />
+    </div>
+
+    <small class="file-hint">يمكن رفع أنواع ملفات مثل PDF, JPG, PNG, DOCX</small>
+  </div>

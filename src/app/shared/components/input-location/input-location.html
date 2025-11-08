@@ -1,0 +1,26 @@
+<div class="p-4">
+  <h2>تحديد موقع بالنقر على الخريطة</h2>
+  <button (click)="getLocation()"> احصل على موقعي الحالي</button>
+
+  <div style="height: 500px; width: 100%; margin-top: 1rem;">
+    <google-map
+      [center]="{ lat: latitude, lng: longitude }"
+      [zoom]="zoom"
+      height="500px"
+      width="100%"
+      (mapClick)="mapClicked($event)">
+
+      <map-marker
+        *ngIf="clickedLat && clickedLng"
+        [position]="{ lat: clickedLat, lng: clickedLng }"
+        [title]="'النقطة المحددة'">
+      </map-marker>
+    </google-map>
+  </div>
+
+  <div *ngIf="clickedLat && clickedLng" style="margin-top: 1rem;">
+    <p><strong>📍 الإحداثيات التي تم النقر عليها:</strong></p>
+    <p>Latitude: {{ clickedLat }}</p>
+    <p>Longitude: {{ clickedLng }}</p>
+  </div>
+</div>

@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { AccountRoutingModule } from "src/app/features/account/account-routing-module";
-import { Router } from '@angular/router';
-// import { NgClass } from '@angular/common';
+import { Router, RouterLink } from '@angular/router';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-side-bar',
-  imports: [PanelMenuModule, AccountRoutingModule],
+  imports: [PanelMenuModule, AccountRoutingModule,NgClass],
   templateUrl: './side-bar.html',
   styleUrl: './side-bar.scss'
 })
@@ -29,15 +29,21 @@ export class SideBar {
       {
         label: 'إدارة العقارات',
         icon: '',
+        routerLink : "/real-state-management",
         roles: [''],
         items: [
           {
-            label: '1',
-            routerLink: "/login",
+            label: 'الاراضي',
+            routerLink: "/real-state-management/lands",
             roles: [],
           },
           {
-            label: '2',
+            label: 'العمارات',
+            routerLink: "/real-state-management/builings",
+            roles: [],
+          },
+          {
+            label: 'الوحدات السكانية',
             routerLink: "/login",
             roles: [],
           }

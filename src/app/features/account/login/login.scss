@@ -31,7 +31,37 @@
       .group {
         margin-bottom: 3%;
       }
+
+      label {
+        font-size: 1.4vw;
+        margin-bottom: 0.5%;
+
+        &.blue {
+          color: rgba(16, 55, 70, 1);
+        }
+
+        &.white {
+          color: rgba(246, 246, 248, 1);
+        }
+      }
+
+      input {
+        width: 98%;
+        height: 4.5vh;
+        padding: 1%;
+        border-radius: 0.4vw;
+        border: none;
+        outline: none;
+        background: rgba(255, 255, 255, 0.5);
+        color: #fff;
+        font-size: 1.2vw;
+      }
+
+      input::placeholder {
+        color: #ddd;
+      }
     }
+
 
     .forgot {
       width: 100%;

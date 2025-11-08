@@ -32,20 +32,64 @@
     <div class="row">
       <div class="half">
         <div class="half">
-          <app-input-num [placeholder]="'اسم الأرض'" [formStyle]="true" [required]="true" [labelTxt]="'اسم الأرض'">
+          <app-input-num [placeholder]="'الطول'" [formStyle]="true" [required]="true" [labelTxt]="'الطول (م)'">
           </app-input-num>
         </div>
         <div class="half">
-          <app-input-num [placeholder]="'اسم الأرض'" [formStyle]="true" [required]="true" [labelTxt]="'اسم الأرض'">
+          <app-input-num [placeholder]="'العرض'" [formStyle]="true" [required]="true" [labelTxt]="'العرض (م)'">
           </app-input-num>
         </div>
       </div>
       <div class="half">
         <div class="full">
-          <app-input-num [placeholder]="'اسم الأرض'" [formStyle]="true" [required]="true" [labelTxt]="'اسم الأرض'">
+          <app-input-num [placeholder]="'المساحة الكلية (م²)'" [formStyle]="true" [required]="true"
+            [labelTxt]="'المساحة الكلية (م²)'">
           </app-input-num>
         </div>
       </div>
+    </div>
+    <div class="row">
+      <div class="full">
+        <app-input-text-area [placeholder]="'الوصف'" [formStyle]="true" [required]="false" [labelTxt]="'الوصف'">
+        </app-input-text-area>
+      </div>
+    </div>
+    <div class="sub-form">
+      <div class="subTitle">
+        <p>المستندات الرسمية</p>
+      </div>
+      <div class="row">
+        <div class="half">
+          <div class="full">
+            <app-input-upload [placeholder]="'تصريح البناء'" [formStyle]="true" [required]="true"
+              [labelTxt]="'تصريح البناء'"></app-input-upload>
+          </div>
+        </div>
+        <div class="half">
+          <div class="full">
+            <app-input-upload [placeholder]="'شهادة الملكية'" [formStyle]="true" [required]="true"
+              [labelTxt]="'شهادة الملكية'"></app-input-upload>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="half">
+          <div class="full">
+            <app-input-upload [placeholder]="'عقد البيع أو التمليك '" [formStyle]="true" [required]="true"
+              [labelTxt]="'عقد البيع أو التمليك '"></app-input-upload>
+          </div>
+        </div>
+        <div class="half">
+          <div class="full">
+            <app-input-upload [placeholder]="'مستندات الشهر العقاري'" [formStyle]="true" [required]="true"
+              [labelTxt]="'مستندات الشهر العقاري'"></app-input-upload>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="buttons">
+      <app-button [className]="'gray'" [buttonTxt]="'الغاء'"></app-button>
+      <app-button [className]="'main'" [buttonTxt]="'اضافة'" ></app-button>
     </div>
   </div>
 </div>

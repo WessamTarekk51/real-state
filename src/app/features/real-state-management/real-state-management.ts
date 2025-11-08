@@ -11,6 +11,7 @@ import { ChartModule } from 'primeng/chart';
 export class RealStateManagement {
   data: any;
   options: any;
+  pageTitle : string = 'إدارة العقارات'
 
   constructor(private cd : ChangeDetectorRef) { }
 

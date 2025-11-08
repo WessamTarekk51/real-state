@@ -6,8 +6,9 @@ import { Home } from './features/home/home';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
-  { path: 'home', canActivate: [NotLoggedGuard], component: Home },
+  { path: 'home', component: Home },
   { path: 'login', canActivate: [NotLoggedGuard], component: Account },
   { path: 'real-state-management', canActivate: [NotLoggedGuard], loadChildren: () => import('./features/real-state-management/real-state-management-module').then(m => m.RealStateManagementModule) },
 
 ];
+// , canActivate: [NotLoggedGuard]

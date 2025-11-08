@@ -9,5 +9,5 @@ import { ContainerColored } from "src/app/shared/components/container-colored/co
   styleUrl: './home.scss'
 })
 export class Home {
-
+  pageTitle : string = 'لوحة التحكم'
 }

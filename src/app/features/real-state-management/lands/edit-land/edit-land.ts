@@ -7,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrl: './edit-land.scss'
 })
 export class EditLand {
+  pageTitle : string = 'تعديل قطعة أرض'
 
 }

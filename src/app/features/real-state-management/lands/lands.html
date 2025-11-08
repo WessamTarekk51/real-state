@@ -29,7 +29,11 @@
     <app-button [className]="'custom'" [buttonTxt]="'تصدير إلى Excel'" ></app-button>
     <app-button [className]="'main'" [buttonTxt]="'+ إضافة قطعة أرض جديدة'" (buttonClick)="createLand()"></app-button>
   </div>
-  <div class="container-table">
-    <app-table (delete)="deleteLand($event)"></app-table>
+  <div class="container-table" *ngIf="lands && lands.length; else noData">
+    <app-table [cols]="cols" [products]="lands" (delete)="deleteLand($event)" (view)="detailesLand($event)" (edit)="editLand($event)"></app-table>
   </div>
+
+  <ng-template #noData>
+  <p class="text-center text-gray-500 mt-4">لا توجد أراضي متاحة حالياً</p>
+</ng-template>
 </div>
