@@ -1,54 +1,67 @@
 <div id="container-page">
-  <div class="container-detailes">
-    <div class="space-between">
-      <div class="title">
-        <p>عمارة أ</p>
-      </div>
-      <div class="w80f">
-        <div class="buttons">
-          <app-button [className]="'orange'" [buttonTxt]="'تعديل'"></app-button>
-          <app-button [className]="'main'" [buttonTxt]="'تصدير إلى Excel'"></app-button>
+  <div class="space-between">
+    <div class="title">
+      <p>عمارة أ</p>
+    </div>
+    <div class="w80f">
+      <div class="buttons">
+        <div class="status red green m1l">
+          <p>مكتملة</p>
         </div>
+        <app-button [className]="'orange'" [buttonTxt]="'تعديل'"></app-button>
+        <app-button [className]="'main'" [buttonTxt]="'تصدير إلى Excel'"></app-button>
       </div>
     </div>
+  </div>
+  <div class="toggle-collection">
+    <div class="collection " *ngFor="let button of buttons" [ngClass]="{'active':button.active}"
+      (click)="toggleButton(button)">
+      <p>{{button.name}}</p>
+    </div>
+
+  </div>
+  @if(activeTab == 1){
+  <div class="container-detailes">
+
     <div class="space-between">
       <div class="txt w50f">
         <p>وصف العمارة</p>
       </div>
       <div class="des w50f end">
-       <p>قطعة أرض سكنية تقع في منطقة التجمع الخامس – القاهرة الجديدة، مساحتها 500 م² (20م طول × 25م عرض)، مستطيلة الشكل، واجهة شرقية على شارع رئيسي بعرض 12م، وقريبة من الخدمات (مدرسة – مسجد – سوبرماركت).</p>
+        <p>قطعة أرض سكنية تقع في منطقة التجمع الخامس – القاهرة الجديدة، مساحتها 500 م² (20م طول × 25م عرض)، مستطيلة
+          الشكل، واجهة شرقية على شارع رئيسي بعرض 12م، وقريبة من الخدمات (مدرسة – مسجد – سوبرماركت).</p>
       </div>
     </div>
     <div class="space-between">
       <div class="txt w50f">
-        <p>المحافظة</p>
+        <p>لأرض التابعة</p>
       </div>
       <div class="des w50f end bold">
-        <p>القاهرة الجديدة</p>
+        <p>أرض A</p>
       </div>
     </div>
     <div class="space-between">
       <div class="txt w50f">
-        <p>المدينة</p>
+        <p>عدد الشقق</p>
       </div>
       <div class="des w50f end bold">
-        <p>التجمع الخامس </p>
+        <p>120 </p>
       </div>
     </div>
     <div class="space-between">
       <div class="txt w50f">
-        <p>المنطقة/الحي </p>
+        <p>عدد الأدوار </p>
       </div>
       <div class="des w50f end bold">
-        <p> حي الزهور </p>
+        <p> 6 </p>
       </div>
     </div>
     <div class="space-between">
       <div class="txt w50f">
-        <p>إحداثيات GPS </p>
+        <p>سنة البنا</p>
       </div>
       <div class="des w50f end bold">
-        <p>30.0444, 31.2357</p>
+        <p>12 يونيو 2020</p>
       </div>
     </div>
     <div class="line"></div>
@@ -85,7 +98,7 @@
     </div>
     <div class="space-between">
       <div class="txt w50f">
-        <p>تصريح البناء</p>
+        <p>شهادة السلامة الإنشائية</p>
       </div>
       <div class="file w50f end">
         <p>Document1.pdf</p>
@@ -93,9 +106,9 @@
 
       </div>
     </div>
-     <div class="space-between">
+    <div class="space-between">
       <div class="txt w50f">
-        <p>شهادة الملكية </p>
+        <p> رخصة البناء </p>
       </div>
       <div class="file w50f end">
         <p>Document1.pdf</p>
@@ -103,9 +116,9 @@
 
       </div>
     </div>
-      <div class="space-between">
+    <div class="space-between">
       <div class="txt w50f">
-        <p>عقد البيع أو التمليك  </p>
+        <p> المخططات المعمارية والكهربائية </p>
       </div>
       <div class="file w50f end">
         <p>Document1.pdf</p>
@@ -113,9 +126,9 @@
 
       </div>
     </div>
-      <div class="space-between">
+    <div class="space-between">
       <div class="txt w50f">
-        <p>مستندات الشهر العقاري</p>
+        <p>شهادة إتمام البناء</p>
       </div>
       <div class="file w50f end">
         <p>Document1.pdf</p>
@@ -123,5 +136,13 @@
 
       </div>
     </div>
+  </div> }
+  @if(activeTab == 2){
+  <div class="container-table" *ngIf="buildings && buildings.length; else noData">
+    <app-table [cols]="cols" [products]="buildings" (view)="detailesUnit($event)" (edit)="editUnit($event)"></app-table>
   </div>
+  <ng-template #noData>
+    <p class="text-center text-gray-500 mt-4">لا توجد وحدات متاحة حالياً</p>
+  </ng-template>
+  }
 </div>

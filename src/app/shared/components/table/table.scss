@@ -36,36 +36,7 @@
     }
   }
 
-  .status {
-    width: 5.5vw;
-    padding: 0.2vw;
-    display: flex;
-    border-radius: 0.6vw;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
 
-    &.red {
-      background-color: rgba(220, 38, 38, 0.1);
-
-      p {
-        color: rgba(255, 52, 52, 1);
-        font-size: 1vw;
-        font-weight: bold;
-      }
-    }
-
-    &.green {
-      background-color: rgba(18, 157, 84, 0.1);
-
-      p {
-        color: rgba(18, 157, 84, 1);
-        font-size: 1vw;
-        font-weight: bold;
-
-      }
-    }
-  }
 
 
 }
