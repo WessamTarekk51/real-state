@@ -8,6 +8,7 @@ import { Button } from "src/app/shared/components/button/button";
 import { Table } from "src/app/shared/components/table/table";
 import { DeleteBuilding } from './delete-building/delete-building';
 import { NgIf } from '@angular/common';
+import { RealStateServices } from '../real-state-services';
 
 @Component({
   selector: 'app-buildings',
@@ -20,7 +21,7 @@ export class Buildings {
   cols: any[];
   buildings: any[];
 
-  constructor(private dialog: MatDialog, private router: Router) {
+  constructor(private dialog: MatDialog, private router: Router, private RealStateServices:RealStateServices) {
 
   }
   ngOnInit(): void {
@@ -135,7 +136,15 @@ export class Buildings {
 
       }
     ]
+    this.getBuilding()
   }
+
+  getBuilding(){
+    this.RealStateServices.GetBuildings().subscribe(res=>{
+        console.log(res)
+    })
+  }
+
   deleteBuiling(data: any) {
     const dialogRef = this.dialog.open(DeleteBuilding, {
       data: { ...data },
