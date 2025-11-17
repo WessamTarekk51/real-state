@@ -9,7 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
   selector: 'app-root',
   imports: [RouterOutlet, CoreModule, SideBar, TopBar,HttpClientModule],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
 })
 export class App {
   title: string;
