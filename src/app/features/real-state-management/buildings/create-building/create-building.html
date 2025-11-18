@@ -1,11 +1,18 @@
 <div id="container-page">
-  <div class="form">
+  <form class="form" [formGroup]="createBuilding">
     <div class="row">
       <div class="half">
         <div class="full">
-          <app-input-txt [placeholder]="'اسم/رقم العمارة'" [formStyle]="true" [required]="true"
-            [labelTxt]="'اسم/رقم العمارة'">
+          <app-input-txt formControlName="name" [placeholder]="'اسم/رقم العمارة'" [formStyle]="true" [required]="true"
+            [labelTxt]="'اسم/رقم العمارة'" >
           </app-input-txt>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createBuilding.get('name')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div>
         </div>
       </div>
       <div class="half">
@@ -19,16 +26,30 @@
     <div class="row">
       <div class="half">
         <div class="full">
-          <app-input-num [placeholder]="'عدد الأدوار '" [formStyle]="true" [required]="true"
-            [labelTxt]="'عدد الأدوار '">
+          <app-input-num [placeholder]="'عدد الأدوار '" formControlName="numberOfFloors" [formStyle]="true"
+            [required]="true" [labelTxt]="'عدد الأدوار '" >
           </app-input-num>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createBuilding.get('numberOfFloors')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div>
         </div>
 
       </div>
       <div class="half">
         <div class="full">
-          <app-input-num [placeholder]="'عدد الشقق'" [formStyle]="true" [required]="true" [labelTxt]="'عدد الشقق'">
+          <app-input-num [placeholder]="'عدد الشقق'" formControlName="numberOfUnits" [formStyle]="true" [required]="true" [labelTxt]="'عدد الشقق'">
           </app-input-num>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createBuilding.get('numberOfUnits')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div>
         </div>
       </div>
     </div>
@@ -50,13 +71,27 @@
 
     <div class="row">
       <div class="half">
-        <div class="half">
-          <app-input-num [placeholder]="'الطول'" [formStyle]="true" [required]="true" [labelTxt]="'الطول (م)'">
+        <div class="half colum">
+          <app-input-num [placeholder]="'الطول'" formControlName="length" [formStyle]="true" [required]="true" [labelTxt]="'الطول (م)'">
           </app-input-num>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createBuilding.get('length')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div>
         </div>
-        <div class="half">
-          <app-input-num [placeholder]="'العرض'" [formStyle]="true" [required]="true" [labelTxt]="'العرض (م)'">
+        <div class="half colum">
+          <app-input-num [placeholder]="'العرض'" formControlName="width" [formStyle]="true" [required]="true" [labelTxt]="'العرض (م)'">
           </app-input-num>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createBuilding.get('width')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div>
         </div>
       </div>
       <div class="half">
@@ -80,6 +115,7 @@
       <div class="row">
         <div class="half">
           <div class="full">
+            <!-- (inputValue)="get()" -->
             <app-input-upload [placeholder]="' رخصة البناء'" [formStyle]="true" [required]="true"
               [labelTxt]="' رخصة البناء'"></app-input-upload>
           </div>
@@ -108,7 +144,7 @@
     </div>
     <div class="buttons">
       <app-button [className]="'gray'" [buttonTxt]="'الغاء'"></app-button>
-      <app-button [className]="'main'" [buttonTxt]="'اضافة'"></app-button>
+      <app-button [className]="'main'" (click)="validateAllFields(createBuilding)" [buttonTxt]="'اضافة'"></app-button>
     </div>
-  </div>
+  </form>
 </div>
