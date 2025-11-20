@@ -29,7 +29,7 @@ import { ControlMessages } from "src/app/shared/components/control-messages/cont
     Button,
     ReactiveFormsModule,
     ControlMessages
-],
+  ],
   templateUrl: './create-building.html',
   styleUrl: './create-building.scss',
 })
@@ -62,7 +62,6 @@ export class CreateBuilding {
     this.attachmentsArray.push(this.fb.group(attachment));
   }
   validateAllFields(formGroup: UntypedFormGroup) {
-    console.log(formGroup)
     Object.keys(formGroup.controls).forEach((field) => {
       const control = formGroup.get(field)
       if (control instanceof UntypedFormControl) {
@@ -71,5 +70,9 @@ export class CreateBuilding {
         this.validateAllFields(control)
       }
     })
+  }
+
+  getLand(event: any) {
+    console.log(this.createBuilding)
   }
 }

@@ -4,7 +4,7 @@
       <div class="half">
         <div class="full">
           <app-input-txt formControlName="name" [placeholder]="'اسم/رقم العمارة'" [formStyle]="true" [required]="true"
-            [labelTxt]="'اسم/رقم العمارة'" >
+            [labelTxt]="'اسم/رقم العمارة'">
           </app-input-txt>
           <div class="errormassage">
             <app-control-messages class="form-validation-style" [control]="createBuilding.get('name')"
@@ -17,8 +17,8 @@
       </div>
       <div class="half">
         <div class="full">
-          <app-input-select [placeholder]="'الأرض التابعة'" [formStyle]="true" [required]="true"
-            [labelTxt]="'الأرض التابعة'">
+          <app-input-select formControlName="buildingStatusId" [placeholder]="'الأرض التابعة'" [formStyle]="true" [required]="true"
+            [labelTxt]="'الأرض التابعة'" (selectValue)="getLand($event)">
           </app-input-select>
         </div>
       </div>
@@ -27,7 +27,7 @@
       <div class="half">
         <div class="full">
           <app-input-num [placeholder]="'عدد الأدوار '" formControlName="numberOfFloors" [formStyle]="true"
-            [required]="true" [labelTxt]="'عدد الأدوار '" >
+            [required]="true" [labelTxt]="'عدد الأدوار '">
           </app-input-num>
           <div class="errormassage">
             <app-control-messages class="form-validation-style" [control]="createBuilding.get('numberOfFloors')"
@@ -41,7 +41,8 @@
       </div>
       <div class="half">
         <div class="full">
-          <app-input-num [placeholder]="'عدد الشقق'" formControlName="numberOfUnits" [formStyle]="true" [required]="true" [labelTxt]="'عدد الشقق'">
+          <app-input-num [placeholder]="'عدد الشقق'" formControlName="numberOfUnits" [formStyle]="true"
+            [required]="true" [labelTxt]="'عدد الشقق'">
           </app-input-num>
           <div class="errormassage">
             <app-control-messages class="form-validation-style" [control]="createBuilding.get('numberOfUnits')"
@@ -72,7 +73,8 @@
     <div class="row">
       <div class="half">
         <div class="half colum">
-          <app-input-num [placeholder]="'الطول'" formControlName="length" [formStyle]="true" [required]="true" [labelTxt]="'الطول (م)'">
+          <app-input-num [placeholder]="'الطول'" formControlName="length" [formStyle]="true" [required]="true"
+            [labelTxt]="'الطول (م)'">
           </app-input-num>
           <div class="errormassage">
             <app-control-messages class="form-validation-style" [control]="createBuilding.get('length')"
@@ -83,7 +85,8 @@
           </div>
         </div>
         <div class="half colum">
-          <app-input-num [placeholder]="'العرض'" formControlName="width" [formStyle]="true" [required]="true" [labelTxt]="'العرض (م)'">
+          <app-input-num [placeholder]="'العرض'" formControlName="width" [formStyle]="true" [required]="true"
+            [labelTxt]="'العرض (م)'">
           </app-input-num>
           <div class="errormassage">
             <app-control-messages class="form-validation-style" [control]="createBuilding.get('width')"
