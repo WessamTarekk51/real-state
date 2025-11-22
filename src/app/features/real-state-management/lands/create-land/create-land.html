@@ -1,43 +1,90 @@
-<div id="container-page">
-  <form class="form">
+<div id="container-page" *ngIf="dataLoaded">
+  <form class="form" [formGroup]="createLands">
     <div class="row">
       <div class="half">
         <div class="full">
-          <app-input-txt [placeholder]="'اسم الأرض'" [formStyle]="true" [required]="true" [labelTxt]="'اسم الأرض'">
+          <app-input-txt formControlName="name" [placeholder]="'اسم الأرض'" [formStyle]="true" [required]="true"
+            [labelTxt]="'اسم الأرض'">
           </app-input-txt>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createLands.get('name')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div>
         </div>
       </div>
       <div class="half">
         <div class="full">
-          <app-input-select [placeholder]="'المحافظة'" [formStyle]="true" [required]="true" [labelTxt]="'المحافظة'">
+          <app-input-select formControlName="governorateId" [placeholder]="'المحافظة'" [options]="Governorates()"
+            [formStyle]="true" [required]="true" [labelTxt]="'المحافظة'">
           </app-input-select>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createLands.get('governorateId')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="half">
         <div class="full">
-          <app-input-select [placeholder]="'المدينة'" [formStyle]="true" [required]="true" [labelTxt]="'المدينة'">
+          <app-input-select formControlName="cityId" [placeholder]="'المدينة'" [options]="Cities()" [formStyle]="true"
+            [required]="true" [labelTxt]="'المدينة'">
           </app-input-select>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createLands.get('cityId')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div>
         </div>
       </div>
       <div class="half">
         <div class="full">
-          <app-input-select [placeholder]="'المنطقة/الحي'" [formStyle]="true" [required]="true"
-            [labelTxt]="'المنطقة/الحي'">
+          <app-input-select formControlName="districtId" [placeholder]="'المنطقة/الحي'" [options]="Districtes()"
+            [formStyle]="true" [required]="true" [labelTxt]="'المنطقة/الحي'">
           </app-input-select>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createLands.get('districtId')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="half">
-        <div class="half">
-          <app-input-num [placeholder]="'الطول'" [formStyle]="true" [required]="true" [labelTxt]="'الطول (م)'">
+        <div class="half colum">
+          <app-input-num formControlName="length" [placeholder]="'الطول'" [formStyle]="true" [required]="true"
+            [labelTxt]="'الطول (م)'">
           </app-input-num>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createLands.get('length')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div>
         </div>
-        <div class="half">
-          <app-input-num [placeholder]="'العرض'" [formStyle]="true" [required]="true" [labelTxt]="'العرض (م)'">
+        <div class="half colum">
+          <app-input-num formControlName="width" [placeholder]="'العرض'" [formStyle]="true" [required]="true"
+            [labelTxt]="'العرض (م)'">
           </app-input-num>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createLands.get('width')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div>
         </div>
       </div>
       <div class="half">
@@ -50,8 +97,10 @@
     </div>
     <div class="row">
       <div class="full">
-        <app-input-text-area [placeholder]="'الوصف'" [formStyle]="true" [required]="false" [labelTxt]="'الوصف'">
+        <app-input-text-area formControlName="description" [placeholder]="'الوصف'" [formStyle]="true" [required]="false"
+          [labelTxt]="'الوصف'">
         </app-input-text-area>
+
       </div>
     </div>
     <div class="sub-form">
@@ -61,35 +110,69 @@
       <div class="row">
         <div class="half">
           <div class="full">
-            <app-input-upload [placeholder]="'تصريح البناء'" [formStyle]="true" [required]="true"
-              [labelTxt]="'تصريح البناء'"></app-input-upload>
+            <app-input-upload formControlName="BulidingPermit" (inputValue)="uploadBulidingPermit($event)"
+              [placeholder]="'تصريح البناء'" [formStyle]="true" [required]="true" [labelTxt]="'تصريح البناء'">
+            </app-input-upload>
+            <div class="errormassage">
+              <app-control-messages class="form-validation-style" [control]="createLands.get('BulidingPermit')"
+                [validationMessages]="[
+              { type: 'required', message: 'هذا الحقل مطلوب' }
+            ]">
+              </app-control-messages>
+            </div>
           </div>
         </div>
         <div class="half">
           <div class="full">
-            <app-input-upload [placeholder]="'شهادة الملكية'" [formStyle]="true" [required]="true"
-              [labelTxt]="'شهادة الملكية'"></app-input-upload>
+            <app-input-upload formControlName="OwnershipCertificate" (inputValue)="uploadOwnershipCertificate($event)"
+              [placeholder]="'شهادة الملكية'" [formStyle]="true" [required]="true" [labelTxt]="'شهادة الملكية'">
+            </app-input-upload>
+            <div class="errormassage">
+              <app-control-messages class="form-validation-style" [control]="createLands.get('OwnershipCertificate')"
+                [validationMessages]="[
+              { type: 'required', message: 'هذا الحقل مطلوب' }
+            ]">
+              </app-control-messages>
+            </div>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="half">
           <div class="full">
-            <app-input-upload [placeholder]="'عقد البيع أو التمليك '" [formStyle]="true" [required]="true"
+            <app-input-upload formControlName="OwnershipContract" (inputValue)="uploadOwnershipContract($event)"
+              [placeholder]="'عقد البيع أو التمليك '" [formStyle]="true" [required]="true"
               [labelTxt]="'عقد البيع أو التمليك '"></app-input-upload>
+              <div class="errormassage">
+                <app-control-messages class="form-validation-style" [control]="createLands.get('OwnershipContract')"
+                  [validationMessages]="[
+                { type: 'required', message: 'هذا الحقل مطلوب' }
+              ]">
+                </app-control-messages>
+              </div>
           </div>
         </div>
         <div class="half">
           <div class="full">
-            <app-input-upload [placeholder]="'مستندات الشهر العقاري'" [formStyle]="true" [required]="true"
-              [labelTxt]="'مستندات الشهر العقاري'"></app-input-upload>
+            <app-input-upload formControlName="RealStateRegistrationDocuments"
+              (inputValue)="uploadRealStateRegistrationDocuments($event)" [placeholder]="'مستندات الشهر العقاري'"
+              [formStyle]="true" [required]="true" [labelTxt]="'مستندات الشهر العقاري'"></app-input-upload>
+              <div class="errormassage">
+                <app-control-messages class="form-validation-style" [control]="createLands.get('RealStateRegistrationDocuments')"
+                  [validationMessages]="[
+                { type: 'required', message: 'هذا الحقل مطلوب' }
+              ]">
+                </app-control-messages>
+              </div>
           </div>
         </div>
       </div>
     </div>
     <div class="buttons">
       <app-button [className]="'gray'" [buttonTxt]="'الغاء'"></app-button>
-      <app-button [className]="'main'" [buttonTxt]="'اضافة'" ></app-button>
+      <app-button [className]="'main'" [buttonTxt]="'اضافة'" (click)="addLand()"></app-button>
     </div>
   </form>
 </div>
+<p-toast />
+

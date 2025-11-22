@@ -120,7 +120,7 @@
           <div class="full">
             <!-- (inputValue)="get()" -->
             <app-input-upload [placeholder]="' رخصة البناء'" [formStyle]="true" [required]="true"
-              [labelTxt]="' رخصة البناء'"></app-input-upload>
+              [labelTxt]="' رخصة البناء'" (inputValue)="getUPload($event)"></app-input-upload>
           </div>
         </div>
         <div class="half">

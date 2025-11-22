@@ -28,24 +28,7 @@ export class InputSelect {
 
 
   ngOnInit(): void {
-    this.options = [
-      {
-        "name": "wess1",
-        "id": 1
-      },
-      {
-        "name": "wess3",
-        "id": 3
-      },
-      {
-        "name": "4",
-        "id": 4
-      },
-      {
-        "name": "5",
-        "id": 51
-      }
-    ]
+         console.log(this.options)
   }
 
 
@@ -67,7 +50,6 @@ export class InputSelect {
   }
 
   updateValue(event: any) {
-    console.log(event.target.value)
     const value = event.target.value;
     this.value = value;
     this.onChange(value);

@@ -13,9 +13,10 @@ import {
   Validators,
   ReactiveFormsModule,
   UntypedFormGroup,
-  UntypedFormControl
+  UntypedFormControl,
 } from '@angular/forms';
-import { ControlMessages } from "src/app/shared/components/control-messages/control-messages";
+import { ControlMessages } from 'src/app/shared/components/control-messages/control-messages';
+import { RealStateServices } from '../../real-state-services';
 
 @Component({
   selector: 'app-create-building',
@@ -28,7 +29,7 @@ import { ControlMessages } from "src/app/shared/components/control-messages/cont
     InputUpload,
     Button,
     ReactiveFormsModule,
-    ControlMessages
+    ControlMessages,
   ],
   templateUrl: './create-building.html',
   styleUrl: './create-building.scss',
@@ -37,7 +38,7 @@ export class CreateBuilding {
   pageTitle: string = 'إضافة عمارة جديدة';
   createBuilding!: FormGroup;
 
-  constructor(private fb: UntypedFormBuilder) {
+  constructor(private fb: UntypedFormBuilder,private RealStateServices:RealStateServices) {
     this.createBuilding = this.fb.group({
       name: ['', Validators.required],
       landId: ['', Validators.required],
@@ -52,8 +53,6 @@ export class CreateBuilding {
     });
   }
 
-
-
   get attachmentsArray() {
     return this.createBuilding.get('attachments') as FormArray;
   }
@@ -63,16 +62,21 @@ export class CreateBuilding {
   }
   validateAllFields(formGroup: UntypedFormGroup) {
     Object.keys(formGroup.controls).forEach((field) => {
-      const control = formGroup.get(field)
+      const control = formGroup.get(field);
       if (control instanceof UntypedFormControl) {
-        control.markAsTouched({ onlySelf: true })
+        control.markAsTouched({ onlySelf: true });
       } else if (control instanceof UntypedFormGroup) {
-        this.validateAllFields(control)
+        this.validateAllFields(control);
       }
-    })
+    });
+  }
+  getUPload(file: any) {
+    this.addAttachment(file);
+    console.log(this.createBuilding);
+  }
+  getLand(event: any) {
+    console.log(this.createBuilding);
   }
 
-  getLand(event: any) {
-    console.log(this.createBuilding)
-  }
+
 }

@@ -34,66 +34,69 @@
 }
 
 ::ng-deep {
-  .p-panelmenu {
-    gap: unset;
-  }
-
-  .p-panelmenu-item-link-active {
-    background-color: none !important;
-
-
-    span {
-      color: rgba(0, 0, 0, 1);
+  .sideBar{
+    .p-panelmenu {
+      gap: unset;
     }
 
+    .p-panelmenu-item-link-active {
+      background-color: none !important;
+
+
+      span {
+        color: rgba(0, 0, 0, 1);
+      }
+
+    }
+
+    .p-panelmenu-panel {
+      border: none !important;
+    }
+
+    .p-icon {
+      width: 1vw;
+      height: 1vw;
+      position: absolute;
+      left: 2%;
+      top: 13%;
+      transform: rotate(180deg);
+    }
+
+    .p-panelmenu-header-label {
+      color: rgba(151, 151, 151, 1);
+      font-weight: 700;
+      font-size: 1.4vw;
+
+    }
+
+    .p-panelmenu-item-label {
+      color: rgba(184, 184, 184, 1);
+      font-size: 1.4vw;
+    }
+
+    .p-panelmenu-item {
+      margin: 1vw 1vw 1vw 0vw;
+    }
+
+    .p-panelmenu-header-link,
+    .p-panelmenu-panel {
+      padding: 3%;
+      margin: 0;
+      border-radius: 0;
+
+    }
+
+    .p-panelmenu .p-panelmenu-header:not(.p-disabled).p-highlight .p-panelmenu-header-content {
+      background-color: unset;
+      color: #0d89ec !important;
+    }
+
+    .p-panelmenu .p-panelmenu-header .p-panelmenu-header-content {
+      border: none;
+      background-color: white;
+      border-radius: 0;
+
+    }
   }
 
-  .p-panelmenu-panel {
-    border: none !important;
-  }
-
-  .p-icon {
-    width: 1vw;
-    height: 1vw;
-    position: absolute;
-    left: 2%;
-    top: 13%;
-    transform: rotate(180deg);
-  }
-
-  .p-panelmenu-header-label {
-    color: rgba(151, 151, 151, 1);
-    font-weight: 700;
-    font-size: 1.4vw;
-
-  }
-
-  .p-panelmenu-item-label {
-    color: rgba(184, 184, 184, 1);
-    font-size: 1.4vw;
-  }
-
-  .p-panelmenu-item {
-    margin: 1vw 1vw 1vw 0vw;
-  }
-
-  .p-panelmenu-header-link,
-  .p-panelmenu-panel {
-    padding: 3%;
-    margin: 0;
-    border-radius: 0;
-
-  }
-
-  .p-panelmenu .p-panelmenu-header:not(.p-disabled).p-highlight .p-panelmenu-header-content {
-    background-color: unset;
-    color: #0d89ec !important;
-  }
-
-  .p-panelmenu .p-panelmenu-header .p-panelmenu-header-content {
-    border: none;
-    background-color: white;
-    border-radius: 0;
-
-  }
 }

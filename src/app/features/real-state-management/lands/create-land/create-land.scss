@@ -1,1 +1,9 @@
 
+.colum{
+  flex-direction: column;
+}
+::ng-deep {
+  .p-toast-message-content {
+    direction: ltr;
+  }
+}
