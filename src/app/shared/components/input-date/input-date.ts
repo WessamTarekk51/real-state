@@ -1,11 +1,19 @@
 import { NgClass, NgIf } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-input-date',
-  imports: [NgClass,NgIf],
+  imports: [NgClass, NgIf],
   templateUrl: './input-date.html',
-  styleUrl: './input-date.scss'
+  styleUrl: './input-date.scss',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => InputDate),
+      multi: true,
+    },
+  ],
 })
 export class InputDate {
   @Input() placeholder: string;
@@ -14,7 +22,24 @@ export class InputDate {
   @Input() labelTxt: string
   @Output() inputValue = new EventEmitter<any>();
   inputType: string = 'text';
+  value: any = '';
+  disabled = false;
+  writeValue(value: any): void {
+    this.value = value ?? '';
+  }
 
+  onChange: any = () => { };
+  onTouched: any = () => { };
+
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
 
   onFocus(input: HTMLInputElement) {
     this.inputType = 'date';
@@ -35,10 +60,11 @@ export class InputDate {
     }
   }
   getvalue(event: any) {
-    console.log(event)
-    let value = event.target.value
-    console.log(value)
-
+    const value = event.target.value;
+    this.value = value;
+    this.onChange(value);
+    this.onTouched();
     this.inputValue.emit(value)
   }
+
 }

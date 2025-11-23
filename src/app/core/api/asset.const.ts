@@ -27,6 +27,10 @@ export const ASSET = {
     DeleteUnits: '/api/units/{id}/delete', //DELETE
   },
   document: {
+    documnet:
+      '/api/documents',
+    createDocumnet:
+      '/create',
     createDocumnetBulidingPermit:
       '/api/documents/019aacb7-f6b5-72e3-aeaa-8f8a8dc01cd0/create',
     createDocumnetOwnershipCertificate:
@@ -37,9 +41,8 @@ export const ASSET = {
       '/api/documents/019aacc4-303c-79b3-916d-2cb2d2fe5a15/create',
   },
   lookup: {
-    getGovernorate:
-      '/api/lookups/sets/e6a4a4b0-0917-4d68-b5e6-1f2c1daa0001/Items',
-    getCity: '/api/lookups/sets/e6a4a4b0-0917-4d68-b5e6-1f2c1daa1000/Items',
-    getDistrict: '/api/lookups/sets/e6a4a4b0-0917-4d68-b5e6-1f2c1daa2000/Items',
+    getSetByCode: '/api/lookups/sets/by-code',
+    getItemByCode: '/items/by-code',
+
   },
 } as const;

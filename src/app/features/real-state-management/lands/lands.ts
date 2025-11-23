@@ -8,252 +8,41 @@ import { MatDialog } from '@angular/material/dialog';
 import { DeleteLand } from './delete-land/delete-land';
 import { Router } from '@angular/router';
 import { NgIf } from '@angular/common';
+import { RealStateServices } from '../real-state-services';
+import { GetLands } from 'src/app/shared/models/real-state/land';
+import { SharedServices } from 'src/app/shared/services/shared-services';
 
 @Component({
   selector: 'app-lands',
-  imports: [InputTxt, InputDate, InputSelect, Table, Button,NgIf],
+  imports: [InputTxt, InputDate, InputSelect, Table, Button, NgIf],
   templateUrl: './lands.html',
   styleUrl: './lands.scss'
 })
 export class Lands {
   pageTitle: string = 'الأراضي'
   cols: any[];
-  lands: any[];
+  lands: GetLands;
+  pageSize: number = 14;
+  totalPages: 2;
+  pageNumber:number = 1;
 
-  constructor(private dialog: MatDialog, private router: Router) {
-
+  constructor(private dialog: MatDialog, private router: Router, private RealStateServices: RealStateServices,private SharedServices:SharedServices) {
   }
 
   ngOnInit(): void {
     this.cols = [
-      { field: 'code', header: 'رقم الأرض' },
+      { field: 'number', header: 'رقم الأرض' },
       { field: 'name', header: 'اسم الأرض' },
-      { field: 'category', header: 'الموقع' },
-      { field: 'quantity', header: 'المساحة (م2)' },
-      { field: 'quantity', header: 'العمارات' },
-      { field: 'quantity', header: 'الشقق' },
-      { field: 'quantity', header: 'تاريخ الانشاء' },
+      { field: 'location', header: 'الموقع' },
+      { field: 'area', header: 'المساحة (م2)' },
+      { field: 'buildingsCount', header: 'العمارات' },
+      { field: 'unitsCount', header: 'الشقق' },
+      { field: 'convertCreationDate', header: 'تاريخ الانشاء' },
       { field: '', header: 'التحكم', control: true }
 
     ];
-    this.lands = [
-      {
-        id: '1000',
-        code: 'f230fh0g3',
-        name: 'Bamboo Watch',
-        description: 'Product Description',
-        image: 'bamboo-watch.jpg',
-        price: 65,
-        category: 'Accessories',
-        quantity: 24,
-        inventoryStatus: 'INSTOCK',
-        rating: 5
-      },
-      {
-        id: '1000',
-        code: 'f230fh0g3',
-        name: 'Bamboo Watch',
-        description: 'Product Description',
-        image: 'bamboo-watch.jpg',
-        price: 65,
-        category: 'Accessories',
-        quantity: 24,
-        inventoryStatus: 'INSTOCK',
-        rating: 5
-      },
-      {
-        id: '1000',
-        code: 'f230fh0g3',
-        name: 'Bamboo Watch',
-        description: 'Product Description',
-        image: 'bamboo-watch.jpg',
-        price: 65,
-        category: 'Accessories',
-        quantity: 24,
-        inventoryStatus: 'INSTOCK',
-        rating: 5
-      },
-      {
-        id: '1000',
-        code: 'f230fh0g3',
-        name: 'Bamboo Watch',
-        description: 'Product Description',
-        image: 'bamboo-watch.jpg',
-        price: 65,
-        category: 'Accessories',
-        quantity: 24,
-        inventoryStatus: 'INSTOCK',
-        rating: 5
-      },
-      {
-        id: '1000',
-        code: 'f230fh0g3',
-        name: 'Bamboo Watch',
-        description: 'Product Description',
-        image: 'bamboo-watch.jpg',
-        price: 65,
-        category: 'Accessories',
-        quantity: 24,
-        inventoryStatus: 'INSTOCK',
-        rating: 5
-      },
-      {
-        id: '1000',
-        code: 'f230fh0g3',
-        name: 'Bamboo Watch',
-        description: 'Product Description',
-        image: 'bamboo-watch.jpg',
-        price: 65,
-        category: 'Accessories',
-        quantity: 24,
-        inventoryStatus: 'INSTOCK',
-        rating: 5
-      },
-      {
-        id: '1000',
-        code: 'f230fh0g3',
-        name: 'Bamboo Watch',
-        description: 'Product Description',
-        image: 'bamboo-watch.jpg',
-        price: 65,
-        category: 'Accessories',
-        quantity: 24,
-        inventoryStatus: 'INSTOCK',
-        rating: 5
-      },
-      {
-        id: '1000',
-        code: 'f230fh0g3',
-        name: 'Bamboo Watch',
-        description: 'Product Description',
-        image: 'bamboo-watch.jpg',
-        price: 65,
-        category: 'Accessories',
-        quantity: 24,
-        inventoryStatus: 'INSTOCK',
-        rating: 5
-      },
-      {
-        id: '1000',
-        code: 'f230fh0g3',
-        name: 'Bamboo Watch',
-        description: 'Product Description',
-        image: 'bamboo-watch.jpg',
-        price: 65,
-        category: 'Accessories',
-        quantity: 24,
-        inventoryStatus: 'INSTOCK',
-        rating: 5
-      },
-      {
-        id: '1000',
-        code: 'f230fh0g3',
-        name: 'Bamboo Watch',
-        description: 'Product Description',
-        image: 'bamboo-watch.jpg',
-        price: 65,
-        category: 'Accessories',
-        quantity: 24,
-        inventoryStatus: 'INSTOCK',
-        rating: 5
-      },
-      {
-        id: '1000',
-        code: 'f230fh0g3',
-        name: 'Bamboo Watch',
-        description: 'Product Description',
-        image: 'bamboo-watch.jpg',
-        price: 65,
-        category: 'Accessories',
-        quantity: 24,
-        inventoryStatus: 'INSTOCK',
-        rating: 5
-      },
-      {
-        id: '1000',
-        code: 'f230fh0g3',
-        name: 'Bamboo Watch',
-        description: 'Product Description',
-        image: 'bamboo-watch.jpg',
-        price: 65,
-        category: 'Accessories',
-        quantity: 24,
-        inventoryStatus: 'INSTOCK',
-        rating: 5
-      },
-      {
-        id: '1000',
-        code: 'f230fh0g3',
-        name: 'Bamboo Watch',
-        description: 'Product Description',
-        image: 'bamboo-watch.jpg',
-        price: 65,
-        category: 'Accessories',
-        quantity: 24,
-        inventoryStatus: 'INSTOCK',
-        rating: 5
-      },
-      {
-        id: '1000',
-        code: 'f230fh0g3',
-        name: 'Bamboo Watch',
-        description: 'Product Description',
-        image: 'bamboo-watch.jpg',
-        price: 65,
-        category: 'Accessories',
-        quantity: 24,
-        inventoryStatus: 'INSTOCK',
-        rating: 5
-      },
-      {
-        id: '1000',
-        code: 'f230fh0g3',
-        name: 'Bamboo Watch',
-        description: 'Product Description',
-        image: 'bamboo-watch.jpg',
-        price: 65,
-        category: 'Accessories',
-        quantity: 24,
-        inventoryStatus: 'INSTOCK',
-        rating: 5
-      },
-      {
-        id: '1000',
-        code: 'f230fh0g3',
-        name: 'Bamboo Watch',
-        description: 'Product Description',
-        image: 'bamboo-watch.jpg',
-        price: 65,
-        category: 'Accessories',
-        quantity: 24,
-        inventoryStatus: 'INSTOCK',
-        rating: 5
-      },
-      {
-        id: '1000',
-        code: 'f230fh0g3',
-        name: 'Bamboo Watch',
-        description: 'Product Description',
-        image: 'bamboo-watch.jpg',
-        price: 65,
-        category: 'Accessories',
-        quantity: 24,
-        inventoryStatus: 'INSTOCK',
-        rating: 5
-      },
-      {
-        id: '1000',
-        code: 'f230fh0g3',
-        name: 'Bamboo Watch',
-        description: 'Product Description',
-        image: 'bamboo-watch.jpg',
-        price: 65,
-        category: 'Accessories',
-        quantity: 24,
-        inventoryStatus: 'INSTOCK',
-        rating: 5
-      }
-    ]
+
+    this.getLands()
   }
 
   deleteLand(data: any) {
@@ -277,5 +66,24 @@ export class Lands {
   editLand(data: any) {
     this.router.navigate(['/real-state-management/lands/EditLand']);
   }
+
+
+  getLands() {
+    this.RealStateServices.GetLands(this.pageSize, this.pageNumber).subscribe(res => {
+      console.log(res)
+      if(res.isSuccess){
+        this.lands = res.value
+        this.lands.items.forEach(el=>{
+          el.location = el.district.ar;
+          el.convertCreationDate = this.SharedServices.convertToArabicDate(el.creationDate)
+        })
+      }
+    })
+  }
+  GetpageNumber(pageNumber: number) {
+    this.pageNumber = pageNumber
+  }
+
+
 }
 

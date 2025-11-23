@@ -4,7 +4,7 @@ import { DecimalPipe, CommonModule, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-table',
-  imports: [TableModule, DecimalPipe, CommonModule,NgIf],
+  imports: [TableModule, DecimalPipe, CommonModule, NgIf],
   standalone: true,
   templateUrl: './table.html',
   styleUrl: './table.scss'
@@ -12,20 +12,21 @@ import { DecimalPipe, CommonModule, NgIf } from '@angular/common';
 export class Table {
   @Input() products: any[] = [];
   @Input() cols: any[] = [];
+  @Input() totalPages: number;
+  @Input() pageSize: number;
+
 
   @Output() delete = new EventEmitter<any>();
   @Output() edit = new EventEmitter<any>();
   @Output() view = new EventEmitter<any>();
+  @Output() pageNumber = new EventEmitter<any>();
 
-  rows = 14;
   first = 0;
   currentPage = 1;
-  totalPages: number;
 
   constructor() { }
 
   ngOnInit() {
-    this.totalPages = Math.ceil(this.products.length / this.rows);
   }
   deleteItem(item: any) {
     this.delete.emit(item)
@@ -38,21 +39,28 @@ export class Table {
   }
   onPageChange(event: any) {
     this.first = event.first;
-    this.rows = event.rows;
-    this.currentPage = Math.floor(this.first / this.rows) + 1;
+    this.pageSize = event.rows;
+    this.currentPage = Math.floor(this.first / this.pageSize) + 1;
+    console.log("onPageChange"+this.currentPage)
   }
 
   prevPage() {
     if (this.currentPage > 1) {
       this.currentPage--;
-      this.first = (this.currentPage - 1) * this.rows;
+      this.first = (this.currentPage - 1) * this.pageSize;
+      this.pageNumber.emit(this.currentPage)
+      console.log("prevPage"+this.currentPage)
+
     }
   }
 
   nextPage() {
     if (this.currentPage < this.totalPages) {
       this.currentPage++;
-      this.first = (this.currentPage - 1) * this.rows;
+      this.first = (this.currentPage - 1) * this.pageSize;
+      this.pageNumber.emit(this.currentPage)
+      console.log("nextPage"+this.currentPage)
+
     }
   }
 }

@@ -1,4 +1,4 @@
-<div id="container-page">
+<div id="container-page" *ngIf="dataLoaded">
   <form class="form" [formGroup]="createBuilding">
     <div class="row">
       <div class="half">
@@ -17,9 +17,16 @@
       </div>
       <div class="half">
         <div class="full">
-          <app-input-select formControlName="buildingStatusId" [placeholder]="'الأرض التابعة'" [formStyle]="true" [required]="true"
-            [labelTxt]="'الأرض التابعة'" (selectValue)="getLand($event)">
+          <app-input-select formControlName="landId" [placeholder]="'الأرض التابعة'" [formStyle]="true"
+            [required]="true" [labelTxt]="'الأرض التابعة'">
           </app-input-select>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createBuilding.get('landId')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div>
         </div>
       </div>
     </div>
@@ -57,15 +64,31 @@
     <div class="row">
       <div class="half">
         <div class="full">
-          <app-input-date [placeholder]="'سنة البناء'" [formStyle]="true" [required]="true" [labelTxt]="'سنة البناء'">
+          <app-input-date [placeholder]="'سنة البناء'" formControlName="constructionYear" [formStyle]="true"
+            [required]="true" [labelTxt]="'سنة البناء'">
           </app-input-date>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createBuilding.get('constructionYear')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div>
         </div>
 
       </div>
       <div class="half">
         <div class="full">
-          <app-input-num [placeholder]="'عدد الشقق'" [formStyle]="true" [required]="true" [labelTxt]="'عدد الشقق'">
-          </app-input-num>
+          <app-input-select formControlName="buildingStatusId" [placeholder]="'الحالة'" [formStyle]="true"
+            [required]="true" [labelTxt]="'الحالة'" [options]="buildingStatus()">
+          </app-input-select>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createBuilding.get('buildingStatusId')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div>
         </div>
       </div>
     </div>
@@ -107,7 +130,8 @@
     </div>
     <div class="row">
       <div class="full">
-        <app-input-text-area [placeholder]="'الوصف'" [formStyle]="true" [required]="false" [labelTxt]="'الوصف'">
+        <app-input-text-area formControlName="description" [placeholder]="'الوصف'" [formStyle]="true" [required]="false"
+          [labelTxt]="'الوصف'">
         </app-input-text-area>
       </div>
     </div>
@@ -119,35 +143,65 @@
         <div class="half">
           <div class="full">
             <!-- (inputValue)="get()" -->
-            <app-input-upload [placeholder]="' رخصة البناء'" [formStyle]="true" [required]="true"
-              [labelTxt]="' رخصة البناء'" (inputValue)="getUPload($event)"></app-input-upload>
+            <app-input-upload formControlName="BulidingPermit" (inputValue)="uploadDocument($event,0,this.BulidingPermit)" [placeholder]="' رخصة البناء'" [formStyle]="true"
+              [required]="true" [labelTxt]="' رخصة البناء'" ></app-input-upload>
+            <div class="errormassage">
+              <app-control-messages class="form-validation-style" [control]="createBuilding.get('BulidingPermit')"
+                [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+              </app-control-messages>
+            </div>
           </div>
         </div>
         <div class="half">
           <div class="full">
-            <app-input-upload [placeholder]="' شهادة السلامة الإنشائية'" [formStyle]="true" [required]="true"
-              [labelTxt]="' شهادة السلامة الإنشائية'"></app-input-upload>
+            <app-input-upload formControlName="BulidingSafetyCertificate" (inputValue)="uploadDocument($event,1,this.BulidingSafetyCertificate)" [placeholder]="' شهادة السلامة الإنشائية'"
+              [formStyle]="true" [required]="true" [labelTxt]="' شهادة السلامة الإنشائية'"></app-input-upload>
+            <div class="errormassage">
+              <app-control-messages class="form-validation-style"
+                [control]="createBuilding.get('BulidingSafetyCertificate')" [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+              </app-control-messages>
+            </div>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="half">
           <div class="full">
-            <app-input-upload [placeholder]="'شهادة إتمام البناء'" [formStyle]="true" [required]="true"
-              [labelTxt]="'شهادة إتمام البناء'"></app-input-upload>
+            <app-input-upload formControlName="BuildingCompletionCertificate" (inputValue)="uploadDocument($event,2,this.BuildingCompletionCertificate)" [placeholder]="'شهادة إتمام البناء'"
+              [formStyle]="true" [required]="true" [labelTxt]="'شهادة إتمام البناء'"></app-input-upload>
+            <div class="errormassage">
+              <app-control-messages class="form-validation-style"
+                [control]="createBuilding.get('BuildingCompletionCertificate')" [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+              </app-control-messages>
+            </div>
           </div>
         </div>
         <div class="half">
           <div class="full">
-            <app-input-upload [placeholder]="'المخططات المعمارية والكهربائية'" [formStyle]="true" [required]="true"
+            <app-input-upload formControlName="ArchitecturalAndElectrical" (inputValue)="uploadDocument($event,3,this.ArchitecturalAndElectrical)"
+              [placeholder]="'المخططات المعمارية والكهربائية'" [formStyle]="true" [required]="true"
               [labelTxt]="'المخططات المعمارية والكهربائية'"></app-input-upload>
+            <div class="errormassage">
+              <app-control-messages class="form-validation-style"
+                [control]="createBuilding.get('ArchitecturalAndElectrical')" [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+              </app-control-messages>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div class="buttons">
       <app-button [className]="'gray'" [buttonTxt]="'الغاء'"></app-button>
-      <app-button [className]="'main'" (click)="validateAllFields(createBuilding)" [buttonTxt]="'اضافة'"></app-button>
+      <app-button [className]="'main'" (click)="createNewBuilding()" [buttonTxt]="'اضافة'"></app-button>
     </div>
   </form>
 </div>
+<p-toast />

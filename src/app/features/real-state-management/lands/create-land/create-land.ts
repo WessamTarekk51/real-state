@@ -15,17 +15,16 @@ import {
   Validators,
 } from '@angular/forms';
 import { RealStateServices } from '../../real-state-services';
-import { GovernorateItem } from 'src/app/shared/models/real-state/governorate';
-import { CityItem } from 'src/app/shared/models/real-state/city';
-import { DistrictItem } from 'src/app/shared/models/real-state/district';
 import { NgIf } from '@angular/common';
 // import { InputLocation } from "src/app/shared/components/input-location/input-location";
 import { forkJoin } from 'rxjs';
 import { ControlMessages } from 'src/app/shared/components/control-messages/control-messages';
 import { ChangeDetectorRef, AfterViewInit } from '@angular/core';
-import { attachment, CreateNewLand } from 'src/app/shared/models/real-state/land';
+import { CreateNewLand } from 'src/app/shared/models/real-state/land';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { LookUpItem } from 'src/app/shared/models/real-state/lookup';
+import { attachment } from 'src/app/shared/models/real-state/attachment';
 
 @Component({
   selector: 'app-create-land',
@@ -49,9 +48,9 @@ export class CreateLand implements AfterViewInit {
   pageTitle: string = 'إضافة قطعة أرض جديدة';
   createLands!: FormGroup;
   attachmentsFiles: attachment[];
-  Governorates = signal<GovernorateItem[]>([]);
-  Cities = signal<CityItem[]>([]);
-  Districtes = signal<DistrictItem[]>([]);
+  Governorates = signal<LookUpItem[]>([]);
+  Cities = signal<LookUpItem[]>([]);
+  Districtes = signal<LookUpItem[]>([]);
   newLand: CreateNewLand;
   dataLoaded = computed(
     () =>
@@ -122,9 +121,9 @@ export class CreateLand implements AfterViewInit {
 
   getLookup() {
     forkJoin({
-      governorates: this.RealStateServices.GetGovernorate(),
-      cities: this.RealStateServices.GetCity(),
-      districts: this.RealStateServices.GetDistrict(),
+      governorates: this.RealStateServices.GetLookUpSetByCode('governorate'),
+      cities: this.RealStateServices.GetLookUpSetByCode('city'),
+      districts: this.RealStateServices.GetLookUpSetByCode('district'),
     }).subscribe(({ governorates, cities, districts }) => {
       if (governorates?.isSuccess) {
         const mapped = governorates.value.items.map((el) => ({

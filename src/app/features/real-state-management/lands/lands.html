@@ -29,8 +29,8 @@
     <app-button [className]="'custom'" [buttonTxt]="'تصدير إلى Excel'" ></app-button>
     <app-button [className]="'main'" [buttonTxt]="'+ إضافة قطعة أرض جديدة'" (buttonClick)="createLand()"></app-button>
   </div>
-  <div class="container-table" *ngIf="lands && lands.length; else noData">
-    <app-table [cols]="cols" [products]="lands" (delete)="deleteLand($event)" (view)="detailesLand($event)" (edit)="editLand($event)"></app-table>
+  <div class="container-table" *ngIf="lands && lands.items.length; else noData">
+    <app-table [cols]="cols" [products]="lands.items" [totalPages]="2" [pageSize]="pageSize" (pageNumber)="GetpageNumber($event)" (delete)="deleteLand($event)" (view)="detailesLand($event)" (edit)="editLand($event)"></app-table>
   </div>
 
   <ng-template #noData>
