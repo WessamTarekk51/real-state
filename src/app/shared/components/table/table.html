@@ -1,7 +1,7 @@
-<div class="table" *ngIf="products">
-  <p-table [columns]="cols" [value]="products" [rows]="14" [paginator]="true" [lazy]="false" [(first)]="first"
-    (onPage)="onPageChange($event)" stripedRows [tableStyle]="{'min-width': '50rem'}">
-    <ng-template #header let-columns>
+<div class="table" *ngIf="items">
+  <p-table [columns]="cols" [value]="items" [rows]="pageSize"  [lazy]="false" [(first)]="first"
+     stripedRows [tableStyle]="{'min-width': '50rem'}">
+    <ng-template pTemplate="header" let-columns>
       <tr>
         @for(col of columns; track $index ){
         <th>
@@ -12,7 +12,7 @@
       </tr>
     </ng-template>
 
-    <ng-template #body let-rowData let-columns="columns">
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
       <tr>
         @for(col of columns; track $index ){
         <td>
@@ -55,3 +55,4 @@
   </span>
 
 </div>
+

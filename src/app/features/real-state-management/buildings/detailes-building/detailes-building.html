@@ -139,7 +139,7 @@
   </div> }
   @if(activeTab == 2){
   <div class="container-table" *ngIf="buildings && buildings.length; else noData">
-    <app-table [cols]="cols" [products]="buildings" (view)="detailesUnit($event)" (edit)="editUnit($event)"></app-table>
+    <app-table [cols]="cols" [items]="buildings" (view)="detailesUnit($event)" (edit)="editUnit($event)"></app-table>
   </div>
   <ng-template #noData>
     <p class="text-center text-gray-500 mt-4">لا توجد وحدات متاحة حالياً</p>

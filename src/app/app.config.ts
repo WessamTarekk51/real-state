@@ -6,7 +6,7 @@ import { provideClientHydration, withEventReplay } from '@angular/platform-brows
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
-import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
+import {  provideHttpClient, withInterceptors } from '@angular/common/http';
 
 
 
@@ -16,8 +16,8 @@ export const appConfig: ApplicationConfig = {
     provideZonelessChangeDetection(),
     provideRouter(routes), provideClientHydration(withEventReplay()),
     provideAnimationsAsync(),
-    provideHttpClient(),
-
+    provideHttpClient(
+    ),
     providePrimeNG({
       theme: {
         preset: Aura,

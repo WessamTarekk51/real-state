@@ -2,5 +2,5 @@
   <label>{{labelTxt}} <span *ngIf="required">*</span></label>
 
   <input #dateInput [ngClass]="{'inputForm':formStyle}" [attr.type]="inputType" [placeholder]="placeholder" dir="rtl" (focus)="onFocus(dateInput)"
-    (blur)="onBlur(dateInput)" />
+    (blur)="onBlur(dateInput)" (input)="getvalue($event)" />
 </div>

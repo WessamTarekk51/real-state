@@ -1,7 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ASSET } from 'src/app/core/api/asset.const';
-import { GetLandsRoot } from 'src/app/shared/models/real-state/land';
+import { GetLandsRoot, LandDetailesRoot } from 'src/app/shared/models/real-state/land';
 import { RootLookUp } from 'src/app/shared/models/real-state/lookup';
 import { IResult, IStringResult } from 'src/app/shared/models/result';
 import { environment } from 'src/environments/environment';
@@ -14,28 +14,22 @@ export class RealStateServices {
   baseURL = environment.baseURL;
   token =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJUZXJyYUxpbmsiLCJleHAiOjE3NjYwMTIzNDIsImlhdCI6MTc2MzM4NDM0MiwianRpIjoiYjFkOWIxN2YtYTIwNC00NWQyLThhNTktOTg3OGU4MWQ5NTZjIiwiYXVkIjoiVGVycmFMaW5rQVBJIiwic3ViIjoiMDAwMDAwMDAtMDAwMC0wMDAwLTAwMDAtMDAwMDAwMDAwMDAxIiwidW5pcXVlX25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AdGVycmFsaW5rLmxvY2FsIiwibmFtZSI6IlN5c3RlbSBBZG1pbiIsInBob25lIjoiMDAwLTAwMDAtMDAwMCIsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlcyI6IkFkbWluaXN0cmF0b3IiLCJuYmYiOjE3NjMzODQzNDJ9.c8ITT0Ywqj9_2mTWqklFhS6v0fM-CrPIT1yd7XAoy0Y';
-
   //buildings
+  headers = new HttpHeaders({
+    Authorization: `Bearer ${this.token}`, // <-- add Bearer token
+  });
   GetBuildings() {
     let pageSize = 10;
     let pageNumber = 1;
     const url = `${this.baseURL}${ASSET.buildings.Buildings}?pageSize=${pageSize}&pageNumber=${pageNumber}`;
-    // Set Authorization header
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.token}`, // <-- add Bearer token
-    });
-    return this.http.get(url, { headers });
+    return this.http.get(url);
   }
   GetBuildingsByID(id: number) {
     return this.http.get(this.baseURL + ASSET.buildings.Buildings + '/' + id);
   }
   CreateBuildings(obj: any) {
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.token}`, // <-- add Bearer token
-    });
-    return this.http.post<IResult>(this.baseURL + ASSET.buildings.CreateBuildings, obj, {
-      headers,
-    });
+
+    return this.http.post<IResult>(this.baseURL + ASSET.buildings.CreateBuildings, obj,);
   }
   UpdateBuildings(id: any, obj: any) {
     return this.http.put(
@@ -50,23 +44,27 @@ export class RealStateServices {
   }
 
   //lands
-  GetLands(pageSize:number , pageNumber:number ) {
-    const url = `${this.baseURL}${ASSET.lands.GetLands}?pageSize=${pageSize}&pageNumber=${pageNumber}`;
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.token}`,
+  GetLands(pageSize: number, pageNumber: number, filters: any) {
+    const headers = this.headers
+    let params = new HttpParams()
+      .set('pageSize', pageSize)
+      .set('pageNumber', pageNumber);
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value != '' && key !== 'pageSize' && key !== 'pageNumber') {
+        params = params.set(key, String(value));
+      }
     });
-    return this.http.get<GetLandsRoot>(url, { headers });
+    const url = `${this.baseURL}${ASSET.lands.GetLands}`;
+
+    return this.http.get<GetLandsRoot>(url, { headers,params });
   }
-  GetLandsByID(id: number) {
-    return this.http.get(this.baseURL + ASSET.lands.GetLands + '/' + id);
+  GetLandsByID(id: string) {
+    const headers = this.headers
+    return this.http.get<LandDetailesRoot>(this.baseURL + ASSET.lands.GetLands + '/' + id, { headers });
   }
   CreateLands(obj: any) {
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.token}`, // <-- add Bearer token
-    });
-    return this.http.post<IResult>(this.baseURL + ASSET.lands.CreateLands, obj, {
-      headers,
-    });
+
+    return this.http.post<IResult>(this.baseURL + ASSET.lands.CreateLands, obj);
   }
   UpdateLands(id: any, obj: any) {
     return this.http.put(
@@ -104,68 +102,49 @@ export class RealStateServices {
 
   //upload
   uploadBulidingPermit(data: any) {
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.token}`, // <-- add Bearer token
-    });
     return this.http.post<IStringResult>(
       this.baseURL + ASSET.document.createDocumnetBulidingPermit,
-      data,
-      { headers }
+      data
     );
   }
   uploadOwnershipCertificate(data: any) {
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.token}`, // <-- add Bearer token
-    });
+
     return this.http.post(
       this.baseURL + ASSET.document.createDocumnetOwnershipCertificate,
-      data,
-      { headers }
+      data
     );
   }
   uploadOwnershipContract(data: any) {
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.token}`, // <-- add Bearer token
-    });
+
     return this.http.post(
       this.baseURL + ASSET.document.createDocumnetOwnershipContract,
-      data,
-      { headers }
+      data
     );
   }
   uploadRealStateRegistrationDocuments(data: any) {
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.token}`, // <-- add Bearer token
-    });
+
     return this.http.post(
       this.baseURL +
       ASSET.document.createDocumnetRealStateRegistrationDocuments,
-      data,
-      { headers }
+      data
     );
   }
   uploadDocument(data: any, code: string) {
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.token}`, // <-- add Bearer token
-    });
+
     const url = `${this.baseURL}${ASSET.document.documnet}/${code}${ASSET.document.createDocumnet}`;
-    return this.http.post<IStringResult>(url, data, { headers });
+    return this.http.post<IStringResult>(url, data);
   }
 
   //lookup
   GetLookUpSetByCode(code: string) {
     const url = `${this.baseURL}${ASSET.lookup.getSetByCode}/${code}`;
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.token}`,
-    });
-    return this.http.get<RootLookUp>(url, { headers });
+
+    return this.http.get<RootLookUp>(url);
   }
   GetLookUpItemByCode(setCode: string, ItemCode: string) {
     const url = `${this.baseURL}${ASSET.lookup.getSetByCode}/${setCode}${ASSET.lookup.getItemByCode}/${ItemCode}`;
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.token}`,
-    });
 
-    return this.http.get<RootLookUp>(url, { headers });
+
+    return this.http.get<RootLookUp>(url);
   }
 }

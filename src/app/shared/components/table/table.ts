@@ -1,20 +1,20 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { TableModule } from 'primeng/table';
-import { DecimalPipe, CommonModule, NgIf } from '@angular/common';
+import { DecimalPipe, CommonModule, NgIf, NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-table',
-  imports: [TableModule, DecimalPipe, CommonModule, NgIf],
+  imports: [TableModule, DecimalPipe, CommonModule],
   standalone: true,
   templateUrl: './table.html',
-  styleUrl: './table.scss'
+  styleUrl: './table.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Table {
-  @Input() products: any[] = [];
+  @Input() items: any;
   @Input() cols: any[] = [];
   @Input() totalPages: number;
   @Input() pageSize: number;
-
 
   @Output() delete = new EventEmitter<any>();
   @Output() edit = new EventEmitter<any>();
@@ -24,8 +24,12 @@ export class Table {
   first = 0;
   currentPage = 1;
 
-  constructor() { }
-
+  constructor(private cd: ChangeDetectorRef) { }
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['items']) {
+      console.log("items changed:", this.items);
+    }
+  }
   ngOnInit() {
   }
   deleteItem(item: any) {
@@ -37,19 +41,14 @@ export class Table {
   editItem(item: any) {
     this.edit.emit(item)
   }
-  onPageChange(event: any) {
-    this.first = event.first;
-    this.pageSize = event.rows;
-    this.currentPage = Math.floor(this.first / this.pageSize) + 1;
-    console.log("onPageChange"+this.currentPage)
-  }
+
 
   prevPage() {
     if (this.currentPage > 1) {
       this.currentPage--;
       this.first = (this.currentPage - 1) * this.pageSize;
       this.pageNumber.emit(this.currentPage)
-      console.log("prevPage"+this.currentPage)
+      console.log("prevPage" + this.currentPage)
 
     }
   }
@@ -59,7 +58,7 @@ export class Table {
       this.currentPage++;
       this.first = (this.currentPage - 1) * this.pageSize;
       this.pageNumber.emit(this.currentPage)
-      console.log("nextPage"+this.currentPage)
+      console.log("nextPage" + this.currentPage)
 
     }
   }

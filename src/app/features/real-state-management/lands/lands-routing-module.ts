@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: '', component: Lands },
   { path: 'CreateLand', component: CreateLand },
   { path: 'EditLand', component: EditLand },
-  { path: 'DetailesLand', component: DetailesLand },
+  { path: 'detailesLand', component: DetailesLand },
 
 ];
 

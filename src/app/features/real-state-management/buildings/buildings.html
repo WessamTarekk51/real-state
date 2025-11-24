@@ -36,7 +36,7 @@
     <app-button [className]="'main'" [buttonTxt]="'+ إضافة عمارة جديدة'" (buttonClick)="createBuiling()"></app-button>
   </div>
   <div class="container-table" *ngIf="buildings && buildings.length; else noData">
-    <app-table [cols]="cols" [products]="buildings" (delete)="deleteBuiling($event)" (view)="detailesBuiling($event)"
+    <app-table [cols]="cols" [items]="buildings" (delete)="deleteBuiling($event)" (view)="detailesBuiling($event)"
       (edit)="editBuiling($event)"></app-table>
   </div>
   <ng-template #noData>

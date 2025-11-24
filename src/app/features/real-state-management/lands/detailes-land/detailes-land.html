@@ -1,8 +1,8 @@
-<div id="container-page">
+<div id="container-page" *ngIf="landDetailes != undefined">
   <div class="container-detailes">
     <div class="space-between">
       <div class="title">
-        <p>ارض A</p>
+        <p>{{landDetailes.name}}</p>
       </div>
       <div class="w80f">
         <div class="buttons">
@@ -16,8 +16,7 @@
         <p>وصف الأرض</p>
       </div>
       <div class="des w50f end">
-        <p>قطعة أرض سكنية تقع في منطقة التجمع الخامس – القاهرة الجديدة، مساحتها 500 م² (20م طول × 25م عرض)، مستطيلة
-          الشكل، واجهة شرقية على شارع رئيسي بعرض 12م، وقريبة من الخدمات (مدرسة – مسجد – سوبرماركت).</p>
+        <p>{{landDetailes.description}}</p>
       </div>
     </div>
     <div class="space-between">
@@ -25,7 +24,7 @@
         <p>المحافظة</p>
       </div>
       <div class="des w50f end bold">
-        <p>القاهرة الجديدة</p>
+        <p> {{landDetailes.governorateName.ar}}</p>
       </div>
     </div>
     <div class="space-between">
@@ -33,7 +32,7 @@
         <p>المدينة</p>
       </div>
       <div class="des w50f end bold">
-        <p>التجمع الخامس </p>
+        <p>  {{landDetailes.cityName.ar}} </p>
       </div>
     </div>
     <div class="space-between">
@@ -41,7 +40,7 @@
         <p>المنطقة/الحي </p>
       </div>
       <div class="des w50f end bold">
-        <p> حي الزهور </p>
+        <p>  {{landDetailes.districtName.ar}} </p>
       </div>
     </div>
     <div class="space-between">
@@ -49,7 +48,7 @@
         <p>إحداثيات GPS </p>
       </div>
       <div class="des w50f end bold">
-        <p>30.0444, 31.2357</p>
+        <p>{{landDetailes.longitude}}, {{landDetailes.latitude}}</p>
       </div>
     </div>
     <div class="line"></div>
@@ -61,7 +60,7 @@
         <p>الطول (م) </p>
       </div>
       <div class="des w50f end bold">
-        <p>12233</p>
+        <p>{{landDetailes.length}}</p>
       </div>
     </div>
     <div class="space-between">
@@ -69,7 +68,7 @@
         <p>العرض(م)</p>
       </div>
       <div class="des w50f end bold">
-        <p>2334</p>
+        <p>{{landDetailes.width}}</p>
       </div>
     </div>
     <div class="space-between">
@@ -77,7 +76,7 @@
         <p>المساحة الكلية(م2)</p>
       </div>
       <div class="des w50f end bold">
-        <p>22456</p>
+        <p>{{landDetailes.width}}</p>
       </div>
     </div>
     <div class="line"></div>

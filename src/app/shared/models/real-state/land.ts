@@ -52,3 +52,40 @@ export interface Land {
 
 
 
+export interface LandDetailesRoot extends IResult {
+  value: LandDetailes
+}
+
+export interface LandDetailes {
+
+  name: string,
+  districtName: {
+    ar: string,
+    en: string
+  },
+  cityName: {
+    ar: string,
+    en: string
+  },
+  governorateName: {
+    ar: string,
+    en: string
+  },
+  length: number,
+  width: number,
+  latitude: number,
+  longitude: number,
+  description: string,
+  attachments: Attachment[]
+}
+
+export interface Attachment {
+  elementId: string;
+  attachmentId?: string;
+  attachmentIds?: string[];
+}
+
+
+
+
+
