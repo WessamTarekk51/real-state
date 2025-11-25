@@ -36,7 +36,8 @@ export class Lands {
     Area: '',
     BuildingCount: ''
   };
-  Districtes: LookUpItem[]
+  Districtes: LookUpItem[];
+  dialogRef:any
   constructor(private cd: ChangeDetectorRef, private dialog: MatDialog, private router: Router, private RealStateServices: RealStateServices, private SharedServices: SharedServices) {
   }
 
@@ -57,31 +58,34 @@ export class Lands {
   getFilter(num: any) {
     this.getLands()
   }
-  deleteLand(data: Land) {
-    const dialogRef = this.dialog.open(DeleteLand, {
-      data: { ...data },
+  deleteLand(land: Land) {
+    this.dialogRef = this.dialog.open(DeleteLand, {
+      data: { ...land },
       panelClass: 'center-dialog'
     });
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        console.log("close")
-      }
+    this.dialogRef.componentInstance.cancleEvent.subscribe(() => {
+      this.dialogRef.close();
     });
+    this.dialogRef.componentInstance.deleteEvent.subscribe((land: Land) => {
+      this.delete(land)
+    });
+
   }
   createLand() {
     this.router.navigate(['/real-state-management/lands/CreateLand']);
   }
   detailesLand(data: Land) {
-    console.log(data)
     this.router.navigate(['/real-state-management/lands/detailesLand'], {
-    queryParams: { id: data.id }
-  });
+      queryParams: { id: data.id }
+    });
   }
   editLand(data: Land) {
-    this.router.navigate(['/real-state-management/lands/EditLand']);
+    this.router.navigate(['/real-state-management/lands/EditLand'], {
+      queryParams: { id: data.id }
+    });
   }
   getLands() {
-    this.RealStateServices.GetLands(this.pageSize, this.pageNumber,this.filters).subscribe(res => {
+    this.RealStateServices.GetLands(this.pageSize, this.pageNumber, this.filters).subscribe(res => {
       if (res.isSuccess) {
         this.lands = res.value;
         this.lands.items.forEach(el => {
@@ -106,9 +110,16 @@ export class Lands {
           el.name = el.descriptions.ar
         })
       }
-      this.cd.detectChanges()
+      this.cd.detectChanges();
     });
 
+  }
+
+  delete(land: Land) {
+    this.RealStateServices.DeleteLands(land.id).subscribe(res => {
+      console.log(res)
+      res.isSuccess ?  [this.dialogRef.close(), this.getLands()] : ''
+    })
   }
 
 }

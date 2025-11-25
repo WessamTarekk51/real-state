@@ -5,8 +5,8 @@
       <p class="warningTxt">مسح الارض رقم 1233445</p>
       <p class="txt">هل انت متأكد من انك تريد مسح هذه الارض؟</p>
       <div class="buttons">
-        <app-button [buttonTxt]="'مسح'" [className]="'delete'"></app-button>
-        <app-button [buttonTxt]="'الغاء'" [className]="'gray'"></app-button>
+        <app-button [buttonTxt]="'مسح'" [className]="'delete'" (click)="delete()"></app-button>
+        <app-button [buttonTxt]="'الغاء'" [className]="'gray'" (click)="cancle()"></app-button>
       </div>
     </div>
   </div>

@@ -135,7 +135,6 @@ export class CreateBuilding {
         this.buildingStatus.set(mapped);
       }
       if (BulidingPermit?.isSuccess) {
-        console.log(BulidingPermit)
         this.BulidingPermit = BulidingPermit.value.id
         this.attachmentsFiles[0].attachmentId = this.BulidingPermit
       }

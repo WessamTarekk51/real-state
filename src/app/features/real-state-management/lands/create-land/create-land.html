@@ -17,7 +17,7 @@
       </div>
       <div class="half">
         <div class="full">
-          <app-input-select formControlName="governorateId" [placeholder]="'المحافظة'" [options]="Governorates()"
+          <app-input-select [value]="createLands.value.governorateId" formControlName="governorateId" [placeholder]="'المحافظة'" [options]="Governorates()"
             [formStyle]="true" [required]="true" [labelTxt]="'المحافظة'">
           </app-input-select>
           <div class="errormassage">
@@ -110,8 +110,9 @@
       <div class="row">
         <div class="half">
           <div class="full">
-            <app-input-upload formControlName="BulidingPermit" (inputValue)="uploadBulidingPermit($event)"
-              [placeholder]="'تصريح البناء'" [formStyle]="true" [required]="true" [labelTxt]="'تصريح البناء'">
+            <app-input-upload formControlName="BulidingPermit"
+              (inputValue)="uploadDocument($event,0,this.BulidingPermit)" [placeholder]="'تصريح البناء'"
+              [formStyle]="true" [required]="true" [labelTxt]="'تصريح البناء'">
             </app-input-upload>
             <div class="errormassage">
               <app-control-messages class="form-validation-style" [control]="createLands.get('BulidingPermit')"
@@ -124,8 +125,9 @@
         </div>
         <div class="half">
           <div class="full">
-            <app-input-upload formControlName="OwnershipCertificate" (inputValue)="uploadOwnershipCertificate($event)"
-              [placeholder]="'شهادة الملكية'" [formStyle]="true" [required]="true" [labelTxt]="'شهادة الملكية'">
+            <app-input-upload formControlName="OwnershipCertificate"
+              (inputValue)="uploadDocument($event,1,this.OwnershipCertificate)" [placeholder]="'شهادة الملكية'"
+              [formStyle]="true" [required]="true" [labelTxt]="'شهادة الملكية'">
             </app-input-upload>
             <div class="errormassage">
               <app-control-messages class="form-validation-style" [control]="createLands.get('OwnershipCertificate')"
@@ -140,30 +142,31 @@
       <div class="row">
         <div class="half">
           <div class="full">
-            <app-input-upload formControlName="OwnershipContract" (inputValue)="uploadOwnershipContract($event)"
-              [placeholder]="'عقد البيع أو التمليك '" [formStyle]="true" [required]="true"
-              [labelTxt]="'عقد البيع أو التمليك '"></app-input-upload>
-              <div class="errormassage">
-                <app-control-messages class="form-validation-style" [control]="createLands.get('OwnershipContract')"
-                  [validationMessages]="[
+            <app-input-upload formControlName="OwnershipContract"
+              (inputValue)="uploadDocument($event,2,this.OwnershipContract)" [placeholder]="'عقد البيع أو التمليك '"
+              [formStyle]="true" [required]="true" [labelTxt]="'عقد البيع أو التمليك '"></app-input-upload>
+            <div class="errormassage">
+              <app-control-messages class="form-validation-style" [control]="createLands.get('OwnershipContract')"
+                [validationMessages]="[
                 { type: 'required', message: 'هذا الحقل مطلوب' }
               ]">
-                </app-control-messages>
-              </div>
+              </app-control-messages>
+            </div>
           </div>
         </div>
         <div class="half">
           <div class="full">
             <app-input-upload formControlName="RealStateRegistrationDocuments"
-              (inputValue)="uploadRealStateRegistrationDocuments($event)" [placeholder]="'مستندات الشهر العقاري'"
-              [formStyle]="true" [required]="true" [labelTxt]="'مستندات الشهر العقاري'"></app-input-upload>
-              <div class="errormassage">
-                <app-control-messages class="form-validation-style" [control]="createLands.get('RealStateRegistrationDocuments')"
-                  [validationMessages]="[
+              (inputValue)="uploadDocument($event,3,this.RealStateRegistrationDocuments)"
+              [placeholder]="'مستندات الشهر العقاري'" [formStyle]="true" [required]="true"
+              [labelTxt]="'مستندات الشهر العقاري'"></app-input-upload>
+            <div class="errormassage">
+              <app-control-messages class="form-validation-style"
+                [control]="createLands.get('RealStateRegistrationDocuments')" [validationMessages]="[
                 { type: 'required', message: 'هذا الحقل مطلوب' }
               ]">
-                </app-control-messages>
-              </div>
+              </app-control-messages>
+            </div>
           </div>
         </div>
       </div>
@@ -175,4 +178,3 @@
   </form>
 </div>
 <p-toast />
-

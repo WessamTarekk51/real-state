@@ -1,7 +1,8 @@
 <div class="select">
   <!-- [(ngModel)]="selectedOption" -->
   <label>{{labelTxt}} <span *ngIf="required">*</span></label>
-  <select (change)="updateValue($event)"  [ngClass]="{'inputForm':formStyle}">
+  <select   [ngClass]="{'inputForm':formStyle}" [value]="value"
+  (change)="updateValue($event)"  >
     <option value="" disabled selected>{{placeholder}}</option>
     <option *ngFor="let option of options" [value]="option.id">
       {{option.name}}

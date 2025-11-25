@@ -23,12 +23,14 @@ export class InputSelect {
   @Input() labelTxt: string;
 
   @Output() selectValue = new EventEmitter<any>();
-  value: any = '';
+  @Input() value: any;
   disabled = false;
 
 
   ngOnInit(): void {
-         console.log(this.options)
+    console.log(this.options)
+    console.log(this.value)
+
   }
 
 

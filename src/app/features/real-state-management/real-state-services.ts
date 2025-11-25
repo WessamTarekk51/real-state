@@ -54,27 +54,29 @@ export class RealStateServices {
         params = params.set(key, String(value));
       }
     });
-    const url = `${this.baseURL}${ASSET.lands.GetLands}`;
+    const url = `${this.baseURL}${ASSET.lands.Lands}`;
 
     return this.http.get<GetLandsRoot>(url, { headers, params });
   }
   GetLandsByID(id: string) {
     const headers = this.headers
-    return this.http.get<LandDetailesRoot>(this.baseURL + ASSET.lands.GetLands + '/' + id, { headers });
+    return this.http.get<LandDetailesRoot>(this.baseURL + ASSET.lands.Lands + '/' + id, { headers });
   }
   CreateLands(obj: any) {
-
-    return this.http.post<IResult>(this.baseURL + ASSET.lands.CreateLands, obj);
+    const headers = this.headers
+    return this.http.post<IResult>(this.baseURL + ASSET.lands.Lands + ASSET.lands.CreateLands, obj, { headers });
   }
   UpdateLands(id: any, obj: any) {
+    const headers = this.headers
     return this.http.put(
-      this.baseURL + ASSET.lands.GetLands + '/' + id + '/update',
-      obj
+      this.baseURL + ASSET.lands.Lands + '/' + id + ASSET.lands.UpdateLands,
+      obj, { headers }
     );
   }
-  DeleteLands(id: any) {
-    return this.http.delete(
-      this.baseURL + ASSET.lands.GetLands + '/' + id + '/delete'
+  DeleteLands(id: string) {
+    const headers = this.headers
+    return this.http.delete<IResult>(
+      this.baseURL + ASSET.lands.Lands + '/' + id + ASSET.lands.DeleteLands, { headers }
     );
   }
 
@@ -101,52 +103,28 @@ export class RealStateServices {
   }
 
   //upload
-  uploadBulidingPermit(data: any) {
-    return this.http.post<IStringResult>(
-      this.baseURL + ASSET.document.createDocumnetBulidingPermit,
-      data
-    );
-  }
-  uploadOwnershipCertificate(data: any) {
-
-    return this.http.post(
-      this.baseURL + ASSET.document.createDocumnetOwnershipCertificate,
-      data
-    );
-  }
-  uploadOwnershipContract(data: any) {
-
-    return this.http.post(
-      this.baseURL + ASSET.document.createDocumnetOwnershipContract,
-      data
-    );
-  }
-  uploadRealStateRegistrationDocuments(data: any) {
-    return this.http.post(
-      this.baseURL +
-      ASSET.document.createDocumnetRealStateRegistrationDocuments,
-      data
-    );
-  }
   uploadDocument(data: any, code: string) {
+    const headers = this.headers
     const url = `${this.baseURL}${ASSET.document.documnet}/${code}${ASSET.document.createDocumnet}`;
-    return this.http.post<IStringResult>(url, data);
+    return this.http.post<IStringResult>(url, data, { headers });
   }
   //lookup
   GetLookUpSetByCode(code: string) {
+    const headers = this.headers
     const url = `${this.baseURL}${ASSET.lookup.getSetByCode}/${code}`;
 
-    return this.http.get<RootLookUp>(url);
+    return this.http.get<RootLookUp>(url, { headers });
   }
   GetLookUpItemByCode(setCode: string, ItemCode: string) {
+    const headers = this.headers
     const url = `${this.baseURL}${ASSET.lookup.getSetByCode}/${setCode}${ASSET.lookup.getItemByCode}/${ItemCode}`;
 
-    return this.http.get<RootLookUp>(url);
+    return this.http.get<RootLookUp>(url,{headers});
   }
 
   DownloadDocmument(documnetId: string) {
     const headers = this.headers
     const url = `${this.baseURL}${ASSET.document.documnet}/${documnetId}`;
-    return this.http.get(url,{headers, responseType: 'blob'});
+    return this.http.get(url, { headers, responseType: 'blob' });
   }
 }
