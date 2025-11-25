@@ -32,7 +32,7 @@
         <p>المدينة</p>
       </div>
       <div class="des w50f end bold">
-        <p>  {{landDetailes.cityName.ar}} </p>
+        <p> {{landDetailes.cityName.ar}} </p>
       </div>
     </div>
     <div class="space-between">
@@ -40,7 +40,7 @@
         <p>المنطقة/الحي </p>
       </div>
       <div class="des w50f end bold">
-        <p>  {{landDetailes.districtName.ar}} </p>
+        <p> {{landDetailes.districtName.ar}} </p>
       </div>
     </div>
     <div class="space-between">
@@ -88,39 +88,38 @@
         <p>تصريح البناء</p>
       </div>
       <div class="file w50f end">
-        <p>Document1.pdf</p>
+        <p id="buliding_permit" (click)="downloadAttachment('buliding_permit')">Attachment1</p>
         <div class="icon"></div>
 
       </div>
     </div>
-     <div class="space-between">
+    <div class="space-between">
       <div class="txt w50f">
         <p>شهادة الملكية </p>
       </div>
       <div class="file w50f end">
-        <p>Document1.pdf</p>
+        <p id="ownership_certificate" (click)="downloadAttachment('ownership_certificate')">Attachment2</p>
         <div class="icon"></div>
 
       </div>
     </div>
-      <div class="space-between">
+    <div class="space-between">
       <div class="txt w50f">
-        <p>عقد البيع أو التمليك  </p>
+        <p >عقد البيع أو التمليك </p>
       </div>
       <div class="file w50f end">
-        <p>Document1.pdf</p>
+        <p id="ownership_contract" (click)="downloadAttachment('ownership_contract')">Attachment3</p>
         <div class="icon"></div>
 
       </div>
     </div>
-      <div class="space-between">
+    <div class="space-between">
       <div class="txt w50f">
         <p>مستندات الشهر العقاري</p>
       </div>
       <div class="file w50f end">
-        <p>Document1.pdf</p>
+        <p id="RealState_registration_documents" (click)="downloadAttachment('RealState_registration_documents')">Attachment4</p>
         <div class="icon"></div>
-
       </div>
     </div>
   </div>

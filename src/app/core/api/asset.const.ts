@@ -31,6 +31,7 @@ export const ASSET = {
       '/api/documents',
     createDocumnet:
       '/create',
+
     createDocumnetBulidingPermit:
       '/api/documents/019aacb7-f6b5-72e3-aeaa-8f8a8dc01cd0/create',
     createDocumnetOwnershipCertificate:

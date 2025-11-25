@@ -56,7 +56,7 @@ export class RealStateServices {
     });
     const url = `${this.baseURL}${ASSET.lands.GetLands}`;
 
-    return this.http.get<GetLandsRoot>(url, { headers,params });
+    return this.http.get<GetLandsRoot>(url, { headers, params });
   }
   GetLandsByID(id: string) {
     const headers = this.headers
@@ -122,7 +122,6 @@ export class RealStateServices {
     );
   }
   uploadRealStateRegistrationDocuments(data: any) {
-
     return this.http.post(
       this.baseURL +
       ASSET.document.createDocumnetRealStateRegistrationDocuments,
@@ -130,11 +129,9 @@ export class RealStateServices {
     );
   }
   uploadDocument(data: any, code: string) {
-
     const url = `${this.baseURL}${ASSET.document.documnet}/${code}${ASSET.document.createDocumnet}`;
     return this.http.post<IStringResult>(url, data);
   }
-
   //lookup
   GetLookUpSetByCode(code: string) {
     const url = `${this.baseURL}${ASSET.lookup.getSetByCode}/${code}`;
@@ -144,7 +141,12 @@ export class RealStateServices {
   GetLookUpItemByCode(setCode: string, ItemCode: string) {
     const url = `${this.baseURL}${ASSET.lookup.getSetByCode}/${setCode}${ASSET.lookup.getItemByCode}/${ItemCode}`;
 
-
     return this.http.get<RootLookUp>(url);
+  }
+
+  DownloadDocmument(documnetId: string) {
+    const headers = this.headers
+    const url = `${this.baseURL}${ASSET.document.documnet}/${documnetId}`;
+    return this.http.get(url,{headers, responseType: 'blob'});
   }
 }
