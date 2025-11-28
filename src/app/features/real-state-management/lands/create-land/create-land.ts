@@ -84,6 +84,7 @@ export class CreateLand implements AfterViewInit {
       OwnershipCertificate: ['', Validators.required],
       OwnershipContract: ['', Validators.required],
       RealStateRegistrationDocuments: ['', Validators.required],
+      area: ['2']
     });
     this.newLand = {
       name: '',
@@ -231,9 +232,23 @@ export class CreateLand implements AfterViewInit {
       latitude: this.landEdited.latitude,
       longitude: this.landEdited.longitude,
       description: this.landEdited.description,
-      governorateId: this.getGovernorateById(this.landEdited.governorateName.ar)
+      governorateId: this.getGovernorateById(this.landEdited.governorateName.ar),
+      area: this.landEdited.length * this.landEdited.width
 
     });
-    console.log(this.createLands)
   }
+
+
+  getcaluArea(length: any) {
+    console.log(length)
+    this.createLands.value.width != null && this.createLands.value.length ? this.getArea() : ''
+  }
+
+  getArea() {
+    this.createLands.patchValue({
+      area: this.createLands.value.width * this.createLands.value.length
+    });
+  }
+
+
 }

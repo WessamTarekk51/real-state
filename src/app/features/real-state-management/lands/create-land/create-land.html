@@ -64,7 +64,7 @@
       <div class="half">
         <div class="half colum">
           <app-input-num formControlName="length" [placeholder]="'الطول'" [formStyle]="true" [required]="true"
-            [labelTxt]="'الطول (م)'">
+            [labelTxt]="'الطول (م)'" (inputValue)="getcaluArea($event)">
           </app-input-num>
           <div class="errormassage">
             <app-control-messages class="form-validation-style" [control]="createLands.get('length')"
@@ -75,7 +75,7 @@
           </div>
         </div>
         <div class="half colum">
-          <app-input-num formControlName="width" [placeholder]="'العرض'" [formStyle]="true" [required]="true"
+          <app-input-num formControlName="width" (inputValue)="getcaluArea($event)" [placeholder]="'العرض'" [formStyle]="true" [required]="true"
             [labelTxt]="'العرض (م)'">
           </app-input-num>
           <div class="errormassage">
@@ -89,7 +89,7 @@
       </div>
       <div class="half">
         <div class="full">
-          <app-input-num [placeholder]="'المساحة الكلية (م²)'" [formStyle]="true" [required]="true"
+          <app-input-num  formControlName="area" [placeholder]="'المساحة الكلية (م²)'" [formStyle]="true" [required]="true" [readOnly]="true"
             [labelTxt]="'المساحة الكلية (م²)'">
           </app-input-num>
         </div>

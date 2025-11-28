@@ -19,7 +19,8 @@ export class InputNum {
   @Input() placeholder: string;
   @Input() formStyle: boolean;
   @Input() required: boolean;
-  @Input() labelTxt: string
+  @Input() labelTxt: string;
+  @Input() readOnly:boolean;
   @Output() inputValue = new EventEmitter<any>();
   value: any = '';
   disabled = false;
