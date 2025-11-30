@@ -1,0 +1,45 @@
+<div id="container-page">
+  <div class="container-filter">
+    <div class="title-filter">
+      <p>البحث</p>
+    </div>
+    <div class="content-filter">
+      <div class="four">
+        <app-input-txt [placeholder]="'رقم الوحدة'"></app-input-txt>
+      </div>
+      <div class="four">
+        <app-input-select [placeholder]="'اسم العمارة'"  ></app-input-select>
+      </div>
+       <div class="four">
+        <app-input-select [placeholder]="'اسم الأرض'"  ></app-input-select>
+      </div>
+       <div class="four">
+        <app-input-select [placeholder]="' الحالة'"  ></app-input-select>
+      </div>
+       <div class="four">
+        <app-input-num [placeholder]="' الدور'"  ></app-input-num>
+      </div>
+      <div class="four">
+        <app-input-num [placeholder]="' الغرف'"  ></app-input-num>
+      </div>
+      <div class="four">
+        <app-input-num [placeholder]="' السعر'"  ></app-input-num>
+      </div>
+      <div class="four">
+        <app-input-num [placeholder]="'المساحة (م2)'"  ></app-input-num>
+      </div>
+    </div>
+  </div>
+   <div class="buttons">
+    <app-button [className]="'custom'" [buttonTxt]="'تصدير إلى Excel'"></app-button>
+    <app-button [className]="'main'" [buttonTxt]="'+ إضافة وحدة سكنية جديدة'" (buttonClick)="createUnit()"></app-button>
+  </div>
+   <div class="container-table" *ngIf="units && units.items.length; else noData">
+    <app-table [cols]="cols" [items]="units.items" [totalPages]="totalPages" [pageSize]="pageSize"
+      (pageNumber)="GetpageNumber($event)" (delete)="deleteBuiling($event)" (view)="detailesBuiling($event)"
+      (edit)="editBuiling($event)"></app-table>
+  </div>
+  <ng-template #noData>
+    <p class="text-center text-gray-500 mt-4">لا توجد وحدات سكنية متاحة حالياً</p>
+  </ng-template>
+</div>

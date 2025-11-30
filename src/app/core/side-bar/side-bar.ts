@@ -44,7 +44,7 @@ export class SideBar {
           },
           {
             label: 'الوحدات السكانية',
-            routerLink: "/login",
+            routerLink: "/real-state-management/units",
             roles: [],
           }
         ]

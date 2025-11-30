@@ -1,12 +1,15 @@
 import { NgClass, NgFor, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ChangeDetectorRef, Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Button } from "src/app/shared/components/button/button";
 import { Table } from "src/app/shared/components/table/table";
+import { RealStateServices } from '../../real-state-services';
+import { BuildingDetailes } from 'src/app/shared/models/real-state/building';
+import { SharedServices } from 'src/app/shared/services/shared-services';
 
 @Component({
   selector: 'app-detailes-building',
-  imports: [Button, NgClass, NgFor, Table,NgIf],
+  imports: [Button, NgClass, NgFor, Table, NgIf],
   templateUrl: './detailes-building.html',
   styleUrl: './detailes-building.scss'
 })
@@ -16,8 +19,14 @@ export class DetailesBuilding {
   activeTab: number = 1;
   cols: any[];
   buildings: any[];
-  constructor(private router:Router){}
+
+  buildingId: string;
+  buildingDetailes: BuildingDetailes;
+
+  constructor(public SharedServices:SharedServices,private cd: ChangeDetectorRef,private router: Router, private RealStateServices: RealStateServices, private activatedRoute: ActivatedRoute) { }
   ngOnInit(): void {
+    this.buildingId = String(this.activatedRoute.snapshot.queryParamMap.get('id'))
+    this.getBuildingDetailes()
     this.buttons = [
       {
         name: "البيانات الاساسية",
@@ -153,5 +162,27 @@ export class DetailesBuilding {
   }
   editUnit(data: any) {
     this.router.navigate(['/real-state-management/builings/EditBuilding']);
+  }
+
+
+  getBuildingDetailes() {
+    this.RealStateServices.GetBuildingsByID(this.buildingId).subscribe(res => {
+      if (res.isSuccess) {
+        this.buildingDetailes = res.value
+        this.cd.markForCheck();
+      }
+    })
+  }
+ downloadAttachment(code: string) {
+    console.log(code)
+    let id = this.buildingDetailes.attachments.find(a => a.elementId == code)?.attachmentId;
+    this.RealStateServices.DownloadDocmument(String(id)).subscribe(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${code}`;
+      a.click();
+      window.URL.revokeObjectURL(url);
+    })
   }
 }

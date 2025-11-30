@@ -37,7 +37,7 @@ export class Lands {
     BuildingCount: ''
   };
   Districtes: LookUpItem[];
-  dialogRef:any
+  dialogRef: any
   constructor(private cd: ChangeDetectorRef, private dialog: MatDialog, private router: Router, private RealStateServices: RealStateServices, private SharedServices: SharedServices) {
   }
 
@@ -57,6 +57,37 @@ export class Lands {
   }
   getFilter(num: any) {
     this.getLands()
+  }
+  getLands() {
+    this.RealStateServices.GetLands(this.pageSize, this.pageNumber, this.filters).subscribe(res => {
+      if (res.isSuccess) {
+        this.lands = res.value;
+        this.lands.items.forEach(el => {
+          el.location = el.district.ar,
+            el.convertCreationDate = this.SharedServices.convertToArabicDate(el.creationDate)
+        })
+
+        this.totalPages = res.value.totalPages;
+        this.cd.markForCheck();
+      }
+    })
+  }
+ GetpageNumber(pageNumber: number) {
+    this.pageNumber = pageNumber;
+    this.getLands();
+  }
+
+  getDistrict() {
+    this.RealStateServices.GetLookUpSetByCode('district').subscribe(res => {
+      if (res.isSuccess) {
+        this.Districtes = res.value.items;
+        this.Districtes.forEach(el => {
+          el.name = el.descriptions.ar
+        })
+      }
+      this.cd.detectChanges();
+    });
+
   }
   deleteLand(land: Land) {
     this.dialogRef = this.dialog.open(DeleteLand, {
@@ -84,41 +115,10 @@ export class Lands {
       queryParams: { id: data.id }
     });
   }
-  getLands() {
-    this.RealStateServices.GetLands(this.pageSize, this.pageNumber, this.filters).subscribe(res => {
-      if (res.isSuccess) {
-        this.lands = res.value;
-        this.lands.items.forEach(el => {
-          el.location = el.district.ar,
-            el.convertCreationDate = this.SharedServices.convertToArabicDate(el.creationDate)
-        })
-
-        this.totalPages = res.value.totalPages;
-        this.cd.markForCheck();
-      }
-    })
-  }
-  GetpageNumber(pageNumber: number) {
-    this.pageNumber = pageNumber;
-    this.getLands();
-  }
-  getDistrict() {
-    this.RealStateServices.GetLookUpSetByCode('district').subscribe(res => {
-      if (res.isSuccess) {
-        this.Districtes = res.value.items;
-        this.Districtes.forEach(el => {
-          el.name = el.descriptions.ar
-        })
-      }
-      this.cd.detectChanges();
-    });
-
-  }
-
   delete(land: Land) {
     this.RealStateServices.DeleteLands(land.id).subscribe(res => {
       console.log(res)
-      res.isSuccess ?  [this.dialogRef.close(), this.getLands()] : ''
+      res.isSuccess ? [this.dialogRef.close(), this.getLands()] : ''
     })
   }
 

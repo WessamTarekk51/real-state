@@ -7,9 +7,9 @@ import { DetailesBuilding } from './detailes-building/detailes-building';
 
 const routes: Routes = [
   { path: '', component: Buildings },
-  { path: 'CreateBuilding', component: CreateBuilding },
-  { path: 'EditBuilding', component: EditBuilding},
-  { path: 'DetailesBuilding', component: DetailesBuilding },
+  { path: 'createBuilding', component: CreateBuilding },
+  { path: 'editBuilding', component: EditBuilding},
+  { path: 'detailesBuilding', component: DetailesBuilding },
 ];
 
 @NgModule({

@@ -1,12 +1,12 @@
 <div id="container-page">
   <div class="space-between">
     <div class="title">
-      <p>عمارة أ</p>
+      <p> {{buildingDetailes.name}}</p>
     </div>
     <div class="w80f">
       <div class="buttons">
         <div class="status red green m1l">
-          <p>مكتملة</p>
+          <p>{{buildingDetailes.buildingStatus.ar}}</p>
         </div>
         <app-button [className]="'orange'" [buttonTxt]="'تعديل'"></app-button>
         <app-button [className]="'main'" [buttonTxt]="'تصدير إلى Excel'"></app-button>
@@ -28,8 +28,7 @@
         <p>وصف العمارة</p>
       </div>
       <div class="des w50f end">
-        <p>قطعة أرض سكنية تقع في منطقة التجمع الخامس – القاهرة الجديدة، مساحتها 500 م² (20م طول × 25م عرض)، مستطيلة
-          الشكل، واجهة شرقية على شارع رئيسي بعرض 12م، وقريبة من الخدمات (مدرسة – مسجد – سوبرماركت).</p>
+        <p>{{buildingDetailes.description}}</p>
       </div>
     </div>
     <div class="space-between">
@@ -37,7 +36,7 @@
         <p>لأرض التابعة</p>
       </div>
       <div class="des w50f end bold">
-        <p>أرض A</p>
+        <p>{{buildingDetailes.landName}}</p>
       </div>
     </div>
     <div class="space-between">
@@ -45,7 +44,7 @@
         <p>عدد الشقق</p>
       </div>
       <div class="des w50f end bold">
-        <p>120 </p>
+        <p>{{buildingDetailes.numberOfUnits}} </p>
       </div>
     </div>
     <div class="space-between">
@@ -53,15 +52,15 @@
         <p>عدد الأدوار </p>
       </div>
       <div class="des w50f end bold">
-        <p> 6 </p>
+        <p> {{buildingDetailes.numberOfFloors}} </p>
       </div>
     </div>
     <div class="space-between">
       <div class="txt w50f">
-        <p>سنة البنا</p>
+        <p>سنة البناء</p>
       </div>
       <div class="des w50f end bold">
-        <p>12 يونيو 2020</p>
+        <p>{{SharedServices.convertToArabicDate(buildingDetailes.constructionYear)}}</p>
       </div>
     </div>
     <div class="line"></div>
@@ -73,7 +72,7 @@
         <p>الطول (م) </p>
       </div>
       <div class="des w50f end bold">
-        <p>12233</p>
+        <p>{{buildingDetailes.length}}</p>
       </div>
     </div>
     <div class="space-between">
@@ -81,7 +80,7 @@
         <p>العرض(م)</p>
       </div>
       <div class="des w50f end bold">
-        <p>2334</p>
+        <p>{{buildingDetailes.width}}</p>
       </div>
     </div>
     <div class="space-between">
@@ -89,7 +88,7 @@
         <p>المساحة الكلية(م2)</p>
       </div>
       <div class="des w50f end bold">
-        <p>22456</p>
+        <p>{{buildingDetailes.length *  buildingDetailes.width}}</p>
       </div>
     </div>
     <div class="line"></div>
@@ -98,20 +97,32 @@
     </div>
     <div class="space-between">
       <div class="txt w50f">
-        <p>شهادة السلامة الإنشائية</p>
+        <p> رخصة البناء </p>
+
       </div>
       <div class="file w50f end">
-        <p>Document1.pdf</p>
+        <p id="buliding_permit" (click)="downloadAttachment('buliding_permit')">Attachment1</p>
         <div class="icon"></div>
 
       </div>
     </div>
     <div class="space-between">
       <div class="txt w50f">
-        <p> رخصة البناء </p>
+        <p>شهادة السلامة الإنشائية</p>
       </div>
       <div class="file w50f end">
-        <p>Document1.pdf</p>
+        <p id="buliding_safety_certificate" (click)="downloadAttachment('buliding_safety_certificate')">Attachment2</p>
+        <div class="icon"></div>
+
+      </div>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p>شهادة إتمام البناء</p>
+
+      </div>
+      <div class="file w50f end">
+        <p id="buliding_completion_certificate" (click)="downloadAttachment('buliding_completion_certificate')">Attachment3</p>
         <div class="icon"></div>
 
       </div>
@@ -121,17 +132,7 @@
         <p> المخططات المعمارية والكهربائية </p>
       </div>
       <div class="file w50f end">
-        <p>Document1.pdf</p>
-        <div class="icon"></div>
-
-      </div>
-    </div>
-    <div class="space-between">
-      <div class="txt w50f">
-        <p>شهادة إتمام البناء</p>
-      </div>
-      <div class="file w50f end">
-        <p>Document1.pdf</p>
+        <p id="architectural_and_electrical" (click)="downloadAttachment('architectural_and_electrical')">Attachment1</p>
         <div class="icon"></div>
 
       </div>

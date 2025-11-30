@@ -4,10 +4,12 @@ export const ASSET = {
   // baseUrl: environment.baseURL,
   buildings: {
     Buildings: '/api/buildings',
-    GetBuildingsByID: '/api/buildings/{{id}}', // get
-    CreateBuildings: '/api/buildings/create', // post
-    UpdateBuildings: '/api/buildings/{id}/update', //PUT
-    DeleteBuildings: '/api/buildings/{id}/delete', //DELETE
+    GetBuildingsByID: '/{{id}}', // get
+    CreateBuildings: '/create', // post
+    UpdateBuildings: '/update', //PUT
+    DeleteBuildings: '/delete', //DELETE
+    AllBuildings: '/dropdown'
+
   },
   lands: {
     Lands: '/api/lands', // get
@@ -15,14 +17,15 @@ export const ASSET = {
     CreateLands: '/create', // post
     UpdateLands: '/update', //PUT
     DeleteLands: '/delete', //DELETE
+    AllLands: '/dropdown'
   },
   units: {
     Units: '/api/units',
-    GetUnits: '/api/units', // get
-    GetUnitsByID: '/api/units/{id}', // get
-    CreateUnits: '/api/units/create', // post
-    UpdateUnits: '/api/units/{id}/update', //PUT
-    DeleteUnits: '/api/units/{id}/delete', //DELETE
+    GetUnitsByID: '/{id}', // get
+    CreateUnits: '/create', // post
+    UpdateUnits: '/update', //PUT
+    DeleteUnits: '/delete', //DELETE
+    AllUnits: '/dropdown'
   },
   document: {
     documnet:

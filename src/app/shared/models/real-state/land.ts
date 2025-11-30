@@ -52,6 +52,7 @@ export interface Land {
 
 
 
+
 export interface LandDetailesRoot extends IResult {
   value: LandDetailes
 }
@@ -86,6 +87,15 @@ export interface Attachment {
 }
 
 
+
+export interface DropDownLandsRoot extends IResult {
+  value: DropDownLands[]
+}
+
+export interface DropDownLands {
+  id: string,
+  name: string,
+}
 
 
 

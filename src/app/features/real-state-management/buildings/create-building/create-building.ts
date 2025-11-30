@@ -24,6 +24,7 @@ import { CreateNewBuilding } from 'src/app/shared/models/real-state/building';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { attachment } from 'src/app/shared/models/real-state/attachment';
+import { DropDownLands } from 'src/app/shared/models/real-state/land';
 
 @Component({
   selector: 'app-create-building',
@@ -47,13 +48,9 @@ import { attachment } from 'src/app/shared/models/real-state/attachment';
 export class CreateBuilding {
   pageTitle: string = 'إضافة عمارة جديدة';
   createBuilding!: FormGroup;
-  buildingStatus = signal<LookUpItem[]>([]);
-  newBuilding: CreateNewBuilding;
-  BulidingPermit: string;
-  BulidingSafetyCertificate: string;
-  BuildingCompletionCertificate: string;
-  ArchitecturalAndElectrical: string;
+  attachmentsFiles: attachment[];
 
+  buildingStatus = signal<LookUpItem[]>([]);
   dataLoaded = computed(
     () =>
       this.buildingStatus().length > 0 &&
@@ -61,8 +58,16 @@ export class CreateBuilding {
       this.BulidingSafetyCertificate != '' &&
       this.BuildingCompletionCertificate != '' &&
       this.ArchitecturalAndElectrical != ''
+
   );
-  attachmentsFiles: attachment[];
+  newBuilding: CreateNewBuilding;
+  BulidingPermit: string;
+  BulidingSafetyCertificate: string;
+  BuildingCompletionCertificate: string;
+  ArchitecturalAndElectrical: string;
+
+  DropDownLands: DropDownLands[]
+
 
   constructor(private messageService: MessageService, private fb: UntypedFormBuilder, private RealStateServices: RealStateServices,
     private cd: ChangeDetectorRef) {
@@ -75,11 +80,12 @@ export class CreateBuilding {
       buildingStatusId: ['', Validators.required],
       length: [null, Validators.required],
       width: [null, Validators.required],
-      description: ['', Validators.required],
+      description: [''],
       BulidingPermit: ['', Validators.required],
       BulidingSafetyCertificate: ['', Validators.required],
       BuildingCompletionCertificate: ['', Validators.required],
       ArchitecturalAndElectrical: ['', Validators.required],
+      area: ['']
     });
     this.newBuilding = {
       name: '',
@@ -119,14 +125,14 @@ export class CreateBuilding {
     this.GetLookUp();
   }
   GetLookUp() {
-    console.log(this.attachmentsFiles)
     forkJoin({
       BuildingStatus: this.RealStateServices.GetLookUpSetByCode('building_status'),
       BulidingPermit: this.RealStateServices.GetLookUpItemByCode('attachment_type', this.attachmentsFiles[0].elementId),
       BulidingSafetyCertificate: this.RealStateServices.GetLookUpItemByCode('attachment_type', this.attachmentsFiles[1].elementId),
       BuildingCompletionCertificate: this.RealStateServices.GetLookUpItemByCode('attachment_type', this.attachmentsFiles[2].elementId),
-      ArchitecturalAndElectrical: this.RealStateServices.GetLookUpItemByCode('attachment_type', this.attachmentsFiles[3].elementId)
-    }).subscribe(({ BuildingStatus, BulidingPermit, BulidingSafetyCertificate, BuildingCompletionCertificate, ArchitecturalAndElectrical }) => {
+      ArchitecturalAndElectrical: this.RealStateServices.GetLookUpItemByCode('attachment_type', this.attachmentsFiles[3].elementId),
+      getDropDownLands: this.RealStateServices.getDropDownLands()
+    }).subscribe(({ BuildingStatus, BulidingPermit, BulidingSafetyCertificate, BuildingCompletionCertificate, ArchitecturalAndElectrical, getDropDownLands }) => {
       if (BuildingStatus?.isSuccess) {
         const mapped = BuildingStatus.value.items.map((el) => ({
           ...el,
@@ -152,7 +158,9 @@ export class CreateBuilding {
         this.ArchitecturalAndElectrical = ArchitecturalAndElectrical.value.id
         this.attachmentsFiles[3].attachmentId = this.BulidingPermit
       }
-      console.log(this.BulidingPermit)
+      if (getDropDownLands.isSuccess) {
+        this.DropDownLands = getDropDownLands.value;
+      }
     });
   }
 
@@ -198,6 +206,22 @@ export class CreateBuilding {
         this.validateAllFields(control);
       }
     });
+  }
+
+
+  getcaluArea(length: any) {
+    this.createBuilding.value.width != null && this.createBuilding.value.length ? this.getArea() : ''
+  }
+
+  getArea() {
+    this.createBuilding.patchValue({
+      area: this.createBuilding.value.width * this.createBuilding.value.length
+    });
+  }
+
+
+  getDropDownLands() {
+
   }
 
 

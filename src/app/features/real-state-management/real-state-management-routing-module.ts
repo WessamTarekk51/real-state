@@ -6,6 +6,7 @@ const routes: Routes = [
   { path: '', component: RealStateManagement },
   { path: 'lands', loadChildren: () => import('./lands/lands-module').then(m => m.LandsModule) },
   { path: 'builings', loadChildren: () => import('./buildings/buildings-module').then(m => m.BuildingsModule) },
+  { path: 'units', loadChildren: () => import('./units/units-module').then(m => m.UnitsModule) },
 
 ];
 

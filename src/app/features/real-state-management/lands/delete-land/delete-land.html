@@ -2,7 +2,7 @@
   <div class="delete-container">
     <div class="deleteIcon"></div>
     <div class="content">
-      <p class="warningTxt">مسح الارض رقم 1233445</p>
+      <p class="warningTxt" style="direction: rtl;">مسح الارض رقم  {{item.number}}  </p>
       <p class="txt">هل انت متأكد من انك تريد مسح هذه الارض؟</p>
       <div class="buttons">
         <app-button [buttonTxt]="'مسح'" [className]="'delete'" (click)="delete()"></app-button>

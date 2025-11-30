@@ -1,30 +1,28 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { InputTxt } from "src/app/shared/components/input-txt/input-txt";
 import { InputSelect } from "src/app/shared/components/input-select/input-select";
-import { InputDate } from "src/app/shared/components/input-date/input-date";
+import { InputNum } from "src/app/shared/components/input-num/input-num";
 import { Button } from "src/app/shared/components/button/button";
+import { Router } from '@angular/router';
 import { Table } from "src/app/shared/components/table/table";
-import { DeleteBuilding } from './delete-building/delete-building';
-import { NgIf } from '@angular/common';
-import { RealStateServices } from '../real-state-services';
 import { Building, GetBuildings } from 'src/app/shared/models/real-state/building';
-import { SharedServices } from 'src/app/shared/services/shared-services';
-import { FormsModule } from '@angular/forms';
-import { LookUpItem } from 'src/app/shared/models/real-state/lookup';
 import { DropDownLands } from 'src/app/shared/models/real-state/land';
+import { RealStateServices } from '../real-state-services';
+import { SharedServices } from 'src/app/shared/services/shared-services';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteUnit } from './delete-unit/delete-unit';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-buildings',
-  imports: [FormsModule, InputTxt, InputSelect, InputDate, Button, Table, NgIf],
-  templateUrl: './buildings.html',
-  styleUrl: './buildings.scss'
+  selector: 'app-units',
+  imports: [InputTxt, InputSelect, InputNum, Button, Table,NgIf],
+  templateUrl: './units.html',
+  styleUrl: './units.scss'
 })
-export class Buildings {
-  pageTitle: string = 'العمارات'
+export class Units {
+  pageTitle: string = 'الوحدات السكنية'
   cols: any[];
-  buildings: GetBuildings;
+  units: GetBuildings;
   pageSize: number = 4;
   totalPages: number;
   pageNumber: number = 1;
@@ -40,13 +38,10 @@ export class Buildings {
   };
   dialogRef: any;
 
-  buildingStatus: LookUpItem[];
   DropDownLands: DropDownLands[];
+  constructor(private cd: ChangeDetectorRef, private SharedServices: SharedServices, private dialog: MatDialog, private router: Router, private RealStateServices: RealStateServices) { }
 
-  constructor(private cd: ChangeDetectorRef, private SharedServices: SharedServices, private dialog: MatDialog, private router: Router, private RealStateServices: RealStateServices) {
-  }
   ngOnInit(): void {
-    this.getBuildingStatus()
     this.getDropDownLands()
     this.cols = [
       { field: 'number', header: 'رقم العمارة' },
@@ -57,7 +52,7 @@ export class Buildings {
       { field: 'area', header: 'المساحة (م2)' },
       { field: 'convertConstructionYear', header: 'سنة البناء' },
       { field: 'convertCreationDate', header: 'تاريخ الانشاء' },
-      { field: 'buildingStatusName', header: 'الحالة', status: true },
+      { field: '', header: 'الحالة', status: true },
       { field: '', header: 'التحكم', control: true }
     ];
     this.getBuilding()
@@ -68,8 +63,8 @@ export class Buildings {
   getBuilding() {
     this.RealStateServices.GetBuildings(this.pageSize, this.pageNumber, this.filters).subscribe(res => {
       if (res.isSuccess) {
-        this.buildings = res.value;
-        this.buildings.items.forEach(el => {
+        this.units = res.value;
+        this.units.items.forEach(el => {
           el.convertCreationDate = this.SharedServices.convertToArabicDate(el.creationDate);
           el.convertConstructionYear = this.SharedServices.convertToArabicDate(el.constructionYear)
           el.buildingStatusName = el.buildingStatus.ar
@@ -91,23 +86,10 @@ export class Buildings {
     })
     this.cd.detectChanges();
   }
-  getBuildingStatus() {
-    this.RealStateServices.GetLookUpSetByCode('building_status').subscribe(res => {
-      if (res.isSuccess) {
-        this.buildingStatus = res.value.items;
-        this.buildingStatus.forEach(el => {
-          el.name = el.descriptions.ar
-        })
-      }
-    })
-    this.cd.detectChanges();
-  }
-
-
 
 
   deleteBuiling(building: Building) {
-    this.dialogRef = this.dialog.open(DeleteBuilding, {
+    this.dialogRef = this.dialog.open(DeleteUnit, {
       data: { ...building },
       panelClass: 'center-dialog'
     });
@@ -119,8 +101,8 @@ export class Buildings {
     });
 
   }
-  createBuiling() {
-    this.router.navigate(['/real-state-management/builings/createBuilding']);
+  createUnit() {
+    this.router.navigate(['/real-state-management/units/createUnit']);
   }
   detailesBuiling(building: Building) {
     this.router.navigate(['/real-state-management/builings/detailesBuilding'], {

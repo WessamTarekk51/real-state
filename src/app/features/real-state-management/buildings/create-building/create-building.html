@@ -18,7 +18,7 @@
       <div class="half">
         <div class="full">
           <app-input-select formControlName="landId" [placeholder]="'الأرض التابعة'" [formStyle]="true"
-            [required]="true" [labelTxt]="'الأرض التابعة'">
+            [required]="true" [labelTxt]="'الأرض التابعة'" [options]="DropDownLands">
           </app-input-select>
           <div class="errormassage">
             <app-control-messages class="form-validation-style" [control]="createBuilding.get('landId')"
@@ -96,7 +96,7 @@
     <div class="row">
       <div class="half">
         <div class="half colum">
-          <app-input-num [placeholder]="'الطول'" formControlName="length" [formStyle]="true" [required]="true"
+          <app-input-num [placeholder]="'الطول'" (inputValue)="getcaluArea($event)" formControlName="length" [formStyle]="true" [required]="true"
             [labelTxt]="'الطول (م)'">
           </app-input-num>
           <div class="errormassage">
@@ -108,7 +108,7 @@
           </div>
         </div>
         <div class="half colum">
-          <app-input-num [placeholder]="'العرض'" formControlName="width" [formStyle]="true" [required]="true"
+          <app-input-num [placeholder]="'العرض'" (inputValue)="getcaluArea($event)" formControlName="width" [formStyle]="true" [required]="true"
             [labelTxt]="'العرض (م)'">
           </app-input-num>
           <div class="errormassage">
@@ -122,7 +122,7 @@
       </div>
       <div class="half">
         <div class="full">
-          <app-input-num [placeholder]="'المساحة الكلية (م²)'" [formStyle]="true" [required]="true"
+          <app-input-num formControlName="area" [placeholder]="'المساحة الكلية (م²)'" [formStyle]="true" [required]="true"
             [labelTxt]="'المساحة الكلية (م²)'">
           </app-input-num>
         </div>

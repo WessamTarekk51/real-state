@@ -5,29 +5,29 @@
     </div>
     <div class="content-filter">
       <div class="four">
-        <app-input-txt [placeholder]="'رقم العمارة'"></app-input-txt>
+        <app-input-txt [placeholder]="'رقم العمارة'" [(ngModel)]="filters.Number" (inputValue)="getFilter($event)"></app-input-txt>
       </div>
       <div class="four">
-        <app-input-txt [placeholder]="'اسم العمارة'"></app-input-txt>
+        <app-input-txt [placeholder]="'اسم العمارة'" [(ngModel)]="filters.Name" (inputValue)="getFilter($event)" ></app-input-txt>
       </div>
       <div class="four">
-        <app-input-select [placeholder]="'اسم الأرض'"></app-input-select>
+        <app-input-select [placeholder]="'اسم الأرض'" [options]="DropDownLands" [(ngModel)]="filters.LandId" (inputValue)="getFilter($event)"></app-input-select>
       </div>
       <div class="four">
-        <app-input-select [placeholder]="'الحالة'"></app-input-select>
+        <app-input-select [placeholder]="'الحالة'" [options]="buildingStatus" [(ngModel)]="filters.StatusId" (inputValue)="getFilter($event)"></app-input-select>
       </div>
       <div class="four">
-        <app-input-date [placeholder]="'تاريخ الانشاء'"></app-input-date>
+        <app-input-date [placeholder]="'تاريخ الانشاء'" [(ngModel)]="filters.ConstructionDate" (inputValue)="getFilter($event)"></app-input-date>
       </div>
       <div class="four">
-        <app-input-txt [placeholder]="'المساحة (م2)'"></app-input-txt>
+        <app-input-txt [placeholder]="'المساحة (م2)'" [(ngModel)]="filters.Area" (inputValue)="getFilter($event)"></app-input-txt>
       </div>
 
       <div class="four">
-        <app-input-txt [placeholder]="'عدد العمارات'"></app-input-txt>
+        <app-input-txt [placeholder]="'عدد الادوار'" [(ngModel)]="filters.FloorCount" (inputValue)="getFilter($event)"></app-input-txt>
       </div>
       <div class="four">
-        <app-input-txt [placeholder]="'عدد الشقق'"></app-input-txt>
+        <app-input-txt [placeholder]="'عدد الشقق'" [(ngModel)]="filters.UnitCount" (inputValue)="getFilter($event)"></app-input-txt>
       </div>
     </div>
   </div>
@@ -35,11 +35,12 @@
     <app-button [className]="'custom'" [buttonTxt]="'تصدير إلى Excel'"></app-button>
     <app-button [className]="'main'" [buttonTxt]="'+ إضافة عمارة جديدة'" (buttonClick)="createBuiling()"></app-button>
   </div>
-  <div class="container-table" *ngIf="buildings && buildings.length; else noData">
-    <app-table [cols]="cols" [items]="buildings" (delete)="deleteBuiling($event)" (view)="detailesBuiling($event)"
+  <div class="container-table" *ngIf="buildings && buildings.items.length; else noData">
+    <app-table [cols]="cols" [items]="buildings.items" [totalPages]="totalPages" [pageSize]="pageSize"
+      (pageNumber)="GetpageNumber($event)" (delete)="deleteBuiling($event)" (view)="detailesBuiling($event)"
       (edit)="editBuiling($event)"></app-table>
   </div>
   <ng-template #noData>
-    <p class="text-center text-gray-500 mt-4">لا توجد أراضي متاحة حالياً</p>
+    <p class="text-center text-gray-500 mt-4">لا توجد عمارات متاحة حالياً</p>
   </ng-template>
 </div>

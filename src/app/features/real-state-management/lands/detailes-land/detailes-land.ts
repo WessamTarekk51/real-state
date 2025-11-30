@@ -20,9 +20,7 @@ export class DetailesLand {
     //
   }
   ngOnInit(): void {
-    console.log(this.landDetailes)
     this.landId = String(this.activatedRoute.snapshot.queryParamMap.get('id'))
-    console.log(this.landId)
     this.getLandDetailes()
 
   }

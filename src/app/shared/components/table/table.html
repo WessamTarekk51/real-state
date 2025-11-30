@@ -16,10 +16,10 @@
       <tr>
         @for(col of columns; track $index ){
         <td>
-          @if($index == 0){
+          @if($index == 0 && !col.status){
           <p class="orange"> {{ rowData[col.field] }}</p>
           }
-          @else {
+          @else if (!col.status) {
           <p> {{ rowData[col.field] }}</p>
           }
           @if(col.control){
@@ -30,13 +30,22 @@
           </div>
           }
           @if(col.status){
-          @if(rowData.status == 1){
+          @if(rowData[col.field] == "تحت الإنشاء"){
           <div class="status red">
-            <p>تحت الإنشاء</p>
+            <p>{{rowData[col.field]}}</p>
           </div>
-          }@else {
+          }@else if(rowData[col.field] == 'مكتمل') {
           <div class="status green">
             <p>مكتملة</p>
+          </div>
+          }@else if(rowData[col.field] ==  "تم التسليم") {
+          <div class="status green">
+            <p>تم التسليم </p>
+          </div>
+          }
+          @else if(rowData[col.field] ==   "هيكل خرساني") {
+          <div class="status red">
+            <p>هيكل خرساني </p>
           </div>
           }
           }

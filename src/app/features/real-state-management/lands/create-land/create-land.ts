@@ -84,7 +84,7 @@ export class CreateLand implements AfterViewInit {
       OwnershipCertificate: ['', Validators.required],
       OwnershipContract: ['', Validators.required],
       RealStateRegistrationDocuments: ['', Validators.required],
-      area: ['2']
+      area: ['']
     });
     this.newLand = {
       name: '',
@@ -224,7 +224,6 @@ export class CreateLand implements AfterViewInit {
     return id;
   }
   getEditedData() {
-
     this.createLands.patchValue({
       name: this.landEdited.name,
       length: this.landEdited.length,

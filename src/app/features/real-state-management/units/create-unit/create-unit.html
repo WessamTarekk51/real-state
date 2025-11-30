@@ -1,0 +1,95 @@
+<div id="container-page" *ngIf="dataLoaded">
+  <form class="form" [formGroup]="createUnits">
+    <div class="row">
+      <div class="half">
+        <div class="full">
+          <app-input-txt formControlName="name" [placeholder]="'اسم الوحدة'" [formStyle]="true" [required]="true"
+            [labelTxt]="'اسم الوحدة'">
+          </app-input-txt>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createUnits.get('name')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div>
+        </div>
+      </div>
+      <div class="half">
+        <div class="full">
+          <app-input-select [value]="createUnits.value.buildingId" formControlName="buildingId"
+            [placeholder]="'العمارة التابعة'" [options]="DropDownBuildings" [formStyle]="true" [required]="true"
+            [labelTxt]="'العمارة التابعة '">
+          </app-input-select>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createUnits.get('buildingId')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="half">
+        <div class="full">
+          <app-input-num [placeholder]="'الدور'" formControlName="floorNumber" [formStyle]="true" [required]="true"
+            [labelTxt]="'الدور'">
+          </app-input-num>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createUnits.get('floorNumber')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div>
+        </div>
+      </div>
+      <div class="half">
+        <div class="full">
+          <app-input-num [placeholder]="'المساحة (م²) '" formControlName="area" [formStyle]="true" [required]="true"
+            [labelTxt]="'المساحة (م²) '">
+          </app-input-num>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createUnits.get('area')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="half">
+        <div class="full">
+          <app-input-num [placeholder]="'عدد الغرف '" formControlName="numberOfRooms" [formStyle]="true"
+            [required]="true" [labelTxt]="'عدد الغرف '">
+          </app-input-num>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createUnits.get('numberOfRooms')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div>
+        </div>
+      </div>
+      <div class="half">
+        <div class="full">
+          <app-input-num [placeholder]="' عدد الحمامات  '" formControlName="numberOfBatEmployeeooms" [formStyle]="true"
+            [required]="true" [labelTxt]="' عدد الحمامات  '">
+          </app-input-num>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createUnits.get('numberOfBatEmployeeooms')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
