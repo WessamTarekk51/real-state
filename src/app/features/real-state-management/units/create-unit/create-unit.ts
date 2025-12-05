@@ -12,10 +12,14 @@ import { ControlMessages } from "src/app/shared/components/control-messages/cont
 import { InputSelect } from "src/app/shared/components/input-select/input-select";
 import { NgIf } from '@angular/common';
 import { InputNum } from "src/app/shared/components/input-num/input-num";
+import { InputTextArea } from "src/app/shared/components/input-text-area/input-text-area";
+import { RadiosButton } from "src/app/shared/components/radios-button/radios-button";
+import { InputUpload } from "src/app/shared/components/input-upload/input-upload";
+import { Button } from "src/app/shared/components/button/button";
 
 @Component({
   selector: 'app-create-unit',
-  imports: [NgIf, ReactiveFormsModule, ToastModule, InputTxt, ControlMessages, InputSelect, InputNum],
+  imports: [NgIf, ReactiveFormsModule, ToastModule, InputTxt, ControlMessages, InputSelect, InputNum, InputTextArea, RadiosButton, InputUpload, Button],
   templateUrl: './create-unit.html',
   styleUrl: './create-unit.scss',
   providers: [MessageService],
@@ -172,4 +176,5 @@ export class CreateUnit {
       }
     });
   }
+  createNewUnit(){}
 }

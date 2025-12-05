@@ -1,0 +1,14 @@
+<div class="radio">
+  <label>{{labelTxt}} <span *ngIf="required">*</span></label>
+  <div class="flex">
+    <div class=" items-center">
+      <p-radiobutton [name]="radioTxt" [value]="valueOne" [(ngModel)]="ingredient" inputId="ingredient1" />
+      <label for="ingredient1" class="ml-2">{{valueOne}}</label>
+    </div>
+
+    <div class=" items-center">
+      <p-radiobutton [name]="radioTxt" [value]="valueTwo" [(ngModel)]="ingredient" inputId="ingredient2" />
+      <label for="ingredient2" class="ml-2">{{valueTwo}}</label>
+    </div>
+  </div>
+</div>

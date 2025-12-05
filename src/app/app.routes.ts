@@ -9,6 +9,7 @@ export const routes: Routes = [
   { path: 'home', component: Home },
   { path: 'login', canActivate: [NotLoggedGuard], component: Account },
   { path: 'real-state-management', canActivate: [NotLoggedGuard], loadChildren: () => import('./features/real-state-management/real-state-management-module').then(m => m.RealStateManagementModule) },
+  { path: 'customer-management', canActivate: [NotLoggedGuard], loadChildren: () => import('./features/customer-management/customer-management-module').then(m => m.CustomerManagementModule) },
 
 ];
 // , canActivate: [NotLoggedGuard]

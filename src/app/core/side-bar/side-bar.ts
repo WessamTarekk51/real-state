@@ -48,6 +48,19 @@ export class SideBar {
             roles: [],
           }
         ]
+      },
+      {
+        label: 'إدارة العملاء',
+        icon: '',
+        routerLink : "/customer-management",
+        roles: [''],
+        items: [
+          {
+            label: 'العملاء',
+            routerLink: "/customer-management/clients",
+            roles: [],
+          }
+        ]
       }
     ];
 

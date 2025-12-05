@@ -1,0 +1,29 @@
+
+
+.radio{
+  margin-bottom: 1vw;
+  width: 100%;
+
+  .flex {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-top: 0.5vw;
+
+    .items-center {
+      width: 40%;
+      ::ng-deep {
+        label {
+          margin-right: 1vw;
+        }
+      }
+    }
+  }
+  label {
+    font-size: 1.4vw;
+
+    span {
+      color: rgba(255, 52, 52, 1);
+    }
+  }
+}
