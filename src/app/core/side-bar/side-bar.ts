@@ -59,6 +59,11 @@ export class SideBar {
             label: 'العملاء',
             routerLink: "/customer-management/clients",
             roles: [],
+          },
+          {
+            label: 'اضافة عميل جديد',
+            routerLink: "/customer-management/clients/create",
+            roles: [],
           }
         ]
       }

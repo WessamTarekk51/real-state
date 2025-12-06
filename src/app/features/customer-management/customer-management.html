@@ -1,1 +1,23 @@
-<p>customer-management works!</p>
+<div id="container-page">
+  <div class="customerContainer">
+    <div class="totalDiv">
+      <app-container-colored [txt]="'إجمالي عدد العملاء.'" [numTxt]="'2,000,000 جنية'" [color]="'rgba(16, 55, 70, 1)'">
+      </app-container-colored>
+    </div>
+
+    <div class="totalDiv">
+      <app-container-colored [txt]="'المساحة الكلية للأراضي (م²)'" [numTxt]="'2,000,000 جنية'" [color]="'rgba(34, 100, 140, 1)'">
+      </app-container-colored>
+    </div>
+
+    <div class="totalDiv">
+      <app-container-colored [txt]="'عملاء نشطين'" [numTxt]="'2,000,000 جنية'" [color]="'rgba(1, 162, 80, 1)'">
+      </app-container-colored>
+    </div>
+
+    <div class="totalDiv">
+      <app-container-colored [txt]="'عملاء متأخرين في الدفع.'" [numTxt]="'2,000,000 جنية'" [color]="'rgba(221, 43, 46, 1)'">
+      </app-container-colored>
+    </div>
+  </div>
+</div>
