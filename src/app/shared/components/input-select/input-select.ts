@@ -22,7 +22,7 @@ export class InputSelect {
   @Input() required: boolean;
   @Input() labelTxt: string;
 
-  @Output() selectValue = new EventEmitter<any>();
+  @Output() inputValue = new EventEmitter<any>();
   @Input() value: any;
   disabled = false;
 
@@ -56,7 +56,7 @@ export class InputSelect {
     this.value = value;
     this.onChange(value);
     this.onTouched();
-    this.selectValue.emit(value);
+    this.inputValue.emit(value);
   }
 
 

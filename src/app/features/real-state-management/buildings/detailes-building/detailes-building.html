@@ -139,8 +139,8 @@
     </div>
   </div> }
   @if(activeTab == 2){
-  <div class="container-table" *ngIf="buildings && buildings.length; else noData">
-    <app-table [cols]="cols" [items]="buildings" (view)="detailesUnit($event)" (edit)="editUnit($event)"></app-table>
+  <div class="container-table" *ngIf="units && units.items.length; else noData">
+    <app-table [cols]="cols" [items]="units.items" [totalPages]="totalPages" [pageSize]="pageSize" (pageNumber)="GetpageNumber($event)" (view)="detailesUnit($event)" (edit)="editUnit($event)"></app-table>
   </div>
   <ng-template #noData>
     <p class="text-center text-gray-500 mt-4">لا توجد وحدات متاحة حالياً</p>

@@ -47,4 +47,11 @@ export const ASSET = {
     getItemByCode: '/items/by-code',
 
   },
+  client:{
+    Clients: '/api/clients',
+    GetClientsByID: '/{id}', // get
+    CreateClients: '/create', // post
+    UpdateClients: '/update', //PUT
+    DeleteClients: '/delete', //DELETE
+  }
 } as const;

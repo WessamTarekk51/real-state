@@ -4,6 +4,7 @@ import { ASSET } from 'src/app/core/api/asset.const';
 import { BuildingDetailesRoot, DropDownBuildingsRoot, GetBuildingsRoot } from 'src/app/shared/models/real-state/building';
 import { DropDownLandsRoot, GetLandsRoot, LandDetailesRoot } from 'src/app/shared/models/real-state/land';
 import { RootLookUp } from 'src/app/shared/models/real-state/lookup';
+import { GetUnitsRoot } from 'src/app/shared/models/real-state/unit';
 import { IResult, IStringResult } from 'src/app/shared/models/result';
 import { environment } from 'src/environments/environment';
 
@@ -100,8 +101,33 @@ export class RealStateServices {
   }
 
   //units
-  GetUnits() {
-    return this.http.get(this.baseURL + ASSET.units.Units);
+  GetUnits(pageSize: number, pageNumber: number, filters: any) {
+    const headers = this.headers
+    let params = new HttpParams()
+      .set('pageSize', pageSize)
+      .set('pageNumber', pageNumber);
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value != '' && key !== 'pageSize' && key !== 'pageNumber') {
+        params = params.set(key, String(value));
+      }
+    });
+    const url = `${this.baseURL}${ASSET.units.Units}`;
+
+    return this.http.get<GetUnitsRoot>(url, { headers, params });
+  }
+  GetUnitsByBuildingID(pageSize: number, pageNumber: number, filters: any) {
+    const headers = this.headers
+    let params = new HttpParams()
+      .set('pageSize', pageSize)
+      .set('pageNumber', pageNumber);
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value != '' && key !== 'pageSize' && key !== 'pageNumber') {
+        params = params.set(key, String(value));
+      }
+    });
+    const url = `${this.baseURL}${ASSET.units.Units}`;
+
+    return this.http.get<GetUnitsRoot>(url, { headers, params });
   }
   GetUnitsByID(id: number) {
     return this.http.get(this.baseURL + ASSET.units.Units + '/' + id);

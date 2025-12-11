@@ -1,6 +1,6 @@
 <div class="table" *ngIf="items">
-  <p-table [columns]="cols" [value]="items" [rows]="pageSize"  [lazy]="false" [(first)]="first"
-     stripedRows [tableStyle]="{'min-width': '50rem'}">
+  <p-table [columns]="cols" [value]="items" [rows]="pageSize" [lazy]="false" [(first)]="first" stripedRows
+    [tableStyle]="{'min-width': '50rem'}">
     <ng-template pTemplate="header" let-columns>
       <tr>
         @for(col of columns; track $index ){
@@ -26,7 +26,9 @@
           <div class="icons">
             <div class="icon view" (click)="viewItem(rowData)"></div>
             <div class="icon edit" (click)="editItem(rowData)"></div>
+            @if(!col.unit){
             <div class="icon delete" (click)="deleteItem(rowData)"></div>
+            }
           </div>
           }
           @if(col.status){
@@ -38,16 +40,46 @@
           <div class="status green">
             <p>مكتملة</p>
           </div>
-          }@else if(rowData[col.field] ==  "تم التسليم") {
+          }@else if(rowData[col.field] == "تم التسليم") {
           <div class="status green">
             <p>تم التسليم </p>
           </div>
           }
-          @else if(rowData[col.field] ==   "هيكل خرساني") {
+          @else if(rowData[col.field] == "هيكل خرساني") {
           <div class="status red">
             <p>هيكل خرساني </p>
           </div>
           }
+          <!-- unit -->
+          @else if(rowData[col.field] == "مؤجر") {
+          <div class="status red">
+            <p>مؤجر</p>
+          </div>
+          }
+
+
+          @else if(rowData[col.field] == "محجوز") {
+          <div class="status red">
+            <p>محجوز</p>
+          </div>
+          }
+
+          @else if(rowData[col.field] == "مباع") {
+          <div class="status red">
+            <p> مباع </p>
+          </div>
+          }
+
+          @else if(rowData[col.field] == "إعادة بيع") {
+            <div class="status red">
+              <p> إعادة بيع </p>
+            </div>
+            }
+            @else if(rowData[col.field] == "متاح") {
+              <div class="status red">
+                <p> متاح </p>
+              </div>
+              }
           }
         </td>
         }
@@ -64,4 +96,3 @@
   </span>
 
 </div>
-

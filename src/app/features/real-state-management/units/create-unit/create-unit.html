@@ -95,8 +95,8 @@
       <div class="half">
         <div class="full">
           <app-input-select [value]="createUnits.value.buildingId" formControlName="unitTypeId"
-            [placeholder]="'شقة | دوبلكس | بنتهاوس | استوديو | محل | مكتب'" [options]="DropDownBuildings"
-            [formStyle]="true" [required]="true" [labelTxt]="'نوع الوحدة '">
+            [placeholder]="'شقة | دوبلكس | بنتهاوس | استوديو | محل | مكتب'" [options]="UnitType()" [formStyle]="true"
+            [required]="true" [labelTxt]="'نوع الوحدة '">
           </app-input-select>
           <div class="errormassage">
             <app-control-messages class="form-validation-style" [control]="createUnits.get('unitTypeId')"
@@ -131,37 +131,80 @@
     </div>
     <div class="row">
       <div class="half">
+
         <div class="full">
-        <app-radios-button [required]="true" [labelTxt]="'شرفة'" [valueOne]="'نعم'" [valueTwo]="'لا'" [radioTxt]="'radio1'"> </app-radios-button>
+          <app-input-select [value]="createUnits.value.buildingId" formControlName="unitStatusId"
+            [placeholder]="'حالة الوحدة'" [options]="UnitStatus()" [formStyle]="true" [required]="true"
+            [labelTxt]="'حالة الوحدة'">
+          </app-input-select>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createUnits.get('unitStatusId')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div>
         </div>
       </div>
       <div class="half">
         <div class="full">
-          <app-input-select [value]="createUnits.value.buildingId" formControlName="unitTypeId"
-          [placeholder]="'كامل | نصف تشطيب | بدون'" [options]="DropDownBuildings"
-          [formStyle]="true" [required]="true" [labelTxt]="'تشطيب'">
-        </app-input-select>
-        <div class="errormassage">
-          <app-control-messages class="form-validation-style" [control]="createUnits.get('unitTypeId')"
-            [validationMessages]="[
+          <app-input-select [value]="createUnits.value.buildingId" formControlName="finishingTypeId"
+            [placeholder]="'كامل | نصف تشطيب | بدون'" [options]="finishingType()" [formStyle]="true" [required]="true"
+            [labelTxt]="'تشطيب'">
+          </app-input-select>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createUnits.get('finishingTypeId')"
+              [validationMessages]="[
             { type: 'required', message: 'هذا الحقل مطلوب' }
           ]">
-          </app-control-messages>
-        </div>
+            </app-control-messages>
+          </div>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="half">
         <div class="full">
-        <app-radios-button [required]="true" [labelTxt]="'جراج'" [valueOne]="'نعم'" [valueTwo]="'لا'" [radioTxt]="'radio2'"> </app-radios-button>
+          <app-radios-button [required]="true" [labelTxt]="'جراج'" [valueOne]="'نعم'" [valueTwo]="'لا'"
+            [radioTxt]="'radio2'" formControlName="hasGarage"> </app-radios-button>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createUnits.get('hasGarage')"
+              [validationMessages]="[
+              { type: 'required', message: 'هذا الحقل مطلوب' }
+            ]">
+            </app-control-messages>
+          </div>
         </div>
       </div>
       <div class="half">
         <div class="full">
-        <app-radios-button [required]="true" [labelTxt]="'تكييف مركزي'" [valueOne]="'نعم'" [valueTwo]="'لا'" [radioTxt]="'radio3'"> </app-radios-button>
+          <app-radios-button [required]="true" [labelTxt]="'تكييف مركزي'" [valueOne]="'نعم'" [valueTwo]="'لا'"
+            [radioTxt]="'radio3'" formControlName="hasCentralAC"> </app-radios-button>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createUnits.get('hasCentralAC')"
+              [validationMessages]="[
+                { type: 'required', message: 'هذا الحقل مطلوب' }
+              ]">
+            </app-control-messages>
+          </div>
         </div>
       </div>
+    </div>
+    <div class="row">
+      <div class="half">
+        <div class="full">
+          <app-radios-button [required]="true" [labelTxt]="'شرفة'" [valueOne]="'نعم'" [valueTwo]="'لا'"
+            [radioTxt]="'radio1'" formControlName="hasBalcony"> </app-radios-button>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createUnits.get('hasBalcony')"
+              [validationMessages]="[
+                { type: 'required', message: 'هذا الحقل مطلوب' }
+              ]">
+            </app-control-messages>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <div class="sub-form">
@@ -172,8 +215,9 @@
         <div class="half">
           <div class="full">
             <!-- (inputValue)="get()" -->
-            <app-input-upload formControlName="OwnershipAgreement" (inputValue)="uploadDocument($event,0,this.OwnershipAgreement)" [placeholder]="'عقد الملكية أو الإيجار'" [formStyle]="true"
-              [required]="true" [labelTxt]="'عقد الملكية أو الإيجار'" ></app-input-upload>
+            <app-input-upload formControlName="OwnershipAgreement"
+              (inputValue)="uploadDocument($event,0,this.OwnershipAgreement)" [placeholder]="'عقد الملكية أو الإيجار'"
+              [formStyle]="true" [required]="true" [labelTxt]="'عقد الملكية أو الإيجار'"></app-input-upload>
             <div class="errormassage">
               <app-control-messages class="form-validation-style" [control]="createUnits.get('OwnershipAgreement')"
                 [validationMessages]="[
@@ -185,11 +229,12 @@
         </div>
         <div class="half">
           <div class="full">
-            <app-input-upload formControlName="UnitDiagram" (inputValue)="uploadDocument($event,1,this.UnitDiagram)" [placeholder]="'مخطط الوحدة'"
-              [formStyle]="true" [required]="true" [labelTxt]="'مخطط الوحدة'"></app-input-upload>
+            <app-input-upload formControlName="UnitDiagram" (inputValue)="uploadDocument($event,1,this.UnitDiagram)"
+              [placeholder]="'مخطط الوحدة'" [formStyle]="true" [required]="true" [labelTxt]="'مخطط الوحدة'">
+            </app-input-upload>
             <div class="errormassage">
-              <app-control-messages class="form-validation-style"
-                [control]="createUnits.get('UnitDiagram')" [validationMessages]="[
+              <app-control-messages class="form-validation-style" [control]="createUnits.get('UnitDiagram')"
+                [validationMessages]="[
             { type: 'required', message: 'هذا الحقل مطلوب' }
           ]">
               </app-control-messages>
@@ -200,11 +245,12 @@
       <div class="row">
         <div class="half">
           <div class="full">
-            <app-input-upload formControlName="UnitPhotos" (inputValue)="uploadDocument($event,2,this.UnitPhotos)" [placeholder]="'صور الوحدة'"
-              [formStyle]="true" [required]="true" [labelTxt]="'صور الوحدة'"></app-input-upload>
+            <app-input-upload formControlName="UnitPhotos" (inputValue)="uploadDocument($event,2,this.UnitPhotos)"
+              [placeholder]="'صور الوحدة'" [formStyle]="true" [required]="true" [labelTxt]="'صور الوحدة'">
+            </app-input-upload>
             <div class="errormassage">
-              <app-control-messages class="form-validation-style"
-                [control]="createUnits.get('UnitPhotos')" [validationMessages]="[
+              <app-control-messages class="form-validation-style" [control]="createUnits.get('UnitPhotos')"
+                [validationMessages]="[
             { type: 'required', message: 'هذا الحقل مطلوب' }
           ]">
               </app-control-messages>
@@ -213,12 +259,12 @@
         </div>
         <div class="half">
           <div class="full">
-            <app-input-upload formControlName="PreviousUtilityBills" (inputValue)="uploadDocument($event,3,this.PreviousUtilityBills)"
-              [placeholder]="'فواتير الخدمات السابقة'" [formStyle]="true" [required]="true"
-              [labelTxt]="'فواتير الخدمات السابقة'"></app-input-upload>
+            <app-input-upload formControlName="PreviousUtilityBills"
+              (inputValue)="uploadDocument($event,3,this.PreviousUtilityBills)" [placeholder]="'فواتير الخدمات السابقة'"
+              [formStyle]="true" [required]="true" [labelTxt]="'فواتير الخدمات السابقة'"></app-input-upload>
             <div class="errormassage">
-              <app-control-messages class="form-validation-style"
-                [control]="createUnits.get('PreviousUtilityBills')" [validationMessages]="[
+              <app-control-messages class="form-validation-style" [control]="createUnits.get('PreviousUtilityBills')"
+                [validationMessages]="[
             { type: 'required', message: 'هذا الحقل مطلوب' }
           ]">
               </app-control-messages>
@@ -233,3 +279,4 @@
     </div>
   </form>
 </div>
+<p-toast />

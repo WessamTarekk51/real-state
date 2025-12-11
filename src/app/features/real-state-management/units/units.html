@@ -5,28 +5,28 @@
     </div>
     <div class="content-filter">
       <div class="four">
-        <app-input-txt [placeholder]="'رقم الوحدة'"></app-input-txt>
+        <app-input-txt [placeholder]="'رقم الوحدة'" [(ngModel)]="filters.Number" (inputValue)="getFilter($event)"></app-input-txt>
       </div>
       <div class="four">
-        <app-input-select [placeholder]="'اسم العمارة'"  ></app-input-select>
+        <app-input-select [placeholder]="'اسم العمارة'" [options]="DropDownBuildings"  [(ngModel)]="filters.BuildingId" (inputValue)="getFilter($event)"></app-input-select>
       </div>
        <div class="four">
-        <app-input-select [placeholder]="'اسم الأرض'"  ></app-input-select>
+        <app-input-select [placeholder]="'اسم الأرض'" [options]="DropDownLands" [(ngModel)]="filters.LandId" (inputValue)="getFilter($event)"></app-input-select>
       </div>
        <div class="four">
-        <app-input-select [placeholder]="' الحالة'"  ></app-input-select>
+        <app-input-select [placeholder]="' الحالة'" [options]="UnitStatus" [(ngModel)]="filters.StatusId" (inputValue)="getFilter($event)" ></app-input-select>
       </div>
        <div class="four">
-        <app-input-num [placeholder]="' الدور'"  ></app-input-num>
+        <app-input-num [placeholder]="' الدور'"  [(ngModel)]="filters.FloorNumber" (inputValue)="getFilter($event)"></app-input-num>
       </div>
       <div class="four">
-        <app-input-num [placeholder]="' الغرف'"  ></app-input-num>
+        <app-input-num [placeholder]="' الغرف'"  [(ngModel)]="filters.NumberOfRooms" (inputValue)="getFilter($event)"></app-input-num>
       </div>
       <div class="four">
-        <app-input-num [placeholder]="' السعر'"  ></app-input-num>
+        <app-input-num [placeholder]="' السعر'"  [(ngModel)]="filters.Price" (inputValue)="getFilter($event)"></app-input-num>
       </div>
       <div class="four">
-        <app-input-num [placeholder]="'المساحة (م2)'"  ></app-input-num>
+        <app-input-num [placeholder]="'المساحة (م2)'"  [(ngModel)]="filters.Area" (inputValue)="getFilter($event)"></app-input-num>
       </div>
     </div>
   </div>
@@ -36,8 +36,8 @@
   </div>
    <div class="container-table" *ngIf="units && units.items.length; else noData">
     <app-table [cols]="cols" [items]="units.items" [totalPages]="totalPages" [pageSize]="pageSize"
-      (pageNumber)="GetpageNumber($event)" (delete)="deleteBuiling($event)" (view)="detailesBuiling($event)"
-      (edit)="editBuiling($event)"></app-table>
+      (pageNumber)="GetpageNumber($event)" (view)="detailesUnit($event)"
+      (edit)="editUnit($event)"></app-table>
   </div>
   <ng-template #noData>
     <p class="text-center text-gray-500 mt-4">لا توجد وحدات سكنية متاحة حالياً</p>
