@@ -17,11 +17,11 @@
       </div>
       <div class="half">
         <div class="full">
-          <app-input-txt formControlName="mobile" [placeholder]="'رقم الهاتف'" [formStyle]="true" [required]="true"
+          <app-input-txt formControlName="phone" [placeholder]="'رقم الهاتف'" [formStyle]="true" [required]="true"
             [labelTxt]="'رقم الهاتف'">
           </app-input-txt>
           <div class="errormassage">
-            <app-control-messages class="form-validation-style" [control]="createClient.get('mobile')"
+            <app-control-messages class="form-validation-style" [control]="createClient.get('phone')"
               [validationMessages]="[
           { type: 'required', message: 'هذا الحقل مطلوب' }
         ]">
@@ -64,7 +64,8 @@
     </div>
     <div class="buttons">
       <app-button [className]="'gray'" [buttonTxt]="'الغاء'"></app-button>
-      <app-button [className]="'main'"  [buttonTxt]="'اضافة'"></app-button>
+      <app-button [className]="'main'"  [buttonTxt]="'اضافة'" (click)="createNewClient()" ></app-button>
     </div>
   </form>
 </div>
+<p-toast />

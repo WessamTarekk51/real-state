@@ -1,1 +1,38 @@
-<p>clients works!</p>
+<div id="container-page">
+  <div class="container-filter">
+    <div class="title-filter">
+      <p>البحث</p>
+    </div>
+    <div class="content-filter">
+      <div class="half">
+        <app-input-txt [placeholder]="'عدد الوحدة'" [(ngModel)]="filters.NumberOfUnit" (inputValue)="getFilter($event)">
+        </app-input-txt>
+      </div>
+      <div class="half">
+        <app-input-select [placeholder]="'اسم العمارة'" [options]="DropDownBuildings" [(ngModel)]="filters.BuildingName"
+          (inputValue)="getFilter($event)"></app-input-select>
+      </div>
+      <div class="half">
+        <app-input-select [placeholder]="'اسم الأرض'" [options]="DropDownLands" [(ngModel)]="filters.LandName"
+          (inputValue)="getFilter($event)"></app-input-select>
+      </div>
+      <div class="half">
+        <app-input-num [placeholder]="' الدور'" [(ngModel)]="filters.NumberOfFloor" (inputValue)="getFilter($event)">
+        </app-input-num>
+      </div>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <app-button [className]="'custom'" [buttonTxt]="'تصدير إلى Excel'"></app-button>
+    <app-button [className]="'main'" [buttonTxt]="'+ إضافة عميل  جديد'" (buttonClick)="createClient()">
+    </app-button>
+  </div>
+  <div class="container-table" *ngIf="clients && clients.items.length; else noData">
+    <app-table [cols]="cols" [items]="clients.items" [totalPages]="totalPages" [pageSize]="pageSize"
+      (pageNumber)="GetpageNumber($event)" (view)="detailesClient($event)" (edit)="editClient($event)" (delete)="deleteClient($event)"></app-table>
+  </div>
+  <ng-template #noData>
+    <p class="text-center text-gray-500 mt-4">لا يوجد عملاء متاحة حالياً</p>
+  </ng-template>
+</div>
