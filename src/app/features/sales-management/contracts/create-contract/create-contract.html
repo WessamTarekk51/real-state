@@ -1,0 +1,397 @@
+<div id="container-page">
+  <div class="toggle-collection">
+    <div class="collection " *ngFor="let button of buttons" [ngClass]="{'active':button.active}"
+      (click)="toggleButton(button)">
+      <p>{{button.name}}</p>
+    </div>
+
+  </div>
+  <form class="form">
+    @if(activeTab == 1){
+    <div class="row">
+      <div class="half">
+        <div class="full">
+          <app-input-txt formControlName="name" [placeholder]="'اسم العقد'" [formStyle]="true" [required]="true"
+            [labelTxt]="'اسم العقد'">
+          </app-input-txt>
+          <!-- <div class="errormassage">
+              <app-control-messages class="form-validation-style" [control]="createClient.get('name')"
+                [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+              </app-control-messages>
+            </div> -->
+        </div>
+      </div>
+      <div class="half">
+        <div class="full">
+          <app-input-txt formControlName="name" [placeholder]="'قيمة العقد '" [formStyle]="true" [required]="true"
+            [labelTxt]="'قيمة العقد '">
+          </app-input-txt>
+          <!-- <div class="errormassage">
+              <app-control-messages class="form-validation-style" [control]="createClient.get('name')"
+                [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+              </app-control-messages>
+            </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="half">
+        <div class="full">
+          <app-input-txt formControlName="name" [placeholder]="'مدة العقد(أشهر)'" [formStyle]="true" [required]="true"
+            [labelTxt]="'مدة العقد(أشهر)'">
+          </app-input-txt>
+          <!-- <div class="errormassage">
+              <app-control-messages class="form-validation-style" [control]="createClient.get('name')"
+                [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+              </app-control-messages>
+            </div> -->
+        </div>
+      </div>
+      <div class="half">
+        <div class="full">
+          <!-- [options]="" -->
+          <app-input-select formControlName="governorateId" [placeholder]="'نوع العقد'" [formStyle]="true"
+            [required]="true" [labelTxt]="'نوع العقد'">
+          </app-input-select>
+          <!-- <div class="errormassage">
+              <app-control-messages class="form-validation-style" [control]="createClient.get('name')"
+                [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+              </app-control-messages>
+            </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="half">
+        <div class="full">
+          <app-input-date [placeholder]="'تاريخ بداية العقد '" formControlName="constructionYear" [formStyle]="true"
+            [required]="true" [labelTxt]="'تاريخ بداية العقد '">
+          </app-input-date>
+        </div>
+      </div>
+      <div class="half">
+        <div class="full">
+          <app-input-date [placeholder]="'تاريخ نهاية العقد '" formControlName="constructionYear" [formStyle]="true"
+            [required]="true" [labelTxt]="'تاريخ نهاية العقد '">
+          </app-input-date>
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="full">
+        <app-input-text-area formControlName="description" [placeholder]="'ملاحظات'" [formStyle]="true"
+          [required]="false" [labelTxt]="'ملاحظات'">
+        </app-input-text-area>
+      </div>
+    </div>
+    }
+    @if(activeTab == 2){
+    <div class="row">
+      <div class="thrid">
+        <div class="full">
+          <app-input-select formControlName="governorateId" [placeholder]="'الارض'" [formStyle]="true" [required]="true"
+            [labelTxt]="'الارض'">
+          </app-input-select>
+          <!-- <div class="errormassage">
+              <app-control-messages class="form-validation-style" [control]="createClient.get('name')"
+                [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+              </app-control-messages>
+            </div> -->
+        </div>
+      </div>
+      <div class="thrid">
+        <div class="full">
+          <app-input-select formControlName="governorateId" [placeholder]="'العمارة'" [formStyle]="true"
+            [required]="true" [labelTxt]="'العمارة'">
+          </app-input-select>
+          <!-- <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createClient.get('name')"
+              [validationMessages]="[
+          { type: 'required', message: 'هذا الحقل مطلوب' }
+        ]">
+            </app-control-messages>
+          </div> -->
+        </div>
+      </div>
+      <div class="thrid">
+        <div class="full">
+          <app-input-select formControlName="governorateId" [placeholder]="'الوحدة'" [formStyle]="true"
+            [required]="true" [labelTxt]="'الوحدة'">
+          </app-input-select>
+          <!-- <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createClient.get('name')"
+              [validationMessages]="[
+          { type: 'required', message: 'هذا الحقل مطلوب' }
+        ]">
+            </app-control-messages>
+          </div> -->
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="half">
+        <div class="full">
+          <app-input-num [placeholder]="'الدور'" formControlName="numberOfFloors" [formStyle]="true" [required]="true"
+            [labelTxt]="'الدور'">
+          </app-input-num>
+          <!-- <div class="errormassage">
+          <app-control-messages class="form-validation-style" [control]="createBuilding.get('numberOfFloors')"
+            [validationMessages]="[
+          { type: 'required', message: 'هذا الحقل مطلوب' }
+        ]">
+          </app-control-messages>
+        </div> -->
+        </div>
+      </div>
+      <div class="half">
+        <div class="full">
+          <app-input-num [placeholder]="'المساحة (م²)'" formControlName="numberOfFloors" [formStyle]="true"
+            [required]="true" [labelTxt]="'المساحة (م²)'">
+          </app-input-num>
+          <!-- <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createBuilding.get('numberOfFloors')"
+              [validationMessages]="[
+          { type: 'required', message: 'هذا الحقل مطلوب' }
+        ]">
+            </app-control-messages>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="half">
+        <div class="full">
+          <app-input-select formControlName="governorateId"
+            [placeholder]="'شقة | دوبلكس | بنتهاوس | استوديو | محل | مكتب'" [formStyle]="true" [required]="true"
+            [labelTxt]="'نوع الوحدة '">
+          </app-input-select>
+          <!-- <div class="errormassage">
+          <app-control-messages class="form-validation-style" [control]="createClient.get('name')"
+            [validationMessages]="[
+        { type: 'required', message: 'هذا الحقل مطلوب' }
+      ]">
+          </app-control-messages>
+        </div> -->
+        </div>
+      </div>
+      <div class="half">
+        <div class="full">
+          <app-input-num [placeholder]="'السعر'" formControlName="numberOfFloors" [formStyle]="true" [required]="true"
+            [labelTxt]="'السعر'">
+          </app-input-num>
+          <!-- <div class="errormassage">
+        <app-control-messages class="form-validation-style" [control]="createBuilding.get('numberOfFloors')"
+          [validationMessages]="[
+        { type: 'required', message: 'هذا الحقل مطلوب' }
+      ]">
+        </app-control-messages>
+      </div> -->
+        </div>
+      </div>
+
+    </div>
+
+    }
+    @if(activeTab == 3){
+    <div class="row">
+      <div class="half">
+        <div class="full">
+          <app-input-txt formControlName="name" [placeholder]="'الرقم القومي'" [formStyle]="true" [required]="true"
+            [labelTxt]="'الرقم القومي'">
+          </app-input-txt>
+          <!-- <div class="errormassage">
+              <app-control-messages class="form-validation-style" [control]="createClient.get('name')"
+                [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+              </app-control-messages>
+            </div> -->
+        </div>
+      </div>
+      <div class="half">
+        <div class="full">
+          <app-input-txt formControlName="name" [placeholder]="'اسم العميل'" [formStyle]="true" [required]="true"
+            [labelTxt]="'اسم العميل'">
+          </app-input-txt>
+          <!-- <div class="errormassage">
+              <app-control-messages class="form-validation-style" [control]="createClient.get('name')"
+                [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+              </app-control-messages>
+            </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="half">
+        <div class="full">
+          <app-input-txt formControlName="name" [placeholder]="'رقم الهاتف'" [formStyle]="true" [required]="true"
+            [labelTxt]="'رقم الهاتف'">
+          </app-input-txt>
+          <!-- <div class="errormassage">
+              <app-control-messages class="form-validation-style" [control]="createClient.get('name')"
+                [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+              </app-control-messages>
+            </div> -->
+        </div>
+      </div>
+      <div class="half">
+        <div class="full">
+          <app-input-txt formControlName="name" [placeholder]="'البريد الالكتروني'" [formStyle]="true" [required]="true"
+            [labelTxt]="'البريد الالكتروني'">
+          </app-input-txt>
+          <!-- <div class="errormassage">
+              <app-control-messages class="form-validation-style" [control]="createClient.get('name')"
+                [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+              </app-control-messages>
+            </div> -->
+        </div>
+      </div>
+    </div>
+    }
+    @if(activeTab == 4){
+      <div class="row">
+        <div class="half">
+          <div class="full">
+            <app-input-num [placeholder]="'المقدم'" formControlName="numberOfFloors" [formStyle]="true" [required]="true"
+              [labelTxt]="'المقدم'">
+            </app-input-num>
+            <!-- <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createBuilding.get('numberOfFloors')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div> -->
+          </div>
+        </div>
+        <div class="half">
+          <div class="full">
+            <app-input-num [placeholder]="'قيمة القسط الشهري'" formControlName="numberOfFloors" [formStyle]="true"
+              [required]="true" [labelTxt]="'قيمة القسط الشهري'">
+            </app-input-num>
+            <!-- <div class="errormassage">
+              <app-control-messages class="form-validation-style" [control]="createBuilding.get('numberOfFloors')"
+                [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+              </app-control-messages>
+            </div> -->
+          </div>
+        </div>
+      </div>
+      <div class="sub-form">
+        <div class="row">
+          <div class="half">
+            <div class="full">
+              <app-input-select formControlName="governorateId"
+                [placeholder]="'شهري - سنوي'" [formStyle]="true" [required]="true"
+                [labelTxt]="'نوع القسط'">
+              </app-input-select>
+              <!-- <div class="errormassage">
+              <app-control-messages class="form-validation-style" [control]="createClient.get('name')"
+                [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+              </app-control-messages>
+            </div> -->
+            </div>
+          </div>
+          <div class="half">
+            <div class="full">
+              <app-input-num [placeholder]="'عدد الأقساط'" formControlName="numberOfFloors" [formStyle]="true" [required]="true"
+                [labelTxt]="'عدد الأقساط'">
+              </app-input-num>
+              <!-- <div class="errormassage">
+              <app-control-messages class="form-validation-style" [control]="createBuilding.get('numberOfFloors')"
+                [validationMessages]="[
+              { type: 'required', message: 'هذا الحقل مطلوب' }
+            ]">
+              </app-control-messages>
+            </div> -->
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="half">
+            <div class="full">
+              <app-input-select formControlName="governorateId"
+                [placeholder]="'شهري – ربع سنوي – نصف سنوي – سنوي'" [formStyle]="true" [required]="true"
+                [labelTxt]="'تكرار الدفع'">
+              </app-input-select>
+              <!-- <div class="errormassage">
+              <app-control-messages class="form-validation-style" [control]="createClient.get('name')"
+                [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+              </app-control-messages>
+            </div> -->
+            </div>
+          </div>
+          <div class="half">
+            <div class="full">
+              <app-input-date [placeholder]="'تاريخ بداية العقد '" formControlName="constructionYear" [formStyle]="true"
+                [required]="true" [labelTxt]="'تاريخ بداية العقد '">
+              </app-input-date>
+            </div>
+          </div>
+        </div>
+        <div class="buttons">
+          <app-button [className]="'main'" [buttonTxt]="'إضافة'"></app-button>
+        </div>
+      </div>
+    } @if(activeTab == 5){
+      <div class="sub-form">
+        <div class="subTitle">
+          <p>المستندات الرسمية</p>
+        </div>
+        <div class="row">
+          <div class="full">
+            <!-- (inputValue)="get()" -->
+            <app-input-upload formControlName="BulidingPermit"  [placeholder]="'عقد الملكية'" [formStyle]="true"
+              [required]="true" [labelTxt]="'عقد الملكية'" ></app-input-upload>
+            <div class="errormassage">
+              <!-- <app-control-messages class="form-validation-style" [control]="createBuilding.get('BulidingPermit')"
+                [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+              </app-control-messages> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+    <div class="buttons">
+      @if(activeTab == 1){
+      <app-button [className]="'gray'" [buttonTxt]="'الغاء'"></app-button>
+      }
+      @if(activeTab > 1){
+      <app-button [className]="'gray'" (click)="prevTab()" [buttonTxt]="'السابق'"></app-button>
+      }
+      @if(activeTab < 5){ <app-button [className]="'main'" (click)="nextTab()" [buttonTxt]="'التالي'">
+        </app-button>
+        }
+        @if(activeTab == 5){
+        <app-button [className]="'main'" [buttonTxt]="'حفظ'"></app-button>
+        }
+
+    </div>
+  </form>
+</div>

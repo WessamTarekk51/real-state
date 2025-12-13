@@ -1,6 +1,5 @@
 .input {
   width: 100%;
-  height: 3.2vw;
   margin-bottom: 1vw;
 
   label {
@@ -13,8 +12,8 @@
 }
 
 .input input {
+  height: 3.2vw;
   width: 100%;
-  height: 100%;
   padding: 0 3% 0 2.5vw;
   position: relative;
   /* مساحة يسار لأيقونة التقويم */

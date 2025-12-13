@@ -1,0 +1,74 @@
+<div id="container-page">
+  <div class="userContainer">
+    <div class="totalDiv">
+      <app-container-colored [txt]="'عدد الأدوار'" [numTxt]="'25'" [color]="'#0D89EC'">
+      </app-container-colored>
+    </div>
+
+    <div class="totalDiv">
+      <app-container-colored [txt]="'عدد المستخدمين'" [numTxt]="'25'" [color]="'#103746'">
+      </app-container-colored>
+    </div>
+
+    <div class="totalDiv">
+      <app-container-colored [txt]="'المستخدمين النشطين اليوم'" [numTxt]="'25'" [color]="'rgba(1, 162, 80, 1)'">
+      </app-container-colored>
+    </div>
+
+    <div class="totalDiv">
+      <app-container-colored [txt]="'المستخدمين غير النشطين'" [numTxt]="'25'" [color]="'rgba(221, 43, 46, 1)'">
+      </app-container-colored>
+    </div>
+  </div>
+  <div class="state">
+    <div class="chart">
+      <div class="title-chart">
+        <p> توزيع المستخدمين حسب الـ Role </p>
+      </div>
+      <div class="data">
+        <div class="content">
+          <div class="row">
+            <div class="con">
+              <div class="dot"></div>
+              <div class="name">
+                <p>مباعة</p>
+              </div>
+            </div>
+            <div class="con">
+              <div class="num">60%</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="con">
+              <div class="dot"></div>
+              <div class="name">
+                <p>مباعة</p>
+              </div>
+            </div>
+            <div class="con">
+              <div class="num">60%</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="con">
+              <div class="dot"></div>
+              <div class="name">
+                <p>مباعة</p>
+              </div>
+            </div>
+            <div class="con">
+              <div class="num">60%</div>
+            </div>
+          </div>
+
+        </div>
+        <div class="draw">
+          <div class="card flex justify-center">
+            <p-chart type="doughnut" [data]="data" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

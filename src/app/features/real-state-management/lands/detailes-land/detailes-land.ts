@@ -22,7 +22,6 @@ export class DetailesLand {
   ngOnInit(): void {
     this.landId = String(this.activatedRoute.snapshot.queryParamMap.get('id'))
     this.getLandDetailes()
-
   }
   getLandDetailes() {
     this.RealStateServices.GetLandsByID(this.landId).subscribe(res => {

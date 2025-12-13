@@ -1,0 +1,200 @@
+<div id="container-page">
+  <form class="form">
+    <div class="row">
+      <div class="half">
+        <div class="full">
+          <app-input-txt formControlName="name" [placeholder]="'الدور'" [formStyle]="true" [required]="true"
+            [labelTxt]="'الدور'">
+          </app-input-txt>
+          <!-- <div class="errormassage">
+          <app-control-messages class="form-validation-style" [control]="createLands.get('name')"
+            [validationMessages]="[
+          { type: 'required', message: 'هذا الحقل مطلوب' }
+        ]">
+          </app-control-messages>
+        </div> -->
+        </div>
+      </div>
+      <div class="half">
+        <div class="full">
+          <app-input-txt formControlName="name" [placeholder]="'الوصف'" [formStyle]="true" [required]="true"
+            [labelTxt]="'الوصف'">
+          </app-input-txt>
+          <!-- <div class="errormassage">
+          <app-control-messages class="form-validation-style" [control]="createLands.get('name')"
+            [validationMessages]="[
+          { type: 'required', message: 'هذا الحقل مطلوب' }
+        ]">
+          </app-control-messages>
+        </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="subTitle">
+      <p>الصلاحيات</p>
+    </div>
+    <div class="row">
+      <p class="entity">العقارات</p>
+      <div class="boxes">
+        <div class="box">
+          <input type="checkbox">
+          <p>تحديد الكل</p>
+        </div>
+        <div class="box">
+          <input type="checkbox">
+          <p>عرض</p>
+        </div>
+        <div class="box">
+          <input type="checkbox">
+          <p>انشاء</p>
+        </div>
+        <div class="box">
+          <input type="checkbox">
+          <p>تعديل</p>
+        </div>
+        <div class="box">
+          <input type="checkbox">
+          <p>حذف</p>
+        </div>
+      </div>
+    </div>
+    <div class="line"></div>
+    <div class="row">
+      <p class="entity">العملاء</p>
+      <div class="boxes">
+        <div class="box">
+          <input type="checkbox">
+          <p>تحديد الكل</p>
+        </div>
+        <div class="box">
+          <input type="checkbox">
+          <p>عرض</p>
+        </div>
+        <div class="box">
+          <input type="checkbox">
+          <p>انشاء</p>
+        </div>
+        <div class="box">
+          <input type="checkbox">
+          <p>تعديل</p>
+        </div>
+        <div class="box">
+          <input type="checkbox">
+          <p>حذف</p>
+        </div>
+      </div>
+    </div>
+    <div class="line"></div>
+
+    <div class="row">
+      <p class="entity">العقود</p>
+      <div class="boxes">
+        <div class="box">
+          <input type="checkbox">
+          <p>تحديد الكل</p>
+        </div>
+        <div class="box">
+          <input type="checkbox">
+          <p>عرض</p>
+        </div>
+        <div class="box">
+          <input type="checkbox">
+          <p>انشاء</p>
+        </div>
+        <div class="box">
+          <input type="checkbox">
+          <p>تعديل</p>
+        </div>
+        <div class="box">
+          <input type="checkbox">
+          <p>حذف</p>
+        </div>
+      </div>
+    </div>
+    <div class="line"></div>
+
+    <div class="row">
+      <p class="entity">المدفوعات</p>
+      <div class="boxes">
+        <div class="box">
+          <input type="checkbox">
+          <p>تحديد الكل</p>
+        </div>
+        <div class="box">
+          <input type="checkbox">
+          <p>عرض</p>
+        </div>
+        <div class="box">
+          <input type="checkbox">
+          <p>انشاء</p>
+        </div>
+        <div class="box">
+          <input type="checkbox">
+          <p>تعديل</p>
+        </div>
+        <div class="box">
+          <input type="checkbox">
+          <p>حذف</p>
+        </div>
+      </div>
+    </div>
+    <div class="line"></div>
+
+    <div class="row">
+      <p class="entity">المدفوعات السرية</p>
+      <div class="boxes">
+        <div class="box">
+          <input type="checkbox">
+          <p>تحديد الكل</p>
+        </div>
+        <div class="box">
+          <input type="checkbox">
+          <p>عرض</p>
+        </div>
+        <div class="box">
+          <input type="checkbox">
+          <p>انشاء</p>
+        </div>
+        <div class="box">
+          <input type="checkbox">
+          <p>تعديل</p>
+        </div>
+        <div class="box">
+          <input type="checkbox">
+          <p>حذف</p>
+        </div>
+      </div>
+    </div>
+    <div class="line"></div>
+
+    <div class="row">
+      <p class="entity">المبيعات </p>
+      <div class="boxes">
+        <div class="box">
+          <input type="checkbox">
+          <p>تحديد الكل</p>
+        </div>
+        <div class="box">
+          <input type="checkbox">
+          <p>عرض</p>
+        </div>
+        <div class="box">
+          <input type="checkbox">
+          <p>انشاء</p>
+        </div>
+        <div class="box">
+          <input type="checkbox">
+          <p>تعديل</p>
+        </div>
+        <div class="box">
+          <input type="checkbox">
+          <p>حذف</p>
+        </div>
+      </div>
+    </div>
+    <div class="buttons">
+      <app-button [className]="'gray'" [buttonTxt]="'الغاء'"></app-button>
+      <app-button [className]="'main'" [buttonTxt]="'اضافة'" ></app-button>
+    </div>
+  </form>
+</div>

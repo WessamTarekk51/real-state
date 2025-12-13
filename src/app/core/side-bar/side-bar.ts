@@ -64,6 +64,57 @@ export class SideBar {
             label: 'اضافة عميل جديد',
             routerLink: "/customer-management/clients/create",
             roles: [],
+          },
+          {
+            label: 'سجل المتابعات',
+            routerLink: "/customer-management/calls",
+            roles: [],
+          }
+        ]
+      },
+      {
+        label: 'إدارة المبيعات',
+        icon: '',
+        routerLink : "/sales-management",
+        roles: [''],
+        items: [
+          {
+            label: 'العقود',
+            routerLink: "/sales-management/contracts",
+            roles: [],
+          },
+          {
+            label: 'انشاء عقد جديد',
+            routerLink: "/sales-management/contracts/create",
+            roles: [],
+          }
+        ]
+      },
+      {
+        label: 'إدارة المستخدمين ',
+        icon: '',
+        routerLink : "/user-management",
+        roles: [''],
+        items: [
+          {
+            label: 'الأدوار والصلاحيات',
+            routerLink: "/user-management/roles",
+            roles: [],
+          },
+          {
+            label: 'انشاء دور جديد',
+            routerLink: "/user-management/roles/create",
+            roles: [],
+          },
+          {
+            label: 'المستخدمين',
+            routerLink: "/user-management/users",
+            roles: [],
+          },
+          {
+            label: 'انشاء مستخدم جديد',
+            routerLink: "/user-management/users/create",
+            roles: [],
           }
         ]
       }

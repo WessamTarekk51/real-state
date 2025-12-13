@@ -25,3 +25,18 @@ export interface Client {
   nationalId: string;
   phone: string;
 }
+
+
+export interface ClientDetailesRoot extends IResult {
+  value: ClientDetailes
+}
+
+export interface ClientDetailes {
+  id: string,
+  name: string,
+  phone: string,
+  email: string,
+  code: string,
+  address: string,
+  nationalId: string
+}

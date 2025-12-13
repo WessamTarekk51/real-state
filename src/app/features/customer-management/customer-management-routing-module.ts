@@ -9,6 +9,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./clients/clients-module').then((m) => m.ClientsModule),
   },
+  {
+    path: 'calls',
+    loadChildren: () =>
+      import('./calls/calls-module').then((m) => m.CallsModule),
+  }
 ];
 
 @NgModule({

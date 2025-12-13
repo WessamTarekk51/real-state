@@ -10,6 +10,8 @@ export const routes: Routes = [
   { path: 'login', canActivate: [NotLoggedGuard], component: Account },
   { path: 'real-state-management', canActivate: [NotLoggedGuard], loadChildren: () => import('./features/real-state-management/real-state-management-module').then(m => m.RealStateManagementModule) },
   { path: 'customer-management', canActivate: [NotLoggedGuard], loadChildren: () => import('./features/customer-management/customer-management-module').then(m => m.CustomerManagementModule) },
+  { path: 'sales-management', canActivate: [NotLoggedGuard], loadChildren: () => import('./features/sales-management/sales-management-module').then(m => m.SalesManagementModule) },
+  { path: 'user-management', canActivate: [NotLoggedGuard], loadChildren: () => import('./features/user-management/user-management-module').then(m => m.UserManagementModule) },
 
 ];
 // , canActivate: [NotLoggedGuard]

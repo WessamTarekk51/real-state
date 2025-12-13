@@ -1,0 +1,61 @@
+<div id="container-page">
+  <div class="container-detailes">
+    <div class="space-between">
+      <div class="title">
+        <p>{{clientDetailes.name}}</p>
+      </div>
+      <div class="w80f">
+        <div class="buttons">
+          <app-button [className]="'orange'" [buttonTxt]="'تعديل'"></app-button>
+          <app-button [className]="'main'" [buttonTxt]="'تصدير إلى Excel'"></app-button>
+        </div>
+      </div>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p>رقم الهاتف</p>
+      </div>
+      <div class="des w50f end">
+        <p>{{clientDetailes.phone}}</p>
+      </div>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p>الرقم القومي</p>
+      </div>
+      <div class="des w50f end">
+        <p>{{clientDetailes.nationalId}}</p>
+      </div>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p>البريد الإلكتروني</p>
+      </div>
+      <div class="des w50f end">
+        <p>{{clientDetailes.email}}</p>
+      </div>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p>العنوان</p>
+      </div>
+      <div class="des w50f end">
+        <p>{{clientDetailes.address}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="toggle-collection">
+    <div class="collection " *ngFor="let button of buttons" [ngClass]="{'active':button.active}"
+      (click)="toggleButton(button)">
+      <p>{{button.name}}</p>
+    </div>
+
+  </div>
+  @if(activeTab == 1){
+    <p>ta 1</p>
+  }
+  @if(activeTab == 2){
+    <p>ta 2</p>
+  }
+</div>

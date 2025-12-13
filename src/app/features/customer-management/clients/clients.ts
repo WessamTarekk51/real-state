@@ -97,7 +97,7 @@ export class Clients {
     this.getClients();
   }
   detailesClient(client: Client) {
-    this.router.navigate(['/customer-management/clients/create'], {
+    this.router.navigate(['/customer-management/clients/detailes'], {
       queryParams: { id: client.id },
     });
   }
