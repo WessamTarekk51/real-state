@@ -44,3 +44,11 @@ export interface Unit {
   unitStatusName?: string
 
 }
+export interface DropDownUnitRoot extends IResult {
+  value: DropDownUnits[]
+}
+
+export interface DropDownUnits {
+  id: string,
+  name: string,
+}

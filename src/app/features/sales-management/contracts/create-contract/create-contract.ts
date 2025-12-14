@@ -1,5 +1,5 @@
 import { NgClass, NgFor } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { InputTxt } from "src/app/shared/components/input-txt/input-txt";
 import { InputSelect } from "src/app/shared/components/input-select/input-select";
 import { InputDate } from "src/app/shared/components/input-date/input-date";
@@ -7,16 +7,58 @@ import { InputTextArea } from "src/app/shared/components/input-text-area/input-t
 import { Button } from "src/app/shared/components/button/button";
 import { InputNum } from "src/app/shared/components/input-num/input-num";
 import { InputUpload } from "src/app/shared/components/input-upload/input-upload";
+import { FormArray, FormGroup, ReactiveFormsModule, UntypedFormBuilder, Validators } from '@angular/forms';
+import { ControlMessages } from "src/app/shared/components/control-messages/control-messages";
+import { forkJoin } from 'rxjs';
+import { RealStateServices } from 'src/app/features/real-state-management/real-state-services';
+import { LookUpItem } from 'src/app/shared/models/real-state/lookup';
+import { DropDownLands } from 'src/app/shared/models/real-state/land';
+import { DropDownBuildings } from 'src/app/shared/models/real-state/building';
+import { DropDownUnits } from 'src/app/shared/models/real-state/unit';
 
 @Component({
   selector: 'app-create-contract',
-  imports: [NgClass, NgFor, InputTxt, InputSelect, InputDate, InputTextArea, Button, InputNum, InputUpload],
+  imports: [ReactiveFormsModule, NgClass, NgFor, InputTxt, InputSelect, InputDate, InputTextArea, Button, InputNum, InputUpload, ControlMessages],
   templateUrl: './create-contract.html',
   styleUrl: './create-contract.scss'
 })
 export class CreateContract {
   buttons: any[];
   activeTab: number = 1;
+  createContract!: FormGroup;
+  contractTypes = signal<LookUpItem[]>([]);
+  unitTypes = signal<LookUpItem[]>([]);
+  DropDownLands: DropDownLands[];
+  DropDownBuildings: DropDownBuildings[];
+  DropDownUnits: DropDownUnits[];
+
+  constructor(private fb: UntypedFormBuilder, private RealStateServices: RealStateServices) {
+    this.createContract = this.fb.group({
+      contractName: ['', Validators.required],
+      contractNumber: ['', Validators.required],
+      contractTypeId: ['', Validators.required],
+      startDate: ['', Validators.required],
+      endDate: ['', Validators.required],
+      notes: ['', Validators.required],
+      totalPrice: ['', Validators.required],
+      downPayment: ['', Validators.required],
+      paymentMethodId: ['', Validators.required],
+      landId: ['', Validators.required],
+      buildingId: ['', Validators.required],
+      unitId: ['', Validators.required],
+      unitArea: ['', Validators.required],
+      unitPrice: ['', Validators.required],
+      unitType: ['', Validators.required],
+      floorNumber: ['', Validators.required],
+      clientName: ['', Validators.required],
+      clientNationalId: ['', Validators.required],
+      clientEmail: ['', Validators.required],
+      clientPhone: ['', Validators.required],
+      isInstallmentPlan: ['', Validators.required],
+      installments: this.fb.array([]),
+
+    });
+  }
 
   ngOnInit(): void {
     this.buttons = [
@@ -46,7 +88,41 @@ export class CreateContract {
         active: false,
       }
     ];
+    this.GetLookUp();
+  }
+  GetLookUp() {
+    forkJoin({
+      getDropDownLands: this.RealStateServices.getDropDownLands(),
+      getDropDownBuilding: this.RealStateServices.getDropDownBuildings(),
+      getDropDownUnit: this.RealStateServices.getDropDownUnits(),
+      contractTypes: this.RealStateServices.GetLookUpSetByCode('contract_type'),
+      unitTypes: this.RealStateServices.GetLookUpSetByCode('unit_type'),
 
+    }).subscribe(({ getDropDownLands, getDropDownBuilding, getDropDownUnit, contractTypes, unitTypes }) => {
+      if (contractTypes?.isSuccess) {
+        const mapped = contractTypes.value.items.map((el) => ({
+          ...el,
+          name: el.descriptions.ar,
+        }));
+        this.contractTypes.set(mapped);
+      }
+        if (unitTypes?.isSuccess) {
+        const mapped = unitTypes.value.items.map((el) => ({
+          ...el,
+          name: el.descriptions.ar,
+        }));
+        this.unitTypes.set(mapped);
+      }
+      if (getDropDownLands.isSuccess) {
+        this.DropDownLands = getDropDownLands.value;
+      }
+      if (getDropDownBuilding.isSuccess) {
+        this.DropDownBuildings = getDropDownBuilding.value;
+      }
+      if (getDropDownUnit.isSuccess) {
+        this.DropDownUnits = getDropDownUnit.value;
+      }
+    });
   }
   toggleButton(button: any) {
     this.buttons.forEach((el) => {
@@ -55,18 +131,39 @@ export class CreateContract {
     button.active = true;
     this.activeTab = button.type;
   }
-  prevTab(){
+  prevTab() {
     this.buttons.forEach((el) => {
       el.active = false;
     });
     this.activeTab -= 1;
     this.buttons[this.activeTab - 1].active = true
   }
-  nextTab(){
+  nextTab() {
     this.buttons.forEach((el) => {
       el.active = false;
     });
     this.activeTab += 1;
     this.buttons[this.activeTab - 1].active = true
   }
+
+
+  get installments(): FormArray {
+    return this.createContract.get('installments') as FormArray;
+  }
+
+  addInstallment() {
+    this.installments.push(
+      this.fb.group({
+        installmentAmount: [0, Validators.required],
+        installmentCount: [0, Validators.required],
+        firstPaymentDate: ['', Validators.required],
+        frequency: ['', Validators.required]
+      })
+    );
+  }
+
+  removeInstallment(index: number) {
+    this.installments.removeAt(index);
+  }
+
 }

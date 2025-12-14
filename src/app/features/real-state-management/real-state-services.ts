@@ -4,7 +4,7 @@ import { ASSET } from 'src/app/core/api/asset.const';
 import { BuildingDetailesRoot, DropDownBuildingsRoot, GetBuildingsRoot } from 'src/app/shared/models/real-state/building';
 import { DropDownLandsRoot, GetLandsRoot, LandDetailesRoot } from 'src/app/shared/models/real-state/land';
 import { RootLookUp } from 'src/app/shared/models/real-state/lookup';
-import { GetUnitsRoot } from 'src/app/shared/models/real-state/unit';
+import { DropDownUnitRoot, GetUnitsRoot } from 'src/app/shared/models/real-state/unit';
 import { IResult, IStringResult } from 'src/app/shared/models/result';
 import { environment } from 'src/environments/environment';
 
@@ -146,6 +146,10 @@ export class RealStateServices {
     return this.http.delete(
       this.baseURL + ASSET.units.Units + '/' + id + '/delete'
     );
+  }
+  getDropDownUnits() {
+    const headers = this.headers
+    return this.http.get<DropDownUnitRoot>(this.baseURL + ASSET.units.Units + ASSET.units.AllUnits, { headers });
   }
 
   //upload
