@@ -2,23 +2,28 @@
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: start;
+
   .card {
     background: #fff;
     border-radius: 1vw;
     padding: 1vw 1vw;
-    width: 26vw;
+    width: 25vw;
     border: 0.1vw solid #e2e2e2ee;
     margin-bottom: 1vw;
+    margin-left: 1vw;
+
     .card-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
+
       p {
         font-size: 1.5vw;
         font-weight: bold;
         color: #103746;
       }
+
       .actions {
         display: flex;
         gap: 0.5vw;
@@ -47,9 +52,11 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+
       .avatars {
         display: flex;
         align-items: center;
+
         img,
         .more {
           width: 2vw;
@@ -72,6 +79,7 @@
     }
   }
 }
+
 .buttons {
   justify-content: start;
   margin: 0 0 1.5vw 0;

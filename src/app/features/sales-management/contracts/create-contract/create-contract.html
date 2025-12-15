@@ -75,6 +75,13 @@
           <app-input-date [placeholder]="'تاريخ بداية العقد '" formControlName="startDate" [formStyle]="true"
             [required]="true" [labelTxt]="'تاريخ بداية العقد '">
           </app-input-date>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createContract.get('startDate')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div>
         </div>
       </div>
       <div class="half">
@@ -82,6 +89,13 @@
           <app-input-date [placeholder]="'تاريخ نهاية العقد '" formControlName="endDate" [formStyle]="true"
             [required]="true" [labelTxt]="'تاريخ نهاية العقد '">
           </app-input-date>
+             <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createContract.get('endDate')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div>
         </div>
       </div>
 
@@ -91,6 +105,7 @@
         <app-input-text-area formControlName="notes" [placeholder]="'ملاحظات'" [formStyle]="true" [required]="false"
           [labelTxt]="'ملاحظات'">
         </app-input-text-area>
+
       </div>
     </div>
     }
@@ -207,16 +222,16 @@
     <div class="row">
       <div class="half">
         <div class="full">
-          <app-input-txt formControlName="clientNationalId" [placeholder]="'الرقم القومي'" [formStyle]="true" [required]="true"
-            [labelTxt]="'الرقم القومي'">
+          <app-input-txt formControlName="clientNationalId" [placeholder]="'الرقم القومي'" [formStyle]="true"
+            [required]="true" [labelTxt]="'الرقم القومي'">
           </app-input-txt>
           <div class="errormassage">
-              <app-control-messages class="form-validation-style" [control]="createContract.get('clientNationalId')"
-                [validationMessages]="[
+            <app-control-messages class="form-validation-style" [control]="createContract.get('clientNationalId')"
+              [validationMessages]="[
             { type: 'required', message: 'هذا الحقل مطلوب' }
           ]">
-              </app-control-messages>
-            </div>
+            </app-control-messages>
+          </div>
         </div>
       </div>
       <div class="half">
@@ -225,12 +240,12 @@
             [labelTxt]="'اسم العميل'">
           </app-input-txt>
           <div class="errormassage">
-              <app-control-messages class="form-validation-style" [control]="createContract.get('clientName')"
-                [validationMessages]="[
+            <app-control-messages class="form-validation-style" [control]="createContract.get('clientName')"
+              [validationMessages]="[
             { type: 'required', message: 'هذا الحقل مطلوب' }
           ]">
-              </app-control-messages>
-            </div>
+            </app-control-messages>
+          </div>
         </div>
       </div>
     </div>
@@ -241,32 +256,32 @@
             [labelTxt]="'رقم الهاتف'">
           </app-input-txt>
           <div class="errormassage">
-              <app-control-messages class="form-validation-style" [control]="createContract.get('clientPhone')"
-                [validationMessages]="[
+            <app-control-messages class="form-validation-style" [control]="createContract.get('clientPhone')"
+              [validationMessages]="[
             { type: 'required', message: 'هذا الحقل مطلوب' }
           ]">
-              </app-control-messages>
-            </div>
+            </app-control-messages>
+          </div>
         </div>
       </div>
       <div class="half">
         <div class="full">
-          <app-input-txt formControlName="clientEmail" [placeholder]="'البريد الالكتروني'" [formStyle]="true" [required]="true"
-            [labelTxt]="'البريد الالكتروني'">
+          <app-input-txt formControlName="clientEmail" [placeholder]="'البريد الالكتروني'" [formStyle]="true"
+            [required]="true" [labelTxt]="'البريد الالكتروني'">
           </app-input-txt>
           <div class="errormassage">
-              <app-control-messages class="form-validation-style" [control]="createContract.get('clientEmail')"
-                [validationMessages]="[
+            <app-control-messages class="form-validation-style" [control]="createContract.get('clientEmail')"
+              [validationMessages]="[
             { type: 'required', message: 'هذا الحقل مطلوب' }
           ]">
-              </app-control-messages>
-            </div>
+            </app-control-messages>
+          </div>
         </div>
       </div>
     </div>
     }
     @if(activeTab == 4){
-    <!-- <div class="row">
+    <div class="row">
       <div class="half">
         <div class="full">
           <app-input-num [placeholder]="'المقدم'" formControlName="downPayment" [formStyle]="true" [required]="true"
@@ -287,12 +302,12 @@
             [required]="true" [labelTxt]="'قيمة القسط الشهري'">
           </app-input-num>
           <div class="errormassage">
-              <app-control-messages class="form-validation-style" [control]="createContract.get('installmentAmount')"
-                [validationMessages]="[
+            <app-control-messages class="form-validation-style" [control]="createContract.get('installmentAmount')"
+              [validationMessages]="[
             { type: 'required', message: 'هذا الحقل مطلوب' }
           ]">
-              </app-control-messages>
-            </div>
+            </app-control-messages>
+          </div>
         </div>
       </div>
     </div>
@@ -353,7 +368,7 @@
       <div class="buttons">
         <app-button [className]="'main'" [buttonTxt]="'إضافة'"></app-button>
       </div>
-    </div> -->
+    </div>
     } @if(activeTab == 5){
     <div class="sub-form">
       <div class="subTitle">
@@ -362,14 +377,14 @@
       <div class="row">
         <div class="full">
           <!-- (inputValue)="get()" -->
-          <app-input-upload formControlName="BulidingPermit" [placeholder]="'عقد الملكية'" [formStyle]="true"
+          <app-input-upload formControlName="propertyContract" [placeholder]="'عقد الملكية'" [formStyle]="true"
             [required]="true" [labelTxt]="'عقد الملكية'"></app-input-upload>
           <div class="errormassage">
-            <!-- <app-control-messages class="form-validation-style" [control]="createBuilding.get('BulidingPermit')"
-                [validationMessages]="[
+            <app-control-messages class="form-validation-style" [control]="createContract.get('propertyContract')"
+              [validationMessages]="[
             { type: 'required', message: 'هذا الحقل مطلوب' }
           ]">
-              </app-control-messages> -->
+            </app-control-messages>
           </div>
         </div>
       </div>

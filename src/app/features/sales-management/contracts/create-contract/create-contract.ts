@@ -39,7 +39,7 @@ export class CreateContract {
       contractTypeId: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
-      notes: ['', Validators.required],
+      notes: [''],
       totalPrice: ['', Validators.required],
       downPayment: ['', Validators.required],
       paymentMethodId: ['', Validators.required],
@@ -55,8 +55,11 @@ export class CreateContract {
       clientEmail: ['', Validators.required],
       clientPhone: ['', Validators.required],
       isInstallmentPlan: ['', Validators.required],
-      installments: this.fb.array([]),
-
+      installmentAmount: ['', Validators.required],
+      installmentCount: ['', Validators.required],
+      firstPaymentDate: ['', Validators.required],
+      frequency: ['', Validators.required],
+      propertyContract: ['', Validators.required],
     });
   }
 
@@ -106,7 +109,7 @@ export class CreateContract {
         }));
         this.contractTypes.set(mapped);
       }
-        if (unitTypes?.isSuccess) {
+      if (unitTypes?.isSuccess) {
         const mapped = unitTypes.value.items.map((el) => ({
           ...el,
           name: el.descriptions.ar,
@@ -144,26 +147,6 @@ export class CreateContract {
     });
     this.activeTab += 1;
     this.buttons[this.activeTab - 1].active = true
-  }
-
-
-  get installments(): FormArray {
-    return this.createContract.get('installments') as FormArray;
-  }
-
-  addInstallment() {
-    this.installments.push(
-      this.fb.group({
-        installmentAmount: [0, Validators.required],
-        installmentCount: [0, Validators.required],
-        firstPaymentDate: ['', Validators.required],
-        frequency: ['', Validators.required]
-      })
-    );
-  }
-
-  removeInstallment(index: number) {
-    this.installments.removeAt(index);
   }
 
 }

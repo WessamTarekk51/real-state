@@ -1,66 +1,95 @@
 <div id="container-page">
-  <form class="form">
+  <form class="form" [formGroup]="createRole">
     <div class="row">
       <div class="half">
         <div class="full">
           <app-input-txt formControlName="name" [placeholder]="'الدور'" [formStyle]="true" [required]="true"
             [labelTxt]="'الدور'">
           </app-input-txt>
-          <!-- <div class="errormassage">
-          <app-control-messages class="form-validation-style" [control]="createLands.get('name')"
-            [validationMessages]="[
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createRole.get('name')" [validationMessages]="[
           { type: 'required', message: 'هذا الحقل مطلوب' }
         ]">
-          </app-control-messages>
-        </div> -->
+            </app-control-messages>
+          </div>
         </div>
       </div>
       <div class="half">
         <div class="full">
-          <app-input-txt formControlName="name" [placeholder]="'الوصف'" [formStyle]="true" [required]="true"
+          <app-input-txt formControlName="description" [placeholder]="'الوصف'" [formStyle]="true" [required]="true"
             [labelTxt]="'الوصف'">
           </app-input-txt>
-          <!-- <div class="errormassage">
-          <app-control-messages class="form-validation-style" [control]="createLands.get('name')"
-            [validationMessages]="[
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createRole.get('description')"
+              [validationMessages]="[
           { type: 'required', message: 'هذا الحقل مطلوب' }
         ]">
-          </app-control-messages>
-        </div> -->
+            </app-control-messages>
+          </div>
         </div>
       </div>
     </div>
     <div class="subTitle">
       <p>الصلاحيات</p>
     </div>
-    <div class="row">
-      <p class="entity">العقارات</p>
-      <div class="boxes">
-        <div class="box">
-          <input type="checkbox">
-          <p>تحديد الكل</p>
+    <ng-container *ngFor="let group of permissions">
+      <div class="row">
+        <p class="entity">{{group.name}}</p>
+        <div class="boxes">
+          <div class="box" *ngIf="group.permissions.all !== undefined">
+            <input type="checkbox" [(ngModel)]="group.permissions.all.value" [ngModelOptions]="{standalone: true}"
+              (change)="toggleAll(group)">
+            <p>تحديد الكل</p>
+          </div>
+
+          <div class="box" *ngIf="group.permissions.view !== undefined">
+            <input type="checkbox" [(ngModel)]="group.permissions.view.value" [ngModelOptions]="{standalone: true}"
+              (change)="togglePermission(group, 'view')">
+            <p>عرض</p>
+          </div>
+
+          <div class="box" *ngIf="group.permissions.create !== undefined">
+            <input type="checkbox" [(ngModel)]="group.permissions.create.value" [ngModelOptions]="{standalone: true}"
+              (change)="togglePermission(group, 'create')">
+            <p>انشاء</p>
+          </div>
+
+          <div class="box" *ngIf="group.permissions.update !== undefined">
+            <input type="checkbox" [(ngModel)]="group.permissions.update.value" [ngModelOptions]="{standalone: true}"
+              (change)="togglePermission(group, 'update')">
+            <p>تعديل</p>
+          </div>
+
+          <div class="box" *ngIf="group.permissions.delete !== undefined">
+            <input type="checkbox" [(ngModel)]="group.permissions.delete.value" [ngModelOptions]="{standalone: true}"
+              (change)="togglePermission(group, 'delete')">
+            <p>حذف</p>
+          </div>
+
+          <div class="box" *ngIf="group.permissions.upload !== undefined">
+            <input type="checkbox" [(ngModel)]="group.permissions.upload.value" [ngModelOptions]="{standalone: true}"
+              (change)="togglePermission(group, 'upload')">
+            <p>رفع</p>
+          </div>
+
+          <div class="box" *ngIf="group.permissions.download !== undefined">
+            <input type="checkbox" [(ngModel)]="group.permissions.download.value" [ngModelOptions]="{standalone: true}"
+              (change)="togglePermission(group, 'download')">
+            <p>تنزيل</p>
+          </div>
+
         </div>
-        <div class="box">
-          <input type="checkbox">
-          <p>عرض</p>
-        </div>
-        <div class="box">
-          <input type="checkbox">
-          <p>انشاء</p>
-        </div>
-        <div class="box">
-          <input type="checkbox">
-          <p>تعديل</p>
-        </div>
-        <div class="box">
-          <input type="checkbox">
-          <p>حذف</p>
-        </div>
+
       </div>
+      <div class="line"></div>
+    </ng-container>
+    <div class="error" *ngIf="errorPermissions">
+      <p>يجب اختيار بعض الصلاحيات</p>
     </div>
-    <div class="line"></div>
+
+    <!-- <div class="line"></div>
     <div class="row">
-      <p class="entity">العملاء</p>
+      <p class="entity">المستندات</p>
       <div class="boxes">
         <div class="box">
           <input type="checkbox">
@@ -87,7 +116,7 @@
     <div class="line"></div>
 
     <div class="row">
-      <p class="entity">العقود</p>
+      <p class="entity">الموارد البشرية</p>
       <div class="boxes">
         <div class="box">
           <input type="checkbox">
@@ -114,7 +143,7 @@
     <div class="line"></div>
 
     <div class="row">
-      <p class="entity">المدفوعات</p>
+      <p class="entity">الهوية</p>
       <div class="boxes">
         <div class="box">
           <input type="checkbox">
@@ -141,7 +170,7 @@
     <div class="line"></div>
 
     <div class="row">
-      <p class="entity">المدفوعات السرية</p>
+      <p class="entity">الأصوال</p>
       <div class="boxes">
         <div class="box">
           <input type="checkbox">
@@ -168,7 +197,7 @@
     <div class="line"></div>
 
     <div class="row">
-      <p class="entity">المبيعات </p>
+      <p class="entity">العملاء </p>
       <div class="boxes">
         <div class="box">
           <input type="checkbox">
@@ -192,9 +221,108 @@
         </div>
       </div>
     </div>
+    <div class="line"></div>
+    <div class="row">
+      <p class="entity">القوائم </p>
+      <div class="boxes">
+        <div class="box">
+          <input type="checkbox">
+          <p>تحديد الكل</p>
+        </div>
+        <div class="box">
+          <input type="checkbox">
+          <p>عرض</p>
+        </div>
+        <div class="box">
+          <input type="checkbox">
+          <p>انشاء</p>
+        </div>
+        <div class="box">
+          <input type="checkbox">
+          <p>تعديل</p>
+        </div>
+        <div class="box">
+          <input type="checkbox">
+          <p>حذف</p>
+        </div>
+      </div>
+    </div>
+    <div class="line"></div>
+    <div class="row">
+      <p class="entity"> المالية </p>
+      <div class="boxes">
+        <div class="box">
+          <input type="checkbox">
+          <p>تحديد الكل</p>
+        </div>
+        <div class="box">
+          <input type="checkbox">
+          <p>عرض</p>
+        </div>
+        <div class="box">
+          <input type="checkbox">
+          <p>انشاء</p>
+        </div>
+        <div class="box">
+          <input type="checkbox">
+          <p>تعديل</p>
+        </div>
+        <div class="box">
+          <input type="checkbox">
+          <p>حذف</p>
+        </div>
+      </div>
+    </div>
+    <div class="line"></div>
+    <div class="row">
+      <p class="entity">التقارير المالية </p>
+      <div class="boxes">
+        <div class="box">
+          <input type="checkbox">
+          <p>تحديد الكل</p>
+        </div>
+        <div class="box">
+          <input type="checkbox">
+          <p>عرض</p>
+        </div>
+
+      </div>
+    </div>
+    <div class="line"></div>
+    <div class="row">
+      <p class="entity"> التحليلات </p>
+      <div class="boxes">
+        <div class="box">
+          <input type="checkbox">
+          <p>تحديد الكل</p>
+        </div>
+        <div class="box">
+          <input type="checkbox">
+          <p>عرض</p>
+        </div>
+
+      </div>
+    </div>
+    <div class="line"></div>
+    <div class="row">
+      <p class="entity"> لوحة التحكم </p>
+      <div class="boxes">
+        <div class="box">
+          <input type="checkbox">
+          <p>تحديد الكل</p>
+        </div>
+        <div class="box">
+          <input type="checkbox">
+          <p>عرض</p>
+        </div>
+
+      </div>
+    </div> -->
+
     <div class="buttons">
       <app-button [className]="'gray'" [buttonTxt]="'الغاء'"></app-button>
-      <app-button [className]="'main'" [buttonTxt]="'اضافة'" ></app-button>
+      <app-button [className]="'main'" [buttonTxt]="'اضافة'" (click)="createRoleFun()"></app-button>
     </div>
   </form>
 </div>
+<p-toast />

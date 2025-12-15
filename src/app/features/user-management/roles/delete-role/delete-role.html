@@ -1,1 +1,14 @@
-<p>delete-role works!</p>
+<div class="model-container">
+  <div class="delete-container">
+    <div class="deleteIcon"></div>
+    <div class="content">
+      <p class="warningTxt" style="direction: rtl;">مسح دور {{item.roleName}}</p>
+      <p class="txt">هل انت متأكد من انك تريد مسح هذا الدور؟</p>
+      <div class="buttons">
+        <app-button [buttonTxt]="'مسح'" [className]="'delete'" (click)="delete()"></app-button>
+        <app-button [buttonTxt]="'الغاء'" [className]="'gray'" (click)="cancle()"></app-button>
+      </div>
+    </div>
+  </div>
+
+</div>
