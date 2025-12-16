@@ -14,10 +14,11 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrl: './roles.scss',
 })
 export class Roles {
+  pageTitle: string = ' الادوار ';
   roleDistributions: RoleDistribution[];
   dialogRef: any;
 
-  constructor(private cd:ChangeDetectorRef,private dialog: MatDialog, private router: Router, private UserManagementServices: UserManagementServices) { }
+  constructor(private cd: ChangeDetectorRef, private dialog: MatDialog, private router: Router, private UserManagementServices: UserManagementServices) { }
   ngOnInit(): void {
     this.getDashboard()
   }

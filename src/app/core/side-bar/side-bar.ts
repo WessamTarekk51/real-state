@@ -6,7 +6,7 @@ import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-side-bar',
-  imports: [PanelMenuModule, AccountRoutingModule,NgClass],
+  imports: [PanelMenuModule, AccountRoutingModule, NgClass],
   templateUrl: './side-bar.html',
   styleUrl: './side-bar.scss'
 })
@@ -29,7 +29,7 @@ export class SideBar {
       {
         label: 'إدارة العقارات',
         icon: '',
-        routerLink : "/real-state-management",
+        routerLink: "/real-state-management",
         roles: [''],
         items: [
           {
@@ -52,7 +52,7 @@ export class SideBar {
       {
         label: 'إدارة العملاء',
         icon: '',
-        routerLink : "/customer-management",
+        routerLink: "/customer-management",
         roles: [''],
         items: [
           {
@@ -75,7 +75,7 @@ export class SideBar {
       {
         label: 'إدارة المبيعات',
         icon: '',
-        routerLink : "/sales-management",
+        routerLink: "/sales-management",
         roles: [''],
         items: [
           {
@@ -91,9 +91,27 @@ export class SideBar {
         ]
       },
       {
+        label: 'إدارة المدفوعات',
+        icon: '',
+        routerLink: "/payments-management",
+        roles: [''],
+        items: [
+          {
+            label: 'المدفوعات الواردة',
+            routerLink: "/payments-management/incomes",
+            roles: [],
+          },
+          {
+            label: 'اضافه مدفوع وارد',
+            routerLink: "/payments-management/incomes/create",
+            roles: [],
+          }
+        ]
+      },
+      {
         label: 'إدارة المستخدمين ',
         icon: '',
-        routerLink : "/user-management",
+        routerLink: "/user-management",
         roles: [''],
         items: [
           {
@@ -114,6 +132,24 @@ export class SideBar {
           {
             label: 'انشاء مستخدم جديد',
             routerLink: "/user-management/users/create",
+            roles: [],
+          }
+        ]
+      },
+      {
+        label: 'إدارة العمال والفنيين',
+        icon: '',
+        routerLink: "/worker-management",
+        roles: [''],
+        items: [
+          {
+            label: 'العمال',
+            routerLink: "/worker-management/workers",
+            roles: [],
+          },
+          {
+            label: 'إضافة عامل جديد',
+            routerLink: "/worker-management/workers/create",
             roles: [],
           }
         ]

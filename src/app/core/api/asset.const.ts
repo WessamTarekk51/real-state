@@ -56,9 +56,23 @@ export const ASSET = {
   },
   role: {
     Roles: '/api/roles',
-    Dashboard : '/dashboard',
+    Dashboard: '/dashboard',
     GetRoleByID: '/{id}', // get
     UpdateRole: '/update', //PUT
     DeleteRole: '/delete', //DELETE
+  },
+  user: {
+    Users: '/api/user',
+    Dashboard: '/dashboard',
+    GetRoleByID: '/{id}', // get
+    UpdateRole: '/update', //PUT
+    DeleteRole: '/delete', //DELETE
+  },
+  worker: {
+    workers: '/api/employees', // get
+    GetWorkerByID: '/{id}', // get
+    CreateWorker: '/create', // post
+    UpdateWorker: '/update', //PUT
+    DeleteWorker: '/delete', //DELETE
   }
 } as const;

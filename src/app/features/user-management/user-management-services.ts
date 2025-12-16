@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ASSET } from 'src/app/core/api/asset.const';
 import { IResult } from 'src/app/shared/models/result';
-import { RootDashboardRole } from 'src/app/shared/models/user/role';
+import { RootDashboardRole, RootRole } from 'src/app/shared/models/user/role';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -34,6 +34,22 @@ export class UserManagementServices {
   DeleteRole(id: any) {
     return this.http.delete<IResult>(
       this.baseURL + ASSET.role.Roles + '/' + id
+    );
+  }
+  getRoles() {
+    const headers = this.headers;
+    return this.http.get<RootRole>(
+      this.baseURL + ASSET.role.Roles ,
+      { headers }
+    );
+  }
+
+  CreateUser(obj: any) {
+    const headers = this.headers;
+    return this.http.post<IResult>(
+      this.baseURL + ASSET.role.Roles,
+      obj,
+      { headers }
     );
   }
 }

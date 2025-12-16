@@ -17,3 +17,15 @@ export interface RoleDistribution {
   roleName: string,
   userCount: number
 }
+
+
+export interface RootRole extends IResult {
+  value: Role[]
+}
+export interface Role {
+  createdDate : string,
+  description : string,
+  id : string,
+  name : string,
+  userCount : number
+}

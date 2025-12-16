@@ -144,9 +144,6 @@ export class CreateRole {
     console.log(this.permissions)
   }
 
-
-
-
   togglePermission(group: any, key: string) {
     const permission = group.permissions[key];
 
