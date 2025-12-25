@@ -1,0 +1,22 @@
+.radio {
+  margin-bottom: 1vw;
+  width: 100%;
+}
+.radio .flex {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 0.5vw;
+}
+.radio .flex .items-center {
+  width: 40%;
+}
+.radio .flex .items-center ::ng-deep label {
+  margin-right: 1vw;
+}
+.radio label {
+  font-size: 1.4vw;
+}
+.radio label span {
+  color: rgb(255, 52, 52);
+}/*# sourceMappingURL=radios-button.css.map */

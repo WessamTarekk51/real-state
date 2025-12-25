@@ -2,14 +2,15 @@
 
 export const ASSET = {
   // baseUrl: environment.baseURL,
+  token:
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJUZXJyYUxpbmsiLCJleHAiOjE3NjkwNTQ2ODQsImlhdCI6MTc2NjQyNjY4NCwianRpIjoiNGJjNjMyMWYtOWVlZC00ZjA3LWIyNTgtYmQ1MzZiMTQwMzVkIiwiYXVkIjoiVGVycmFMaW5rQVBJIiwic3ViIjoiODYzOWYzNDctM2MyMi00NmZmLWE0MDAtYmY2ODgyMTYyNzliIiwidW5pcXVlX25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AdGVycmFsaW5rLmxvY2FsIiwibmFtZSI6IlN5c3RlbSBBZG1pbiIsInBob25lIjoiMDAwLTAwMDAtMDAwMCIsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlcyI6IkFkbWluaXN0cmF0b3IiLCJuYmYiOjE3NjY0MjY2ODR9.frV82reEMxgR7z1XCarreV73rT4P1vy9NAvUoxpnfUo',
   buildings: {
     Buildings: '/api/buildings',
     GetBuildingsByID: '/{{id}}', // get
     CreateBuildings: '/create', // post
     UpdateBuildings: '/update', //PUT
     DeleteBuildings: '/delete', //DELETE
-    AllBuildings: '/dropdown'
-
+    AllBuildings: '/dropdown',
   },
   lands: {
     Lands: '/api/lands', // get
@@ -17,7 +18,7 @@ export const ASSET = {
     CreateLands: '/create', // post
     UpdateLands: '/update', //PUT
     DeleteLands: '/delete', //DELETE
-    AllLands: '/dropdown'
+    AllLands: '/dropdown',
   },
   units: {
     Units: '/api/units',
@@ -25,13 +26,11 @@ export const ASSET = {
     CreateUnits: '/create', // post
     UpdateUnits: '/update', //PUT
     DeleteUnits: '/delete', //DELETE
-    AllUnits: '/dropdown'
+    AllUnits: '/dropdown',
   },
   document: {
-    documnet:
-      '/api/documents',
-    createDocumnet:
-      '/create',
+    documnet: '/api/documents',
+    createDocumnet: '/create',
 
     createDocumnetBulidingPermit:
       '/api/documents/019aacb7-f6b5-72e3-aeaa-8f8a8dc01cd0/create',
@@ -45,7 +44,6 @@ export const ASSET = {
   lookup: {
     getSetByCode: '/api/lookups/sets/by-code',
     getItemByCode: '/items/by-code',
-
   },
   client: {
     Clients: '/api/clients',
@@ -74,5 +72,13 @@ export const ASSET = {
     CreateWorker: '/create', // post
     UpdateWorker: '/update', //PUT
     DeleteWorker: '/delete', //DELETE
-  }
+  },
+  OutCome: {
+    OutComes: '/api/outgoing-payments', // get
+    GetOutComes: '/get', // get
+    GetOutComeByID: '/{id}', // get
+    CreateOutCome: '/create', // post
+    UpdateOutCome: '/update', //PUT
+    DeleteOutCome: '/delete', //DELETE
+  },
 } as const;

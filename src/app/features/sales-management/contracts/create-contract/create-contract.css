@@ -1,0 +1,20 @@
+.toggle-collection {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 2vw 0 3vw 0;
+}
+.toggle-collection .collection {
+  width: 20%;
+  padding: 0.5vw 3vw;
+  cursor: pointer;
+}
+.toggle-collection .collection p {
+  font-size: 1.4vw;
+  font-weight: 500;
+}
+.toggle-collection .collection.active {
+  border-radius: 0.2vw;
+  color: #D5B682;
+  border-bottom: 0.3vw solid rgba(213, 182, 130, 0.1490196078);
+}/*# sourceMappingURL=create-contract.css.map */

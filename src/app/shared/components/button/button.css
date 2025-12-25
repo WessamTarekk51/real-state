@@ -1,0 +1,56 @@
+.button {
+  width: auto;
+  padding: 1vw 1.5vw;
+  margin: 0 0.5vw;
+  border-radius: 0.5vw;
+  cursor: pointer;
+  min-width: 8vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.button.custom {
+  border: 0.1vw rgb(16, 55, 70) solid;
+}
+.button.custom p {
+  color: rgb(16, 55, 70);
+}
+.button.main {
+  background-color: rgb(16, 55, 70);
+  border: none;
+}
+.button.main p {
+  color: white;
+}
+.button.delete {
+  background-color: rgb(221, 43, 46);
+}
+.button.delete p {
+  color: white;
+}
+.button.gray {
+  background-color: rgb(184, 184, 184);
+}
+.button.gray p {
+  color: white;
+}
+.button.orange {
+  background-color: rgb(236, 98, 13);
+}
+.button.orange p {
+  color: white;
+}
+.button.sky {
+  background-color: #F6F6F8;
+  border: 0.1vw solid #103746;
+}
+.button.sky p {
+  color: #103746;
+}
+.button .print {
+  width: 1.5vw;
+  height: 1.5vw;
+  background-size: 100% 100%;
+  background-image: url(/assets/images/print.png);
+  margin: 0 0.5vw;
+}/*# sourceMappingURL=button.css.map */

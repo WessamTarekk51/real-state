@@ -1,0 +1,61 @@
+.userContainer {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 2vw;
+}
+.userContainer .totalDiv {
+  width: 23%;
+  margin: 1% 0%;
+}
+
+.state {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.state .chart {
+  width: 58%;
+  border: 0.1vw solid rgb(217, 217, 217);
+  border-radius: 0.5vw;
+  padding: 2%;
+  height: 20vw;
+}
+.state .chart .title-chart {
+  text-align: center;
+}
+.state .chart .title-chart p {
+  font-size: 1.6vw;
+  font-weight: 700;
+}
+.state .chart .data {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.state .chart .data .content {
+  width: 58%;
+  height: 30vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.state .chart .data .content .row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.state .chart .data .content .row .con {
+  display: flex;
+  align-items: center;
+}
+.state .chart .data .content .row .dot {
+  width: 1vw;
+  height: 1vw;
+  background-color: rgb(1, 162, 80);
+  margin-left: 0.5vw;
+}
+.state .chart .data .draw {
+  width: 40%;
+}/*# sourceMappingURL=user-management.css.map */

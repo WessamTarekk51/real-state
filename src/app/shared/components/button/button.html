@@ -1,3 +1,3 @@
 <div class="button" [class]="className" (click)="getAction()">
-  <p>{{buttonTxt}}</p>
+  <span *ngIf="iconName" [class]="iconName"></span> <p>{{buttonTxt}}</p>
 </div>

@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, signal } from '@angular/core';
-import { FormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
+import { FormGroup, ReactiveFormsModule, UntypedFormBuilder, Validators } from '@angular/forms';
 import { PaymentsManagementServices } from '../../payments-management-services';
 import { RealStateServices } from 'src/app/features/real-state-management/real-state-services';
 import { forkJoin } from 'rxjs';
@@ -7,15 +7,22 @@ import { DropDownLands } from 'src/app/shared/models/real-state/land';
 import { DropDownBuildings } from 'src/app/shared/models/real-state/building';
 import { DropDownUnits } from 'src/app/shared/models/real-state/unit';
 import { LookUpItem } from 'src/app/shared/models/real-state/lookup';
+import { InputSelect } from "src/app/shared/components/input-select/input-select";
+import { ControlMessages } from "src/app/shared/components/control-messages/control-messages";
+import { InputNum } from "src/app/shared/components/input-num/input-num";
+import { InputDate } from "src/app/shared/components/input-date/input-date";
+import { InputUpload } from "src/app/shared/components/input-upload/input-upload";
+import { InputTextArea } from "src/app/shared/components/input-text-area/input-text-area";
+import { Button } from "src/app/shared/components/button/button";
 
 @Component({
   selector: 'app-create-income',
-  imports: [],
+  imports: [ReactiveFormsModule, InputSelect, ControlMessages, InputNum, InputDate, InputUpload, InputTextArea, Button],
   templateUrl: './create-income.html',
   styleUrl: './create-income.scss'
 })
 export class CreateIncome {
-  pageTitle: string = 'إضافة عامل جديد';
+  pageTitle: string = 'إضافة مدفوع وارد';
   createIncome!: FormGroup;
   DropDownLands: DropDownLands[];
   DropDownBuildings: DropDownBuildings[];

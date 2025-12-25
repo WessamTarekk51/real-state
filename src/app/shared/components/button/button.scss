@@ -50,4 +50,21 @@
     }
   }
 
+  &.sky{
+    background-color: #F6F6F8;
+    border: 0.1vw solid #103746;
+
+    p {
+      color: #103746;
+    }
+  }
+
+  .print{
+    width: 1.5vw;
+    height: 1.5vw;
+    background-size: 100% 100%;
+    background-image: url(/assets/images/print.png);
+    margin: 0 0.5vw;
+  }
+
 }

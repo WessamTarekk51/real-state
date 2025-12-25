@@ -8,7 +8,7 @@
 html {
   @include mat.theme((color: (primary: mat.$azure-palette,
         tertiary: mat.$blue-palette),
-      typography: Roboto,
+      typography: sans,
       density: 0));
 }
 
@@ -26,8 +26,8 @@ body {
 }
 
 @font-face {
-  src: url(src/assets/fonts/PTSans-Regular.ttf);
-  font-family: roboto;
+  src: url(/assets/fonts/ProductSans-Light.ttf);
+  font-family: sans;
 }
 
 .container {
@@ -42,7 +42,7 @@ span,
 label,
 input {
   font-size: 1.6vw;
-  font-family: roboto !important;
+  font-family: sans !important;
 
   &.big {
     font-size: 2vw;
@@ -65,7 +65,7 @@ body {
 #container-page {
   width: 100%;
   height: auto;
-  padding: 2%;
+  padding: 1.5%;
 }
 
 .subTitle {
@@ -81,7 +81,7 @@ body {
 .container-filter {
   width: 100%;
   flex-direction: column;
-  padding: 2%;
+  padding: 1.5%;
   background-color: rgba(246, 246, 248, 1);
 
   .title-filter {
@@ -152,7 +152,7 @@ body {
   padding: 1vw 8vw;
 
   p {
-    font-family: roboto !important;
+    font-family: sans !important;
   }
 
   .buttons {

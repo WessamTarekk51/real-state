@@ -6,8 +6,9 @@
         <div class="top">
           <app-top-bar [title]= "title"></app-top-bar>
         </div>
-        <div class="page">
-          <router-outlet (activate)="getTitle($event)"/>
+        <div class="page" [@routeAnimation]="prepareRoute(outlet)">
+          <router-outlet #outlet="outlet" (activate)="getTitle($event)"/>
         </div>
+        <app-loading></app-loading>
       </div>
     </div>

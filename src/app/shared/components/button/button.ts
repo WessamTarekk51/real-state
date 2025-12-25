@@ -1,14 +1,17 @@
+import { NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-button',
-  imports: [],
+  imports: [NgIf],
   templateUrl: './button.html',
   styleUrl: './button.scss'
 })
 export class Button {
   @Input() className: string;
   @Input() buttonTxt: string;
+  @Input() iconName: string;
+
   @Output() buttonClick = new EventEmitter<any>();
 
 

@@ -105,7 +105,38 @@ export class SideBar {
             label: 'اضافه مدفوع وارد',
             routerLink: "/payments-management/incomes/create",
             roles: [],
-          }
+          },
+          {
+            label: 'المدفوعات الخارجة',
+            routerLink: "/payments-management/outcomes",
+            roles: [],
+          },
+          {
+            label: 'اضافه مدفوع خارج',
+            routerLink: "/payments-management/outcomes/create",
+            roles: [],
+          },
+          {
+            label: 'مدفوعات خاصة',
+            routerLink: "/payments-management/privateOutcomes",
+            roles: [],
+          },
+          {
+            label: 'اضافه مدفوع خاص',
+            routerLink: "/payments-management/privateOutcomes/create",
+            roles: [],
+          },
+          {
+            label: 'الأقساط',
+            routerLink: "/payments-management/installments",
+            roles: [],
+          },
+          {
+            label: 'اضافه قسط',
+            routerLink: "/payments-management/installments/create",
+            roles: [],
+          },
+
         ]
       },
       {

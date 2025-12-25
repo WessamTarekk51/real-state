@@ -1,0 +1,81 @@
+.table {
+  width: 100%;
+  border: 0.1vw rgb(217, 217, 217) solid;
+  padding: 1vw;
+  border-radius: 0.8vw;
+}
+.table .orange {
+  color: rgb(213, 182, 130);
+}
+.table .icons {
+  width: 9vw;
+  display: flex;
+  flex-wrap: wrap;
+  height: 2.5vw;
+}
+.table .icons .icon {
+  cursor: pointer;
+  background-size: 100% 100%;
+  margin: 0.2vw 0.4vw;
+}
+.table .icons .icon.view {
+  background-image: url(/assets/images/view.png);
+  width: 2vw;
+}
+.table .icons .icon.edit {
+  background-image: url(/assets/images/edit.png);
+  width: 2vw;
+}
+.table .icons .icon.delete {
+  background-image: url(/assets/images/delete.png);
+  width: 1.8vw;
+}
+
+::ng-deep .p-datatable-thead > tr > th {
+  font-size: 1.2vw;
+  font-family: sans;
+  font-weight: bold;
+  color: black;
+}
+::ng-deep .p-datatable-thead > tr > th {
+  padding: 1vw !important;
+}
+::ng-deep .p-datatable-tbody > tr > td p {
+  color: black;
+  font-size: 1.4vw;
+  font-weight: 700;
+  font-family: sans;
+}
+::ng-deep .p-datatable.p-datatable-striped .p-datatable-tbody > tr:nth-child(odd) {
+  background: rgb(241, 241, 241);
+}
+::ng-deep p-paginator {
+  display: none !important;
+}
+
+.custom-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  margin-top: 2vw;
+}
+.custom-pagination span {
+  border: 0.1vw rgb(217, 217, 217) solid;
+  border-radius: 2vw;
+  padding: 0.8vw 3vw;
+  background: #fff;
+  font-size: 1.5vw;
+}
+.custom-pagination button {
+  background: none;
+  border: none;
+  font-size: 2vw;
+  margin: 0vw 1vw;
+  cursor: pointer;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+}
+.custom-pagination button:disabled {
+  color: rgb(187, 187, 187);
+  cursor: not-allowed;
+}/*# sourceMappingURL=table.css.map */

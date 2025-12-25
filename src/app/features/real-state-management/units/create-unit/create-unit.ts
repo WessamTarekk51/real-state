@@ -116,7 +116,6 @@ export class CreateUnit {
       UnitType: this.RealStateServices.GetLookUpSetByCode('unit_type'),
       finishingType: this.RealStateServices.GetLookUpSetByCode('finishing_type'),
       UnitStatus: this.RealStateServices.GetLookUpSetByCode('unit_status'),
-
       getDropDownBuildings: this.RealStateServices.getDropDownBuildings(),
       OwnershipAgreement: this.RealStateServices.GetLookUpItemByCode('attachment_type', this.attachmentsFiles[0].elementId),
       UnitDiagram: this.RealStateServices.GetLookUpItemByCode('attachment_type', this.attachmentsFiles[1].elementId),
@@ -164,26 +163,6 @@ export class CreateUnit {
         this.attachmentsFiles[3].attachmentId = this.PreviousUtilityBills
       }
     });
-  }
-  addUnit() {
-    if (this.createUnits.valid) {
-      this.newUnit = { ...this.createUnits.value, attachments: this.attachmentsFiles };
-      this.RealStateServices.CreateUnits(this.newUnit).subscribe(
-        (res) => {
-          if (res.isSuccess) {
-            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'تم إنشاء الأرض بنجاح' });
-            this.createUnits.reset();
-          } else {
-            this.messageService.add({ severity: 'error', summary: 'حدث خطأ', detail: 'حاول مرة أخري.' });
-          }
-        },
-        (error) => {
-          this.messageService.add({ severity: 'error', summary: 'حدث خطأ', detail: 'حاول مرة أخري.' });
-        }
-      );
-    } else {
-      this.validateAllFields(this.createUnits);
-    }
   }
   uploadDocument(file: File, index: number, code: string) {
     const formData = new FormData();

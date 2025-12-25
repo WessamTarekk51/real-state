@@ -19,4 +19,16 @@ export class SharedServices {
 
     return `${day} ${month} ${year}`;
   }
+
+  printPage(){
+    const printContent = document.getElementById('print-section')?.innerHTML;
+    const originalContent = document.body.innerHTML;
+
+    if (printContent) {
+      document.body.innerHTML = printContent;
+      window.print();
+      document.body.innerHTML = originalContent;
+      location.reload(); // علشان يرجع الصفحة زي ما كانت
+    }
+  }
 }

@@ -1,0 +1,106 @@
+<div id="container-page">
+  <form class="form" [formGroup]="createPrivateOutcome">
+    <div class="row">
+      <div class="half">
+        <div class="full">
+          <app-input-select formControlName="x" [placeholder]="'عامل/موظف/مورد'" [formStyle]="true" [required]="true"
+            [labelTxt]="'المستفيد'">
+          </app-input-select>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createPrivateOutcome.get('x')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div>
+        </div>
+      </div>
+      <div class="half">
+        <div class="full">
+          <app-input-select formControlName="x" [placeholder]="'راتب – عمولة – مصروف إداري – صيانة – أخرى'" [formStyle]="true" [required]="true"
+            [labelTxt]="'نوع الصرف'">
+          </app-input-select>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createPrivateOutcome.get('x')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="half">
+        <div class="full">
+          <app-input-num [placeholder]="'المبلغ'" formControlName="x" [formStyle]="true" [required]="true"
+            [labelTxt]="'المبلغ'">
+          </app-input-num>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createPrivateOutcome.get('x')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div>
+        </div>
+
+      </div>
+      <div class="half">
+        <div class="full">
+          <app-input-date [placeholder]="'تاريخ الدفع'" formControlName="x" [formStyle]="true"
+            [required]="true" [labelTxt]="'تاريخ الدفع'">
+          </app-input-date>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createPrivateOutcome.get('x')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="half">
+        <div class="full">
+          <app-input-select formControlName="x" [placeholder]="'كاش – تحويل – شيك – بطاقة'"
+            [formStyle]="true" [required]="true" [labelTxt]="'طريقة الدفع'">
+          </app-input-select>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createPrivateOutcome.get('x')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div>
+        </div>
+      </div>
+      <div class="half">
+        <div class="full">
+          <app-input-upload formControlName="x" [placeholder]="'رفع مستند إيصال الدفع'" [formStyle]="true"
+            [required]="true" [labelTxt]="'رفع مستند إيصال الدفع'"></app-input-upload>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createPrivateOutcome.get('x')"
+              [validationMessages]="[
+      { type: 'required', message: 'هذا الحقل مطلوب' }
+    ]">
+            </app-control-messages>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="full">
+        <app-input-text-area formControlName="x" [placeholder]="'ملاحظات'" [formStyle]="true" [required]="false"
+          [labelTxt]="'ملاحظات'">
+        </app-input-text-area>
+      </div>
+    </div>
+    <div class="buttons">
+      <app-button [className]="'gray'" [buttonTxt]="'الغاء'"></app-button>
+      <app-button [className]="'main'" [buttonTxt]="'اضافة'"></app-button>
+    </div>
+  </form>
+</div>

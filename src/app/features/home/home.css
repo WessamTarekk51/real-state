@@ -1,0 +1,10 @@
+.homeContainer {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.homeContainer .totalDiv {
+  width: 23%;
+  margin: 1% 0%;
+}/*# sourceMappingURL=home.css.map */

@@ -1,0 +1,82 @@
+<div id="container-page" >
+  <div class="container-detailes" id="print-section">
+    <div class="space-between">
+      <div class="title">
+        <p>عملية #122234</p>
+      </div>
+      <div class="w80f">
+        <div class="buttons">
+          <app-button [className]="'orange'" [buttonTxt]="'تعديل'"></app-button>
+          <app-button [className]="'sky'" (click)="print()" [buttonTxt]="'طباعه'" [iconName]="'print'"></app-button>
+          <app-button [className]="'main'" [buttonTxt]="'تصدير إلى Excel'" ></app-button>
+        </div>
+      </div>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p>الجهة/الشخص</p>
+      </div>
+      <div class="des w50f end">
+        <p>أحمد محمد السيد علي</p>
+      </div>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p>نوع الصرف</p>
+      </div>
+      <div class="des w50f end">
+        <p>راتب</p>
+      </div>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p>ملاحظات </p>
+      </div>
+      <div class="des w50f end">
+        <p>-</p>
+      </div>
+    </div>
+    <div class="line"></div>
+    <div class="des w50f bold m1b">
+      <p>تفاصيل الدفع</p>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p>تاريخ الدفع </p>
+      </div>
+      <div class="des w50f end">
+        <p>2 سبتمبر 2014</p>
+      </div>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p>المبلغ </p>
+      </div>
+      <div class="des w50f end">
+        <p>20,000</p>
+      </div>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p>طريقة الدفع </p>
+      </div>
+      <div class="des w50f end">
+        <p>كاش</p>
+      </div>
+    </div>
+    <div class="line"></div>
+    <div class="des w50f bold m1b">
+      <p> المستندات</p>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p>  إيصال الدفع  </p>
+      </div>
+      <div class="file w50f end">
+        <p id="ownership_certificate" (click)="downloadAttachment('receipt')">Attachment</p>
+        <div class="icon"></div>
+
+      </div>
+    </div>
+  </div>
+</div>

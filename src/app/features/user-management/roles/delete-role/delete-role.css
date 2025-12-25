@@ -1,0 +1,30 @@
+.delete-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.delete-container .deleteIcon {
+  width: 6vw;
+  height: 6vw;
+  background-image: url(/assets/images/delete-icon.png);
+  background-size: 100% 100%;
+}
+.delete-container .content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 22vw;
+}
+.delete-container .content .warningTxt {
+  color: rgb(221, 43, 46);
+  font-weight: bold;
+  line-height: 2vw;
+}
+.delete-container .content .txt {
+  color: rgb(0, 0, 0);
+  font-weight: 400;
+  font-size: 1.4vw;
+  line-height: 2vw;
+}/*# sourceMappingURL=delete-role.css.map */

@@ -1,0 +1,53 @@
+@charset "UTF-8";
+.input {
+  width: 100%;
+  margin-bottom: 1vw;
+}
+.input label {
+  font-size: 1.4vw;
+}
+.input label span {
+  color: rgb(255, 52, 52);
+}
+
+.input input {
+  height: 3.2vw;
+  width: 100%;
+  padding: 0 3% 0 2.5vw;
+  position: relative;
+  /* مساحة يسار لأيقونة التقويم */
+  border: 0.1vw solid rgba(0, 0, 0, 0.5);
+  border-radius: 0.8vw;
+  background-color: rgb(246, 246, 248);
+  text-align: right;
+  direction: rtl;
+  font-size: 1.2vw;
+  color: #000;
+  outline: none;
+}
+.input input.inputForm {
+  background-color: rgb(255, 255, 255);
+  border: 0.01vw solid rgb(187, 187, 187);
+  margin-top: 0.5vw;
+}
+
+/* Placeholder */
+.input input::-moz-placeholder {
+  color: rgba(0, 0, 0, 0.4);
+}
+.input input::placeholder {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+/* تقويم */
+.input input::-webkit-calendar-picker-indicator {
+  filter: invert(0.5);
+  cursor: pointer;
+  position: absolute;
+  left: 0.8vw;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.input input::-webkit-calendar-picker-indicator.inputForm {
+  top: 70%;
+}/*# sourceMappingURL=input-date.css.map */

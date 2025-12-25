@@ -1,0 +1,85 @@
+.login {
+  width: 100%;
+  height: 100%;
+  background-size: 100% 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(120deg, #0f3e54, #d0b47b), url(/assets/images/bg-login.png);
+  background-blend-mode: overlay;
+  background-size: cover;
+  background-position: center;
+}
+.login .border-login {
+  width: 40%;
+  height: 64%;
+  padding: 3% 5%;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 0.01vw solid rgba(255, 255, 255, 0.7);
+  border-radius: 2%;
+  display: flex;
+  flex-direction: column;
+}
+.login .border-login form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 6% 0;
+}
+.login .border-login form .group {
+  margin-bottom: 3%;
+}
+.login .border-login form label {
+  font-size: 1.4vw;
+  margin-bottom: 0.5%;
+}
+.login .border-login form label.blue {
+  color: rgb(16, 55, 70);
+}
+.login .border-login form label.white {
+  color: rgb(246, 246, 248);
+}
+.login .border-login form input {
+  width: 98%;
+  height: 4.5vh;
+  padding: 1%;
+  border-radius: 0.4vw;
+  border: none;
+  outline: none;
+  background: rgba(255, 255, 255, 0.5);
+  color: #fff;
+  font-size: 1.2vw;
+}
+.login .border-login form input::-moz-placeholder {
+  color: #ddd;
+}
+.login .border-login form input::placeholder {
+  color: #ddd;
+}
+.login .border-login .forgot {
+  width: 100%;
+  display: flex;
+  justify-content: left;
+  margin-bottom: 1%;
+  cursor: pointer;
+}
+.login .border-login .forgot p {
+  color: rgb(221, 43, 46);
+  font-size: 1.4vw;
+  font-weight: 700;
+}
+.login .border-login .btnLogin {
+  width: 100%;
+  height: 8vh;
+  background-color: rgb(16, 55, 70);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.4vw;
+  cursor: pointer;
+}
+.login .border-login .btnLogin p {
+  color: rgb(255, 255, 255);
+  font-weight: 700;
+  font-size: 1.8vw;
+}/*# sourceMappingURL=login.css.map */

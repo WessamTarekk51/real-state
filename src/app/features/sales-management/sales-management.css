@@ -1,0 +1,11 @@
+.salesContainer {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 2vw;
+}
+.salesContainer .totalDiv {
+  width: 23%;
+  margin: 1% 0%;
+}/*# sourceMappingURL=sales-management.css.map */

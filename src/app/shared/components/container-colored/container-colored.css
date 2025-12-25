@@ -1,0 +1,18 @@
+#container-colored {
+  width: 100%;
+  padding: 10% 6%;
+  border-radius: 0.5vw;
+}
+#container-colored p {
+  color: rgb(255, 255, 255);
+}
+#container-colored .txt {
+  margin-bottom: 1vw;
+}
+#container-colored .txt p {
+  font-size: 1.6vw;
+}
+#container-colored .num p {
+  font-size: 1.9vw;
+  font-weight: 500;
+}/*# sourceMappingURL=container-colored.css.map */

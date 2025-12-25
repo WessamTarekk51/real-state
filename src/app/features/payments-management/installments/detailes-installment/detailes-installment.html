@@ -1,0 +1,142 @@
+<div id="container-page" >
+  <div class="container-detailes" id="print-section">
+    <div class="space-between">
+      <div class="title">
+        <p>عملية #122234</p>
+      </div>
+      <div class="w80f">
+        <div class="buttons">
+          <app-button [className]="'orange'" [buttonTxt]="'تعديل'"></app-button>
+          <app-button [className]="'sky'" (click)="print()" [buttonTxt]="'طباعه'" [iconName]="'print'"></app-button>
+          <app-button [className]="'main'" [buttonTxt]="'تصدير إلى Excel'" ></app-button>
+        </div>
+      </div>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p>اسم العميل</p>
+      </div>
+      <div class="des w50f end">
+        <p>أحمد محمد السيد علي</p>
+      </div>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p>رقم العقد</p>
+      </div>
+      <div class="des w50f end">
+        <p>22233455</p>
+      </div>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p>الوحدة المرتبطة </p>
+      </div>
+      <div class="des w50f end">
+        <p>وحدة 1</p>
+      </div>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p>نوع العملية</p>
+      </div>
+      <div class="des w50f end">
+        <p> قسط شهري</p>
+      </div>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p>رقم القسط</p>
+      </div>
+      <div class="des w50f end">
+        <p>112223344</p>
+      </div>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+       <p>ملاحظات</p>
+      </div>
+      <div class="des w50f end">
+        <p>-</p>
+      </div>
+    </div>
+    <div class="line"></div>
+    <div class="des w50f bold m1b">
+      <p>بيانات القسط</p>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p>تاريخ الاستحقاق</p>
+      </div>
+      <div class="des w50f end">
+        <p>2 سبتمبر 2014</p>
+      </div>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p>المبلغ </p>
+      </div>
+      <div class="des w50f end">
+        <p>20,000</p>
+      </div>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p>طريقة الدفع </p>
+      </div>
+      <div class="des w50f end">
+        <p>كاش</p>
+      </div>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p>حالة القسط</p>
+      </div>
+      <div class="status green ">
+        <p>مدفوع</p>
+      </div>
+    </div>
+    <div class="line"></div>
+    <div class="des w50f bold m1b">
+      <p> الدفع الفعلي</p>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p>تاريخ الدفع الفعلي </p>
+      </div>
+      <div class="des w50f end">
+        <p>2 سبتمبر 2014</p>
+      </div>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p>مبلغ مدفوع </p>
+      </div>
+      <div class="des w50f end">
+        <p>20,000</p>
+      </div>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p>المتبقي  </p>
+      </div>
+      <div class="des w50f end">
+        <p>-</p>
+      </div>
+    </div>
+    <div class="line"></div>
+    <div class="des w50f bold m1b">
+      <p> المستندات</p>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p>  إيصال الدفع  </p>
+      </div>
+      <div class="file w50f end">
+        <p id="ownership_certificate" (click)="downloadAttachment('receipt')">Attachment</p>
+        <div class="icon"></div>
+
+      </div>
+    </div>
+  </div>
+</div>

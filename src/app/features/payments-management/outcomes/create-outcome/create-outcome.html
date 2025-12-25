@@ -1,0 +1,137 @@
+<div id="container-page" *ngIf="dataLoaded">
+  <form class="form" [formGroup]="createOutcome">
+    <div class="row">
+      <div class="half">
+        <div class="full">
+          <app-input-select formControlName="beneficiaryId" [options]="beneficiaryTypes()" [placeholder]="'المستفيد'" [formStyle]="true"
+            [required]="true" [labelTxt]="'المستفيد'">
+          </app-input-select>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createOutcome.get('beneficiaryId')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div>
+        </div>
+      </div>
+      <div class="half">
+        <div class="full">
+          <app-input-select formControlName="expenseTypeId" [options]="expenseTypes()" [placeholder]="'نوع الصرف'" [formStyle]="true"
+            [required]="true" [labelTxt]="'نوع الصرف'">
+          </app-input-select>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createOutcome.get('expenseTypeId')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="half">
+        <div class="full">
+          <app-input-select formControlName="buildingId" [options]="DropDownBuildings" [placeholder]="'العمارة'" [formStyle]="true" [required]="true"
+            [labelTxt]="'العمارة'" >
+          </app-input-select>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createOutcome.get('buildingId')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div>
+        </div>
+      </div>
+      <div class="half">
+        <div class="full">
+          <app-input-select formControlName="unitId" [options]="DropDownUnits" [placeholder]="'الوحدة '" [formStyle]="true" [required]="true"
+            [labelTxt]="'الوحدة '" >
+          </app-input-select>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createOutcome.get('unitId')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="half">
+        <div class="full">
+          <app-input-num [placeholder]="'المبلغ'" formControlName="amount" [formStyle]="true" [required]="true"
+            [labelTxt]="'المبلغ'">
+          </app-input-num>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createOutcome.get('amount')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div>
+        </div>
+      </div>
+      <div class="half">
+        <div class="full">
+          <app-input-date [placeholder]="'تاريخ الدفع'" formControlName="paymentDate" [formStyle]="true"
+            [required]="true" [labelTxt]="'تاريخ الدفع'">
+          </app-input-date>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createOutcome.get('paymentDate')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="half">
+        <div class="full">
+          <app-input-select formControlName="paymentMethodId" [options]="paymentMethods()" [placeholder]="'كاش – تحويل – شيك – بطاقة'"
+            [formStyle]="true" [required]="true" [labelTxt]="'طريقة الدفع'">
+          </app-input-select>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createOutcome.get('paymentMethodId')"
+              [validationMessages]="[
+            { type: 'required', message: 'هذا الحقل مطلوب' }
+          ]">
+            </app-control-messages>
+          </div>
+        </div>
+      </div>
+      <div class="half">
+        <div class="full">
+          <app-input-upload  formControlName="receipt" (inputValue)="uploadDocument($event,0,this.receipt)" [placeholder]="'رفع مستند إيصال الدفع'" [formStyle]="true"
+            [required]="true" [labelTxt]="'رفع مستند إيصال الدفع'"></app-input-upload>
+          <div class="errormassage">
+            <app-control-messages class="form-validation-style" [control]="createOutcome.get('receipt')"
+              [validationMessages]="[
+      { type: 'required', message: 'هذا الحقل مطلوب' }
+    ]">
+            </app-control-messages>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="full">
+        <app-input-text-area formControlName="notes" [placeholder]="'ملاحظات'" [formStyle]="true" [required]="false"
+          [labelTxt]="'ملاحظات'">
+        </app-input-text-area>
+      </div>
+    </div>
+    <div class="buttons">
+      <app-button [className]="'gray'" [buttonTxt]="'الغاء'"></app-button>
+      <app-button [className]="'main'" [buttonTxt]="'اضافة'" (click)="createNewUnit()"></app-button>
+    </div>
+  </form>
+</div>
+<p-toast />

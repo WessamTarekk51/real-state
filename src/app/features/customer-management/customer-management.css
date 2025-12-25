@@ -1,0 +1,11 @@
+.customerContainer {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 2vw;
+}
+.customerContainer .totalDiv {
+  width: 23%;
+  margin: 1% 0%;
+}/*# sourceMappingURL=customer-management.css.map */
