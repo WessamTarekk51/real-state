@@ -106,19 +106,19 @@ export class CreateLand implements AfterViewInit {
   ngOnInit(): void {
     this.attachmentsFiles = [
       {
-        elementId: 'buliding_permit',
+        elementId: 'photo',
         attachmentId: '',
       },
       {
-        elementId: 'ownership_certificate',
+        elementId: 'photo',
         attachmentId: '',
       },
       {
-        elementId: 'ownership_contract',
+        elementId: 'photo',
         attachmentId: '',
       },
       {
-        elementId: 'RealState_registration_documents',
+        elementId: 'photo',
         attachmentId: '',
       },
     ];

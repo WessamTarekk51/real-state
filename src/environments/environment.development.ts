@@ -1,6 +1,6 @@
 export const environment = {
     production: false,
-  baseURL: 'https://dev-terralink.azurewebsites.net',
+    baseURL: 'https://api-dev.bittech.cloud',
 
 
 };

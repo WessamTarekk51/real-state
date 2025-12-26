@@ -25,6 +25,11 @@ export class Roles {
   createRole() {
     this.router.navigate(['/user-management/roles/create']);
   }
+  editRole(role: RoleDistribution) {
+    this.router.navigate(['/user-management/roles/edit'],{
+      queryParams: { id: role.roleId},
+    });
+  }
 
   getDashboard() {
     this.UserManagementServices.getDashboardRole().subscribe(res => {

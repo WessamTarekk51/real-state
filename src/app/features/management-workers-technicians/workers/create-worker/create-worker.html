@@ -30,20 +30,20 @@
         </div>
       </div>
     </div>
-    <!-- <div class="row">
+    <div class="row">
         <div class="full">
-          <app-input-select [value]="createWorker.value.job" formControlName="job" [placeholder]="'الوظيفة'"
+          <app-input-select [value]="createWorker.value.jobStatusId" formControlName="jobStatusId" [placeholder]="'الوظيفة'"
             [formStyle]="true" [required]="true" [labelTxt]="'الوظيفة'">
           </app-input-select>
           <div class="errormassage">
-            <app-control-messages class="form-validation-style" [control]="createWorker.get('job')"
+            <app-control-messages class="form-validation-style" [control]="createWorker.get('jobStatusId')"
               [validationMessages]="[
             { type: 'required', message: 'هذا الحقل مطلوب' }
           ]">
             </app-control-messages>
           </div>
       </div>
-    </div> -->
+    </div>
      <div class="buttons">
       <app-button [className]="'gray'" [buttonTxt]="'الغاء'"></app-button>
       <app-button [className]="'main'" [buttonTxt]="'اضافة'" (click)="addWorker()"></app-button>

@@ -10,6 +10,9 @@ const routes: Routes = [
   },
   {
     path : 'create' , component : CreateRole
+  },
+  {
+    path : 'edit' , component : CreateRole
   }
 ];
 

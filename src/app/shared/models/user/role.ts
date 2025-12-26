@@ -29,3 +29,15 @@ export interface Role {
   name : string,
   userCount : number
 }
+
+
+export interface RoleDetailesRoot extends IResult {
+  value: RoleDetailes
+}
+
+export interface RoleDetailes {
+  name: string,
+  description: string,
+  id : string,
+  permissionIds: string[]
+}

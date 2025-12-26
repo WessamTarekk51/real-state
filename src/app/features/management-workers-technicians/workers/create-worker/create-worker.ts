@@ -6,10 +6,11 @@ import { ControlMessages } from "src/app/shared/components/control-messages/cont
 import { Button } from "src/app/shared/components/button/button";
 import { ManagementWorkerServices } from '../../management-worker-services';
 import { ToastModule } from 'primeng/toast';
+import { InputSelect } from "src/app/shared/components/input-select/input-select";
 
 @Component({
   selector: 'app-create-worker',
-  imports: [ReactiveFormsModule, InputTxt, ControlMessages, Button,ToastModule],
+  imports: [ReactiveFormsModule, InputTxt, ControlMessages, Button, ToastModule, InputSelect],
   templateUrl: './create-worker.html',
   styleUrl: './create-worker.scss',
   providers: [MessageService],
@@ -27,6 +28,7 @@ export class CreateWorker {
     this.createWorker = this.fb.group({
       name: ['', Validators.required],
       phone: ['', Validators.required],
+      jobStatusId: ['', Validators.required],
     });
 
   }

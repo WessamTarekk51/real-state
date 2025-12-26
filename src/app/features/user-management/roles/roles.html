@@ -7,7 +7,7 @@
       <div class="card-header">
         <p>{{roleDistribution.roleName}} </p>
         <div class="actions">
-          <span class="edit-icon"></span>
+          <span class="edit-icon" (click)="editRole(roleDistribution)"></span>
           <span class="delete-icon" (click)="deleteRole(roleDistribution)"></span>
         </div>
       </div>
