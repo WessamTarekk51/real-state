@@ -2,14 +2,18 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ASSET } from 'src/app/core/api/asset.const';
 import { IResult } from 'src/app/shared/models/result';
-import { RoleDetailesRoot, RootDashboardRole, RootRole } from 'src/app/shared/models/user/role';
+import {
+  RoleDetailesRoot,
+  RootDashboardRole,
+  RootRole,
+} from 'src/app/shared/models/user/role';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserManagementServices {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
   baseURL = environment.baseURL;
   token = ASSET.token;
   headers = new HttpHeaders({
@@ -17,11 +21,9 @@ export class UserManagementServices {
   });
   CreateRole(obj: any) {
     const headers = this.headers;
-    return this.http.post<IResult>(
-      this.baseURL + ASSET.role.Roles,
-      obj,
-      { headers }
-    );
+    return this.http.post<IResult>(this.baseURL + ASSET.role.Roles, obj, {
+      headers,
+    });
   }
   getDashboardRole() {
     const headers = this.headers;
@@ -37,23 +39,30 @@ export class UserManagementServices {
   }
   getRoles() {
     const headers = this.headers;
-    return this.http.get<RootRole>(
-      this.baseURL + ASSET.role.Roles ,
+    return this.http.get<RootRole>(this.baseURL + ASSET.role.Roles, {
+      headers,
+    });
+  }
+  GetRoleByID(id: string) {
+    const headers = this.headers;
+    return this.http.get<RoleDetailesRoot>(
+      this.baseURL + ASSET.role.Roles + '/' + id,
       { headers }
     );
   }
-  GetRoleByID(id: string) {
-    const headers = this.headers
-    return this.http.get<RoleDetailesRoot>(this.baseURL + ASSET.role.Roles + '/' + id, { headers });
-  }
-
-
-  CreateUser(obj: any) {
+  EditRole(obj: any, roleId: string) {
     const headers = this.headers;
-    return this.http.post<IResult>(
-      this.baseURL + ASSET.role.Roles,
+    return this.http.put<IResult>(
+      this.baseURL + ASSET.role.Roles + '/' + roleId,
       obj,
       { headers }
     );
+  }
+
+  CreateUser(obj: any) {
+    const headers = this.headers;
+    return this.http.post<IResult>(this.baseURL + ASSET.role.Roles, obj, {
+      headers,
+    });
   }
 }

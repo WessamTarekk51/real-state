@@ -31,4 +31,31 @@ export class SharedServices {
       location.reload(); // علشان يرجع الصفحة زي ما كانت
     }
   }
+  printRow(rowId : string){
+    const row = document.getElementById(rowId);
+    if (!row) return;
+
+    const printWindow = window.open('', '', 'width=900,height=600');
+
+    printWindow!.document.write(`
+      <html>
+        <head>
+          <title>Print</title>
+          <style>
+            body { direction: rtl; font-family: Arial }
+            table { width: 100%; border-collapse: collapse }
+            td, th { border: 1px solid #000; padding: 8px; }
+          </style>
+        </head>
+        <body>
+          <table>
+            ${row.outerHTML}
+          </table>
+        </body>
+      </html>
+    `);
+
+    printWindow!.document.close();
+    printWindow!.print();
+  }
 }

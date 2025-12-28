@@ -2,23 +2,36 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { InputTxt } from "src/app/shared/components/input-txt/input-txt";
-import { InputSelect } from "src/app/shared/components/input-select/input-select";
+import { InputTxt } from 'src/app/shared/components/input-txt/input-txt';
+import { InputSelect } from 'src/app/shared/components/input-select/input-select';
 import { DropDownUnits } from 'src/app/shared/models/real-state/unit';
 import { RealStateServices } from '../../real-state-management/real-state-services';
-import { InputNum } from "src/app/shared/components/input-num/input-num";
-import { InputDate } from "src/app/shared/components/input-date/input-date";
+import { InputNum } from 'src/app/shared/components/input-num/input-num';
+import { InputDate } from 'src/app/shared/components/input-date/input-date';
 import { PaymentsManagementServices } from '../payments-management-services';
-import { Button } from "src/app/shared/components/button/button";
+import { Button } from 'src/app/shared/components/button/button';
+import { GetOutComes, OutCome } from 'src/app/shared/models/payment/outCome';
+import { SharedServices } from 'src/app/shared/services/shared-services';
+import { Table } from 'src/app/shared/components/table/table';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-outcomes',
-  imports: [InputTxt, FormsModule, InputSelect, InputNum, InputDate, Button],
+  imports: [
+    NgIf,
+    InputTxt,
+    FormsModule,
+    InputSelect,
+    InputNum,
+    InputDate,
+    Button,
+    Table,
+  ],
   templateUrl: './outcomes.html',
-  styleUrl: './outcomes.scss'
+  styleUrl: './outcomes.scss',
 })
 export class Outcomes {
-  pageTitle: string = 'المدفوعات الخارجة'
+  pageTitle: string = 'المدفوعات الخارجة';
   filters = {
     Code: '',
     UnitId: '',
@@ -30,55 +43,77 @@ export class Outcomes {
   totalPages: number;
   pageNumber: number = 1;
   DropDownUnits: DropDownUnits[];
-
-  constructor(private PaymentsManagementServices:PaymentsManagementServices,private RealStateServices:RealStateServices,private cd: ChangeDetectorRef, private dialog: MatDialog, private router: Router, ) {
-  }
+  Outcomes: GetOutComes;
+  constructor(
+    private SharedServices: SharedServices,
+    private PaymentsManagementServices: PaymentsManagementServices,
+    private RealStateServices: RealStateServices,
+    private cd: ChangeDetectorRef,
+    private dialog: MatDialog,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.getUnits()
+    this.getUnits();
     this.getOutComes();
     this.cols = [
-      { field: 'number', header: 'رقم الأرض' },
-      { field: 'name', header: 'اسم الأرض' },
-      { field: 'location', header: 'الموقع' },
-      { field: 'area', header: 'المساحة (م2)' },
-      { field: 'buildingsCount', header: 'العمارات' },
-      { field: 'unitsCount', header: 'الشقق' },
-      { field: 'convertCreationDate', header: 'تاريخ الانشاء' },
-      { field: '', header: 'التحكم', control: true },
+      { field: 'code', header: 'رقم العملية' },
+      { field: 'beneficiaryName', header: 'الجهة/الشخص' },
+      { field: 'expenseTypeName', header: 'نوع الصرف' },
+      { field: 'unitCode', header: 'رقم الوحدة' },
+      { field: 'buildingCode', header: 'رقم العمارة' },
+      { field: 'amount', header: 'المبلغ' },
+      { field: 'convertPaymentDate', header: 'تاريخ الدفع' },
+      { field: 'paymentMethodName', header: 'طريقة الدفع' },
+      { field: '', header: 'التحكم', controlOutcome: true },
     ];
   }
 
   getFilter(num: any) {
-    this.getUnits();
+    this.getOutComes();
   }
 
-  getUnits(){
-    this.RealStateServices.getDropDownUnits().subscribe(res=>{
-      res.isSuccess ? this.DropDownUnits = res.value : '';
+  getUnits() {
+    this.RealStateServices.getDropDownUnits().subscribe((res) => {
+      res.isSuccess ? (this.DropDownUnits = res.value) : '';
       this.cd.detectChanges();
-    })
+    });
   }
   getOutComes() {
-    this.PaymentsManagementServices.GetOutcomes(this.pageSize, this.pageNumber, this.filters).subscribe(res => {
-      console.log(res)
-      // if (res.isSuccess) {
-      //   this.lands = res.value;
-      //   this.lands.items.forEach(el => {
-      //     el.location = el.district.ar,
-      //       el.convertCreationDate = this.SharedServices.convertToArabicDate(el.creationDate)
-      //   })
+    this.PaymentsManagementServices.GetOutcomes(
+      this.pageSize,
+      this.pageNumber,
+      this.filters
+    ).subscribe((res) => {
+      if (res.isSuccess) {
+        this.Outcomes = res.value;
+        this.Outcomes.items.forEach((el) => {
+          (el.beneficiaryName = el.beneficiary.ar),
+            (el.paymentMethodName = el.paymentMethod.ar),
+            (el.expenseTypeName = el.expenseType.ar),
+            (el.convertPaymentDate = this.SharedServices.convertToArabicDate(
+              el.paymentDate
+            ));
+        });
 
-      //   this.totalPages = res.value.totalPages;
-      //   this.cd.markForCheck();
-      // }
-    })
+        this.totalPages = res.value.totalPages;
+        this.cd.markForCheck();
+      }
+    });
   }
-  createOutCome(){
+  createOutCome() {
     this.router.navigate(['/payments-management/outcomes/create']);
   }
   GetpageNumber(pageNumber: number) {
     this.pageNumber = pageNumber;
     this.getOutComes();
+  }
+  detailesOutcome(outCome : OutCome){
+    this.router.navigate(['/payments-management/outcomes/detailes'], {
+      queryParams: { id: outCome.id },
+    });
+  }
+  editOutcome(outCome : OutCome){
+    this.router.navigate(['/payments-management/outcomes/create']);
   }
 }

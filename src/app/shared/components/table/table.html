@@ -13,7 +13,7 @@
     </ng-template>
 
     <ng-template pTemplate="body" let-rowData let-columns="columns">
-      <tr>
+      <tr [attr.id]="'row-' + rowData.id">
         @for(col of columns; track $index ){
         <td>
           @if($index == 0 && !col.status){
@@ -31,6 +31,15 @@
             }
           </div>
           }
+          @if(col.controlOutcome){
+            <div class="icons">
+              <div class="icon view" (click)="viewItem(rowData)"></div>
+              <div class="icon edit" (click)="editItem(rowData)"></div>
+              @if(!col.unit){
+              <div class="icon print" (click)="printItem(rowData, 'row-' + rowData.id)"></div>
+              }
+            </div>
+            }
           @if(col.status){
           @if(rowData[col.field] == "تحت الإنشاء"){
           <div class="status red">

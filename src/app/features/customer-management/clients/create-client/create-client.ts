@@ -41,6 +41,7 @@ export class CreateClient {
       email: [''],
       nationalId: ['', Validators.required],
       address: [''],
+      attachments:[[{}]]
     });
     this.newClient = {
       name: '',

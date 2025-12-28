@@ -22,4 +22,12 @@
     <app-button [className]="'custom'" [buttonTxt]="'تصدير إلى Excel'"></app-button>
     <app-button [className]="'main'" [buttonTxt]="'+ إضافة مدفوع خارج'" (buttonClick)="createOutCome()"></app-button>
   </div>
+  <div class="container-table" *ngIf="Outcomes && Outcomes.items.length; else noData">
+    <app-table [cols]="cols" [items]="Outcomes.items" [totalPages]="totalPages" [pageSize]="pageSize"
+      (pageNumber)="GetpageNumber($event)" (view)="detailesOutcome($event)"
+      (edit)="editOutcome($event)"></app-table>
+  </div>
+  <ng-template #noData>
+    <p class="text-center">لا يوجد مدفوعات خارجة حالياً</p>
+  </ng-template>
 </div>

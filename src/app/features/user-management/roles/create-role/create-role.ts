@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { InputTxt } from 'src/app/shared/components/input-txt/input-txt';
 import { Button } from 'src/app/shared/components/button/button';
 import {
@@ -37,7 +37,7 @@ import { RoleDetailes } from 'src/app/shared/models/user/role';
   providers: [MessageService],
 })
 export class CreateRole {
-  pageTitle: string = 'انشاء دور جديد';
+  pageTitle: string;
   createRole!: FormGroup;
   permissions = [
     {
@@ -139,15 +139,17 @@ export class CreateRole {
   errorPermissions: boolean = false;
   edit: boolean = false;
   roleID: string;
-  roleDetailesEdit : RoleDetailes
+  roleDetailesEdit: RoleDetailes;
   constructor(
     private router: Router,
     private messageService: MessageService,
     private fb: UntypedFormBuilder,
     private UserManagementServices: UserManagementServices,
     private RealStateServices: RealStateServices,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private cd: ChangeDetectorRef
   ) {
+    this.getLookUp();
     this.createRole = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
@@ -156,15 +158,19 @@ export class CreateRole {
   }
 
   ngOnInit(): void {
-    this.getLookUp();
   }
   isEditRoute() {
     this.edit = this.router.url.includes('edit');
     this.edit
-      ? [(this.roleID = String(
-          this.activatedRoute.snapshot.queryParamMap.get('id')
-        )),this.getEditedData()]
-      : '';
+      ? [
+          (this.roleID = String(
+            this.activatedRoute.snapshot.queryParamMap.get('id')
+          )),
+          this.getEditedData(),
+          (this.pageTitle = 'تعديل دور '),
+        ]
+      : (this.pageTitle = 'انشاء دور جديد');
+    this.cd.markForCheck();
   }
   getLookUp() {
     this.RealStateServices.GetLookUpSetByCode('Permissions').subscribe(
@@ -175,18 +181,16 @@ export class CreateRole {
               Object.values(el.permissions).forEach((perm) => {
                 if (item.code == perm.code) {
                   perm.code = item.id;
-
                 }
               });
             });
           });
+          this.isEditRoute();
         }
       }
     );
-    console.log(this.permissions)
-    this.isEditRoute();
+    console.log(this.permissions);
   }
-
   togglePermission(group: any, key: string) {
     const permission = group.permissions[key];
 
@@ -230,6 +234,34 @@ export class CreateRole {
       .map((key) => group.permissions[key]);
     group.permissions.all.value = permissions.every((p) => p.value);
   }
+  mapPermissions(permissionIds: string[]) {
+    console.log(permissionIds);
+    this.selectedPermissions = [];
+    this.permissions.forEach((group) => {
+      const permissions = (
+        Object.keys(group.permissions) as Array<keyof typeof group.permissions>
+      )
+        .filter((key) => key !== 'all')
+        .map((key) => group.permissions[key])
+        .filter((p): p is { value: boolean; code: string } => !!p);
+      permissions.forEach((p) => {
+        if (permissionIds.includes(p.code)) {
+          // ✔️ علّم الـ checkbox
+          p.value = true;
+          // ✔️ خزّن في selectedPermissions
+          if (!this.selectedPermissions.includes(p.code)) {
+            this.selectedPermissions.push(p.code);
+            this.cd.markForCheck();
+          }
+        } else {
+          p.value = false;
+        }
+      });
+
+      // ✔️ تحديث تحديد الكل
+      group.permissions.all.value = permissions.every((p) => p.value);
+    });
+  }
 
   createRoleFun() {
     this.errorPermissions = false;
@@ -241,10 +273,51 @@ export class CreateRole {
               this.messageService.add({
                 severity: 'success',
                 summary: 'Success',
-                detail: 'تم إنشاء العمارة بنجاح',
+                detail: 'تم إنشاء الدور بنجاح',
               });
-              this.createRole.reset();
-              this.selectedPermissions = [];
+             this.resetFormAndPermissions();
+             this.pageRoles()
+            } else {
+              this.messageService.add({
+                severity: 'error',
+                summary: 'حدث خطأ',
+                detail: 'حاول مرة أخري.',
+              });
+            }
+          },
+          (error) => {
+            console.log(error);
+            this.messageService.add({
+              severity: 'error',
+              summary: 'حدث خطأ',
+              detail: 'حاول مرة أخري.',
+            });
+          }
+        );
+      } else {
+        this.errorPermissions = true;
+      }
+    } else {
+      this.validateAllFields(this.createRole);
+    }
+  }
+  editRoleFun() {
+    this.errorPermissions = false;
+    if (this.createRole.valid) {
+      if (this.selectedPermissions.length != 0) {
+        this.UserManagementServices.EditRole(
+          this.createRole.value,
+          this.roleID
+        ).subscribe(
+          (res) => {
+            if (res.isSuccess) {
+              this.messageService.add({
+                severity: 'success',
+                summary: 'Success',
+                detail: 'تم تعديل الدور بنجاح',
+              });
+              this.resetFormAndPermissions();
+              this.pageRoles()
             } else {
               this.messageService.add({
                 severity: 'error',
@@ -280,14 +353,33 @@ export class CreateRole {
     });
   }
   getEditedData() {
-    this.UserManagementServices.GetRoleByID(this.roleID).subscribe(res=>{
+    this.UserManagementServices.GetRoleByID(this.roleID).subscribe((res) => {
       this.roleDetailesEdit = res.value;
       this.createRole.patchValue({
-      name: this.roleDetailesEdit.name,
-      description: this.roleDetailesEdit.description,
-      permissionIds: this.roleDetailesEdit.permissionIds,
+        name: this.roleDetailesEdit.name,
+        description: this.roleDetailesEdit.description,
+        permissionIds: this.roleDetailesEdit.permissionIds,
+      });
+      this.mapPermissions(this.roleDetailesEdit.permissionIds);
     });
-    })
-
   }
+  resetFormAndPermissions() {
+    this.createRole.reset();
+    // Reset permissions
+    this.permissions.forEach(group => {
+      Object.keys(group.permissions).forEach(key => {
+        const permission =
+          group.permissions[key as keyof typeof group.permissions];
+        if (permission) {
+          permission.value = false;
+        }
+      });
+      group.permissions.all.value = false;
+    });
+    this.selectedPermissions = [];
+  }
+  pageRoles(){
+    this.router.navigate(['/user-management/roles']);
+  }
+
 }

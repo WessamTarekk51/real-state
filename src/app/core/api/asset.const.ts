@@ -76,7 +76,7 @@ export const ASSET = {
   OutCome: {
     OutComes: '/api/outgoing-payments', // get
     GetOutComes: '/get', // get
-    GetOutComeByID: '/{id}', // get
+    GetOutComeByID: '/get', // get
     CreateOutCome: '/create', // post
     UpdateOutCome: '/update', //PUT
     DeleteOutCome: '/delete', //DELETE
