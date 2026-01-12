@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ASSET } from 'src/app/core/api/asset.const';
+import { GetEmployeeRoot } from 'src/app/shared/models/customer/employess';
 import { IResult } from 'src/app/shared/models/result';
 import { environment } from 'src/environments/environment';
 
@@ -66,5 +67,13 @@ export class ManagementWorkerServices {
         ASSET.worker.DeleteWorker,
       { headers }
     );
+  }
+  GetDropDownWorkers() {
+    const headers = this.headers;
+    let params = new HttpParams()
+      .set('pageSize', 0)
+      .set('pageNumber', 0);
+    const url = `${this.baseURL}${ASSET.worker.workers}`;
+    return this.http.get<GetEmployeeRoot>(url, { headers, params });
   }
 }

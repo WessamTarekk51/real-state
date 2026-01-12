@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, signal } from '@angular/core';
 import { FormGroup, ReactiveFormsModule, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { InputTxt } from "src/app/shared/components/input-txt/input-txt";
@@ -7,6 +7,8 @@ import { Button } from "src/app/shared/components/button/button";
 import { ManagementWorkerServices } from '../../management-worker-services';
 import { ToastModule } from 'primeng/toast';
 import { InputSelect } from "src/app/shared/components/input-select/input-select";
+import { RealStateServices } from 'src/app/features/real-state-management/real-state-services';
+import { LookUpItem } from 'src/app/shared/models/real-state/lookup';
 
 @Component({
   selector: 'app-create-worker',
@@ -19,11 +21,14 @@ import { InputSelect } from "src/app/shared/components/input-select/input-select
 export class CreateWorker {
   pageTitle: string = 'إضافة عامل جديد';
   createWorker!: FormGroup;
+  Jobs = signal<LookUpItem[]>([]);
+
   constructor(
     private fb: UntypedFormBuilder,
     private cd: ChangeDetectorRef,
     private workerServices: ManagementWorkerServices,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private RealStateServices:RealStateServices
   ) {
     this.createWorker = this.fb.group({
       name: ['', Validators.required],
@@ -31,6 +36,10 @@ export class CreateWorker {
       jobStatusId: ['', Validators.required],
     });
 
+  }
+
+  ngOnInit(): void {
+  this.getJobs()
   }
 
   addWorker() {
@@ -61,5 +70,18 @@ export class CreateWorker {
         this.validateAllFields(control);
       }
     });
+  }
+  getJobs(){
+   this.RealStateServices.GetLookUpSetByCode('jobs').subscribe(res=>{
+    const mapped = res.value.items.map((el) => ({
+      ...el,
+      name: el.descriptions.ar,
+    }));
+    this.Jobs.set(mapped);
+    console.log(this.Jobs())
+    this.cd.markForCheck()
+   })
+
+
   }
 }

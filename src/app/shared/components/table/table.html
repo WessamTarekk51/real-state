@@ -12,7 +12,7 @@
       </tr>
     </ng-template>
 
-    <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <ng-template pTemplate="body" let-rowData let-columns="columns" let-rowIndex="rowIndex">
       <tr [attr.id]="'row-' + rowData.id">
         @for(col of columns; track $index ){
         <td>
@@ -40,6 +40,12 @@
               }
             </div>
             }
+            @if(col.controlInstallment){
+              <div class="icons">
+                <div class="icon edit" (click)="editItem(rowIndex)"></div>
+                <div class="icon delete" (click)="deleteItem(rowIndex)"></div>
+              </div>
+              }
           @if(col.status){
           @if(rowData[col.field] == "تحت الإنشاء"){
           <div class="status red">

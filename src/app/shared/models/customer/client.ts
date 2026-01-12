@@ -40,3 +40,16 @@ export interface ClientDetailes {
   address: string,
   nationalId: string
 }
+
+
+
+export interface DropDownClientsRoot extends IResult {
+  value: DropDownClients[]
+}
+
+export interface DropDownClients {
+  id: string,
+  name: string,
+}
+
+

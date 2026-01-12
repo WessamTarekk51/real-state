@@ -51,6 +51,8 @@ export const ASSET = {
     CreateClients: '/create', // post
     UpdateClients: '/update', //PUT
     DeleteClients: '/delete', //DELETE
+    AllClients: '/dropdown',
+
   },
   role: {
     Roles: '/api/roles',
@@ -80,5 +82,9 @@ export const ASSET = {
     CreateOutCome: '/create', // post
     UpdateOutCome: '/update', //PUT
     DeleteOutCome: '/delete', //DELETE
+  },
+  Contract: {
+    Contracts: '/api/contracts',
+    CreateContract: '/create', // post
   },
 } as const;

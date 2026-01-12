@@ -1,68 +1,145 @@
 import { NgClass, NgFor } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { InputTxt } from "src/app/shared/components/input-txt/input-txt";
-import { InputSelect } from "src/app/shared/components/input-select/input-select";
-import { InputDate } from "src/app/shared/components/input-date/input-date";
-import { InputTextArea } from "src/app/shared/components/input-text-area/input-text-area";
-import { Button } from "src/app/shared/components/button/button";
-import { InputNum } from "src/app/shared/components/input-num/input-num";
-import { InputUpload } from "src/app/shared/components/input-upload/input-upload";
-import { FormArray, FormGroup, ReactiveFormsModule, UntypedFormBuilder, Validators } from '@angular/forms';
-import { ControlMessages } from "src/app/shared/components/control-messages/control-messages";
+import { InputTxt } from 'src/app/shared/components/input-txt/input-txt';
+import { InputSelect } from 'src/app/shared/components/input-select/input-select';
+import { InputDate } from 'src/app/shared/components/input-date/input-date';
+import { InputTextArea } from 'src/app/shared/components/input-text-area/input-text-area';
+import { Button } from 'src/app/shared/components/button/button';
+import { InputNum } from 'src/app/shared/components/input-num/input-num';
+import { InputUpload } from 'src/app/shared/components/input-upload/input-upload';
+import {
+  FormArray,
+  FormGroup,
+  ReactiveFormsModule,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
+import { ControlMessages } from 'src/app/shared/components/control-messages/control-messages';
 import { forkJoin } from 'rxjs';
 import { RealStateServices } from 'src/app/features/real-state-management/real-state-services';
 import { LookUpItem } from 'src/app/shared/models/real-state/lookup';
 import { DropDownLands } from 'src/app/shared/models/real-state/land';
 import { DropDownBuildings } from 'src/app/shared/models/real-state/building';
 import { DropDownUnits } from 'src/app/shared/models/real-state/unit';
+import { Table } from 'src/app/shared/components/table/table';
+import { CustomerManagementServices } from 'src/app/features/customer-management/customer-management-services';
+import { DropDownClients } from 'src/app/shared/models/customer/client';
+import { ManagementWorkerServices } from 'src/app/features/management-workers-technicians/management-worker-services';
+import { Employee } from 'src/app/shared/models/customer/employess';
+import { attachment } from 'src/app/shared/models/real-state/attachment';
+import { CreateNewContract } from 'src/app/shared/models/contract';
+import { SalesServices } from '../../sales-services';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-create-contract',
-  imports: [ReactiveFormsModule, NgClass, NgFor, InputTxt, InputSelect, InputDate, InputTextArea, Button, InputNum, InputUpload, ControlMessages],
+  imports: [
+    ReactiveFormsModule,
+    NgClass,
+    NgFor,
+    InputTxt,
+    InputSelect,
+    InputDate,
+    InputTextArea,
+    Button,
+    InputNum,
+    InputUpload,
+    ControlMessages,
+    Table,
+    ToastModule
+  ],
   templateUrl: './create-contract.html',
-  styleUrl: './create-contract.scss'
+  styleUrl: './create-contract.scss',
+  providers: [MessageService]
+
 })
 export class CreateContract {
   buttons: any[];
   activeTab: number = 1;
   createContract!: FormGroup;
+  installmentForm!: FormGroup;
+  cols: any[];
+  installment: boolean = false;
+
   contractTypes = signal<LookUpItem[]>([]);
   unitTypes = signal<LookUpItem[]>([]);
   DropDownLands: DropDownLands[];
   DropDownBuildings: DropDownBuildings[];
   DropDownUnits: DropDownUnits[];
+  DropDownClients: DropDownClients[];
+  DropDownWorkers: Employee[];
+  optaionsInstallment: any[];
+  attachmentsFiles: attachment[];
+  BulidingPermit: string;
+  newContract: CreateNewContract;
 
-  constructor(private fb: UntypedFormBuilder, private RealStateServices: RealStateServices) {
+  constructor(
+    private fb: UntypedFormBuilder,
+    private RealStateServices: RealStateServices,
+    private CustomerManagementServices: CustomerManagementServices,
+    private ManagementWorkerServices: ManagementWorkerServices,
+    private sales: SalesServices,
+    private messageService: MessageService
+  ) {
     this.createContract = this.fb.group({
-      contractName: ['', Validators.required],
-      contractNumber: ['', Validators.required],
-      contractTypeId: ['', Validators.required],
-      startDate: ['', Validators.required],
-      endDate: ['', Validators.required],
-      notes: [''],
+      contractDate: ['', Validators.required],
       totalPrice: ['', Validators.required],
-      downPayment: ['', Validators.required],
-      paymentMethodId: ['', Validators.required],
+      contractTypeId: ['', Validators.required],
+      notes: [''],
+
       landId: ['', Validators.required],
       buildingId: ['', Validators.required],
       unitId: ['', Validators.required],
-      unitArea: ['', Validators.required],
-      unitPrice: ['', Validators.required],
-      unitType: ['', Validators.required],
-      floorNumber: ['', Validators.required],
-      clientName: ['', Validators.required],
-      clientNationalId: ['', Validators.required],
-      clientEmail: ['', Validators.required],
-      clientPhone: ['', Validators.required],
-      isInstallmentPlan: ['', Validators.required],
-      installmentAmount: ['', Validators.required],
-      installmentCount: ['', Validators.required],
-      firstPaymentDate: ['', Validators.required],
-      frequency: ['', Validators.required],
-      propertyContract: ['', Validators.required],
-    });
-  }
+      unitPriceAtContract: ['', Validators.required],
 
+      clientNationalId: ['', Validators.required],
+
+      employeeId: ['', Validators.required],
+      isInstallmentPlan: ['', Validators.required],
+
+      BulidingPermit: ['', Validators.required],
+
+      installments: this.fb.array([]),
+    });
+    this.installmentForm = this.fb.group({
+      description: ['', Validators.required],
+      dueDate: ['', Validators.required],
+      amount: ['', Validators.required],
+      amountText: ['', Validators.required],
+    });
+    this.newContract = {
+      contractDate: '',
+      totalPrice: 0,
+      contractTypeId: '',
+      clientNationalId: '',
+      notes: '',
+      landId: '',
+      buildingId: '',
+      unitId: '',
+      employeeId: '',
+      unitPriceAtContract: 0,
+      isInstallmentPlan: false,
+      installments: [],
+      attachments: [],
+    };
+  }
+  get installments(): FormArray {
+    return this.createContract.get('installments') as FormArray;
+  }
+  addInstallment() {
+    if (this.installmentForm.invalid) return;
+    if (this.installmentForm.valid) {
+      this.installments.push(this.fb.group(this.installmentForm.value));
+      console.log(this.createContract.value);
+      this.installmentForm.reset(); // clear sub form
+    } else {
+      this.installmentForm.markAllAsTouched();
+      this.validateAllFields(this.installmentForm);
+    }
+  }
   ngOnInit(): void {
     this.buttons = [
       {
@@ -89,7 +166,30 @@ export class CreateContract {
         name: 'المستندات والمرفقات',
         type: 5,
         active: false,
-      }
+      },
+    ];
+    this.cols = [
+      { field: 'description', header: 'تفاصيل  القسط' },
+      { field: 'dueDate', header: 'تاريخ  الاستحقاق ' },
+      { field: 'amount', header: ' قيمة القسط بالأرقام' },
+      { field: 'amountText', header: ' قيمة القسط بالحروف' },
+      { field: '', header: 'التحكم', controlInstallment: true },
+    ];
+    this.optaionsInstallment = [
+      {
+        name: 'نعم',
+        id: true,
+      },
+      {
+        name: 'لا',
+        id: false,
+      },
+    ];
+    this.attachmentsFiles = [
+      {
+        elementId: 'photo',
+        attachmentId: '',
+      },
     ];
     this.GetLookUp();
   }
@@ -98,34 +198,60 @@ export class CreateContract {
       getDropDownLands: this.RealStateServices.getDropDownLands(),
       getDropDownBuilding: this.RealStateServices.getDropDownBuildings(),
       getDropDownUnit: this.RealStateServices.getDropDownUnits(),
+      getDropDownClients: this.CustomerManagementServices.getDropDownClients(),
       contractTypes: this.RealStateServices.GetLookUpSetByCode('contract_type'),
       unitTypes: this.RealStateServices.GetLookUpSetByCode('unit_type'),
-
-    }).subscribe(({ getDropDownLands, getDropDownBuilding, getDropDownUnit, contractTypes, unitTypes }) => {
-      if (contractTypes?.isSuccess) {
-        const mapped = contractTypes.value.items.map((el) => ({
-          ...el,
-          name: el.descriptions.ar,
-        }));
-        this.contractTypes.set(mapped);
+      getDropDownWorkers: this.ManagementWorkerServices.GetDropDownWorkers(),
+      BulidingPermit: this.RealStateServices.GetLookUpItemByCode(
+        'attachment_type',
+        this.attachmentsFiles[0].elementId
+      ),
+    }).subscribe(
+      ({
+        getDropDownLands,
+        getDropDownBuilding,
+        getDropDownUnit,
+        contractTypes,
+        unitTypes,
+        getDropDownClients,
+        getDropDownWorkers,
+        BulidingPermit,
+      }) => {
+        if (contractTypes?.isSuccess) {
+          const mapped = contractTypes.value.items.map((el) => ({
+            ...el,
+            name: el.descriptions.ar,
+          }));
+          this.contractTypes.set(mapped);
+        }
+        if (unitTypes?.isSuccess) {
+          const mapped = unitTypes.value.items.map((el) => ({
+            ...el,
+            name: el.descriptions.ar,
+          }));
+          this.unitTypes.set(mapped);
+        }
+        if (getDropDownLands.isSuccess) {
+          this.DropDownLands = getDropDownLands.value;
+        }
+        if (getDropDownBuilding.isSuccess) {
+          this.DropDownBuildings = getDropDownBuilding.value;
+        }
+        if (getDropDownUnit.isSuccess) {
+          this.DropDownUnits = getDropDownUnit.value;
+        }
+        if (getDropDownClients.isSuccess) {
+          this.DropDownClients = getDropDownClients.value;
+        }
+        if (getDropDownWorkers.isSuccess) {
+          this.DropDownWorkers = getDropDownWorkers.value.items;
+        }
+        if (BulidingPermit?.isSuccess) {
+          this.BulidingPermit = BulidingPermit.value.id;
+          this.attachmentsFiles[0].attachmentId = this.BulidingPermit;
+        }
       }
-      if (unitTypes?.isSuccess) {
-        const mapped = unitTypes.value.items.map((el) => ({
-          ...el,
-          name: el.descriptions.ar,
-        }));
-        this.unitTypes.set(mapped);
-      }
-      if (getDropDownLands.isSuccess) {
-        this.DropDownLands = getDropDownLands.value;
-      }
-      if (getDropDownBuilding.isSuccess) {
-        this.DropDownBuildings = getDropDownBuilding.value;
-      }
-      if (getDropDownUnit.isSuccess) {
-        this.DropDownUnits = getDropDownUnit.value;
-      }
-    });
+    );
   }
   toggleButton(button: any) {
     this.buttons.forEach((el) => {
@@ -139,14 +265,85 @@ export class CreateContract {
       el.active = false;
     });
     this.activeTab -= 1;
-    this.buttons[this.activeTab - 1].active = true
+    this.buttons[this.activeTab - 1].active = true;
   }
   nextTab() {
     this.buttons.forEach((el) => {
       el.active = false;
     });
     this.activeTab += 1;
-    this.buttons[this.activeTab - 1].active = true
+    this.buttons[this.activeTab - 1].active = true;
+    console.log(this.createContract.value)
+  }
+  validateAllFields(formGroup: UntypedFormGroup) {
+    Object.keys(formGroup.controls).forEach((field) => {
+      const control = formGroup.get(field);
+      if (control instanceof UntypedFormControl) {
+        control.markAsTouched({ onlySelf: true });
+      } else if (control instanceof UntypedFormGroup) {
+        this.validateAllFields(control);
+      }
+    });
+  }
+  deleteInstallment(index: number) {
+    console.log(index);
+    this.createContract.value.installments.splice(index, 1);
+  }
+  editInstallment(index: any) {
+    this.installmentForm.patchValue({
+      description: this.createContract.value.installments[index].description,
+      dueDate: this.createContract.value.installments[index].dueDate,
+      amount: this.createContract.value.installments[index].amount,
+      amountText: this.createContract.value.installments[index].amountText,
+    });
+  }
+  getvalue(event: any) {
+    event == 'true' ? (this.installment = true , this.createContract.value.isInstallmentPlan = true) : (this.installment = false, this.createContract.value.isInstallmentPlan = false);
+  }
+  uploadDocument(file: File, index: number, code: string) {
+    const formData = new FormData();
+    formData.append('file', file);
+    this.RealStateServices.uploadDocument(formData, code).subscribe((res) => {
+      if (res.isSuccess) {
+        const id = res.value;
+        this.attachmentsFiles[index].attachmentId = id;
+      }
+    });
   }
 
+  addContract() {
+    if (this.createContract.valid) {
+      this.newContract = {
+        ...this.createContract.value,
+        attachments: this.attachmentsFiles,
+      };
+      this.sales.CreateContract(this.newContract).subscribe(
+        (res) => {
+          if (res.isSuccess) {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: 'تم إنشاء الأرض بنجاح',
+            });
+            this.createContract.reset();
+          } else {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'حدث خطأ',
+              detail: 'حاول مرة أخري.',
+            });
+          }
+        },
+        (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'حدث خطأ',
+            detail: 'حاول مرة أخري.',
+          });
+        }
+      );
+    } else {
+      this.validateAllFields(this.createContract);
+    }
+  }
 }

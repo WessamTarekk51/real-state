@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ASSET } from 'src/app/core/api/asset.const';
-import { ClientDetailesRoot, GetClientRoot } from 'src/app/shared/models/customer/client';
+import { ClientDetailesRoot, DropDownClientsRoot, GetClientRoot } from 'src/app/shared/models/customer/client';
 import { IResult } from 'src/app/shared/models/result';
 import { environment } from 'src/environments/environment';
 
@@ -47,5 +47,9 @@ export class CustomerManagementServices {
   GetClientByID(id: string) {
     const headers = this.headers
     return this.http.get<ClientDetailesRoot>(this.baseURL + ASSET.client.Clients + '/' + id, { headers });
+  }
+  getDropDownClients() {
+    const headers = this.headers
+    return this.http.get<DropDownClientsRoot>(this.baseURL + ASSET.client.Clients + ASSET.client.AllClients, { headers });
   }
 }

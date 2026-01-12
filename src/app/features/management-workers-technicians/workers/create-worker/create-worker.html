@@ -33,7 +33,7 @@
     <div class="row">
         <div class="full">
           <app-input-select [value]="createWorker.value.jobStatusId" formControlName="jobStatusId" [placeholder]="'الوظيفة'"
-            [formStyle]="true" [required]="true" [labelTxt]="'الوظيفة'">
+            [formStyle]="true" [required]="true" [options]="Jobs()" [labelTxt]="'الوظيفة'">
           </app-input-select>
           <div class="errormassage">
             <app-control-messages class="form-validation-style" [control]="createWorker.get('jobStatusId')"

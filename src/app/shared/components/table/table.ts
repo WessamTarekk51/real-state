@@ -44,6 +44,7 @@ export class Table {
   deleteItem(item: any) {
     this.delete.emit(item);
   }
+
   viewItem(item: any) {
     this.view.emit(item);
   }
