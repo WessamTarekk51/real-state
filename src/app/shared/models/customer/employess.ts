@@ -14,8 +14,25 @@ export interface Employee {
   phone: string,
   code: string,
   createdDate: string,
+  convertCreationDate?: string,
   jobStatus: {
-      ar: string,
-      en: string
+    ar: string,
+    en: string
   }
+  jobStatusName?: string
+}
+
+
+export interface WorkerDetailesRoot extends IResult {
+  value: WorkerDetailes
+}
+
+export interface WorkerDetailes {
+  name: string,
+  id: string,
+  phone: string,
+  code: string,
+  createdDate: string,
+  convertCreationDate?: string,
+
 }

@@ -4,27 +4,42 @@
       <p class="blue big">تسجيل الدخول</p>
       <p class="white">سجّل الدخول لإدارة ومتابعة خدماتك العقارية بسلاسة مع النظام.</p>
     </div>
-    <form>
+    <form [formGroup]="loginUser">
+
       <div class="group">
-
-
-
         <label class="white">البريد الإلكتروني</label>
-        <input type="email" placeholder="البريد الإلكتروني" required />
+        <input type="email" placeholder="البريد الإلكتروني" formControlName="userName" />
+        <div class="errormassage">
+          <app-control-messages class="form-validation-style" [control]="loginUser.get('userName')"
+            [validationMessages]="[
+            { type: 'required', message: 'البريد الإلكتروني مطلوب' }
+
+          ]">
+          </app-control-messages>
+        </div>
       </div>
 
       <div class="group">
         <label class="white">كلمة السر</label>
-        <input type="password" placeholder="كلمة السر" required />
+        <input type="password" placeholder="كلمة السر" formControlName="password" />
+        <div class="errormassage">
+          <app-control-messages class="form-validation-style" [control]="loginUser.get('password')"
+            [validationMessages]="[
+            { type: 'required', message: 'البريد الإلكتروني مطلوب' },
+          ]">
+          </app-control-messages>
+        </div>
       </div>
-
-      <div class="forgot">
+      <!-- <div class="forgot">
         <p>نسيت كلمة السر؟</p>
+      </div> -->
+      <div class="btnLogin" (click)="submit()">
+        <p> تسجيل الدخول
+        </p>
       </div>
 
-      <div class="btnLogin">
-        <p>تسجيل الدخول</p>
-      </div>
+      <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
     </form>
   </div>
 </div>

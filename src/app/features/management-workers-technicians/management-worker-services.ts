@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ASSET } from 'src/app/core/api/asset.const';
-import { GetEmployeeRoot } from 'src/app/shared/models/customer/employess';
+import { GetEmployeeRoot, WorkerDetailesRoot } from 'src/app/shared/models/customer/employess';
 import { IResult } from 'src/app/shared/models/result';
 import { environment } from 'src/environments/environment';
 
@@ -29,11 +29,11 @@ export class ManagementWorkerServices {
     });
     const url = `${this.baseURL}${ASSET.worker.workers}`;
 
-    return this.http.get(url, { headers, params });
+    return this.http.get<GetEmployeeRoot>(url, { headers, params });
   }
   GetWorkerByID(id: string) {
     const headers = this.headers;
-    return this.http.get(this.baseURL + ASSET.worker.workers + '/' + id, {
+    return this.http.get<WorkerDetailesRoot>(this.baseURL + ASSET.worker.workers + '/' + id, {
       headers,
     });
   }
@@ -47,7 +47,7 @@ export class ManagementWorkerServices {
   }
   UpdateWorker(id: any, obj: any) {
     const headers = this.headers;
-    return this.http.put(
+    return this.http.put<IResult>(
       this.baseURL +
         ASSET.worker.workers +
         '/' +

@@ -22,6 +22,10 @@
     display: flex;
     flex-direction: column;
 
+    .title {
+      line-height: 1;
+    }
+
     form {
       width: 100%;
       display: flex;
@@ -55,6 +59,7 @@
         background: rgba(255, 255, 255, 0.5);
         color: #fff;
         font-size: 1.2vw;
+        margin: 0.5vw 0;
       }
 
       input::placeholder {

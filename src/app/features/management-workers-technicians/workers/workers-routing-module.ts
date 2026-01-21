@@ -13,6 +13,9 @@ const routes: Routes = [
   },
   {
     path: 'detailes', component: DetailesWorker
+  },
+  {
+    path: 'edit', component: CreateWorker
   }
 ];
 

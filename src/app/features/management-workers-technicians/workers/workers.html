@@ -1,13 +1,38 @@
-<!-- <div id="container-page">
+<div id="container-page">
   <div class="container-filter">
     <div class="title-filter">
       <p>البحث</p>
     </div>
     <div class="content-filter">
-      <div class="thrid">
-        <app-input-txt [placeholder]="'رقم الارض'" [(ngModel)]="filters.Number" (inputValue)="getFilter($event)">
+      <div class="half">
+        <app-input-txt [placeholder]="'كود العامل'" [(ngModel)]="filters.Code" (inputValue)="getFilter($event)">
         </app-input-txt>
+      </div>
+      <div class="half">
+        <app-input-num [placeholder]="' رقم هاتف العامل'" [(ngModel)]="filters.Phone"
+          (inputValue)="getFilter($event)">
+        </app-input-num>
+      </div>
+      <div class="half">
+        <app-input-date [placeholder]="'تاريخ الانشاء'" [(ngModel)]="filters.CreatedDate" (inputValue)="getFilter($event)"></app-input-date>
+
+      </div>
+       <div class="half">
+        <app-input-select [placeholder]="'الوظيفة'" [options]="Jobs()" [(ngModel)]="filters.JobStatusId"
+          (inputValue)="getFilter($event)"></app-input-select>
       </div>
     </div>
   </div>
-</div> -->
+   <div class="buttons">
+    <app-button [className]="'custom'" [buttonTxt]="'تصدير إلى Excel'"></app-button>
+    <app-button [className]="'main'" [buttonTxt]="'+ إضافة عامل جديدة'" (buttonClick)="createWorker()"></app-button>
+  </div>
+  <div class="container-table" *ngIf="workers && workers.items.length; else noData">
+    <app-table [cols]="cols" [items]="workers.items" [totalPages]="totalPages" [pageSize]="pageSize"
+      (pageNumber)="GetpageNumber($event)" (delete)="deleteWorker($event)" (view)="detailesWorker($event)"
+      (edit)="editWorker($event)"></app-table>
+  </div>
+  <ng-template #noData>
+    <p class="text-center text-gray-500 mt-4">لا يوجد عمال متاحة حالياً</p>
+  </ng-template>
+</div>

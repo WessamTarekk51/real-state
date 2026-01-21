@@ -3,6 +3,7 @@ import { PanelMenuModule } from 'primeng/panelmenu';
 import { AccountRoutingModule } from "src/app/features/account/account-routing-module";
 import { Router, RouterLink } from '@angular/router';
 import { NgClass } from '@angular/common';
+import { CheckToken } from '../services/check-token';
 
 @Component({
   selector: 'app-side-bar',
@@ -13,7 +14,7 @@ import { NgClass } from '@angular/common';
 export class SideBar {
   items: any[] = []
   menuItems: any[] = [];
-  constructor(private router: Router) { }
+  constructor(private router: Router,private  CheckToken:CheckToken) { }
   ngOnInit(): void {
     this.getItems()
   }
@@ -201,5 +202,8 @@ export class SideBar {
   }
   isActive(menuItem: any): boolean {
     return this.router.isActive(menuItem.routerLink, true);
+  }
+  logOut(){
+    this.CheckToken.logout()
   }
 }

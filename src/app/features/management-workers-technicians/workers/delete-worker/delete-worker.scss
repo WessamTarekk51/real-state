@@ -1,0 +1,36 @@
+.delete-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .deleteIcon {
+    width: 6vw;
+    height: 6vw;
+    background-image: url(/assets/images/delete-icon.png);
+    background-size: 100% 100%;
+  }
+
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 22vw;
+
+    .warningTxt {
+      color: rgba(221, 43, 46, 1);
+      font-weight: bold;
+      line-height: 2vw;
+    }
+
+    .txt {
+      color: rgba(0, 0, 0, 1);
+      font-weight: 400;
+      font-size: 1.4vw;
+      line-height: 2vw;
+
+    }
+  }
+
+}

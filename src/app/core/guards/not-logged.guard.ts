@@ -1,33 +1,23 @@
-import { Injectable } from '@angular/core';
-import { Location } from '@angular/common';
-import {
-  ActivatedRouteSnapshot,
-  CanActivate,
-  Router,
-  RouterStateSnapshot,
-} from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { inject } from '@angular/core';
+import { CanActivateFn, Router } from '@angular/router';
+import { PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class NotLoggedGuard implements CanActivate {
-  constructor(
-    private router: Router,
-    private location: Location
-  ) {
-  }
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Observable<boolean> | Promise<boolean> | boolean {
-    // if (this.accountService.isUserLoggedIn()) {
-    //   this.router.navigate(['']);
-    //   return false;
-    // } else {
+export const notLoggedGuard: CanActivateFn = () => {
+  const platformId = inject(PLATFORM_ID);
+  const router = inject(Router);
 
-      return true;
-    // }
+  // 👈 لو على السيرفر
+  if (!isPlatformBrowser(platformId)) {
+    return true;
   }
 
-}
+  const token = localStorage.getItem('token');
+
+  if (token) {
+    router.navigate(['/home'], { replaceUrl: true });
+    return false;
+  }
+
+  return true;
+};

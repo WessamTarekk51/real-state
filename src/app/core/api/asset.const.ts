@@ -1,9 +1,16 @@
 // import { environment } from "../../../../environments/environment";
 
+import { identity } from "rxjs";
+
 export const ASSET = {
   // baseUrl: environment.baseURL,
   token:
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJUZXJyYUxpbmsiLCJleHAiOjE3NjkwNTQ2ODQsImlhdCI6MTc2NjQyNjY4NCwianRpIjoiNGJjNjMyMWYtOWVlZC00ZjA3LWIyNTgtYmQ1MzZiMTQwMzVkIiwiYXVkIjoiVGVycmFMaW5rQVBJIiwic3ViIjoiODYzOWYzNDctM2MyMi00NmZmLWE0MDAtYmY2ODgyMTYyNzliIiwidW5pcXVlX25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AdGVycmFsaW5rLmxvY2FsIiwibmFtZSI6IlN5c3RlbSBBZG1pbiIsInBob25lIjoiMDAwLTAwMDAtMDAwMCIsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlcyI6IkFkbWluaXN0cmF0b3IiLCJuYmYiOjE3NjY0MjY2ODR9.frV82reEMxgR7z1XCarreV73rT4P1vy9NAvUoxpnfUo',
+  identity: {
+    login: '/api/auth/login',
+    currentUser: '/api/auth/me'
+  },
+
   buildings: {
     Buildings: '/api/buildings',
     GetBuildingsByID: '/{{id}}', // get

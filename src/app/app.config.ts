@@ -10,6 +10,7 @@ import {  provideHttpClient, withInterceptors } from '@angular/common/http';
 import { loadingInterceptor } from './core/interceptor/loading.interceptor';
 
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { authInterceptor } from './core/interceptor/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,7 +19,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes), provideClientHydration(withEventReplay()),
     provideAnimationsAsync(),
     provideHttpClient(
-      withInterceptors([loadingInterceptor])
+      withInterceptors([loadingInterceptor,authInterceptor])
     ),
     providePrimeNG({
       theme: {
