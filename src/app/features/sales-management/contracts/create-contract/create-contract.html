@@ -133,7 +133,7 @@
     <div class="row">
       <div class="full">
         <app-input-select formControlName="clientNationalId" [placeholder]="'العميل'" [formStyle]="true"
-          [required]="true" [labelTxt]="'العميل'" [options]="DropDownClients">
+          [required]="true" [labelTxt]="'العميل'" [options]="DropDownClients()">
         </app-input-select>
         <div class="errormassage">
           <app-control-messages class="form-validation-style" [control]="createContract.get('clientNationalId')"

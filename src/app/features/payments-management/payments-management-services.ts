@@ -11,16 +11,11 @@ import { environment } from 'src/environments/environment';
 export class PaymentsManagementServices {
   constructor(private http: HttpClient) { }
   baseURL = environment.baseURL;
-  token = ASSET.token;
-  headers = new HttpHeaders({
-    Authorization: `Bearer ${this.token}`, // <-- add Bearer token
-  });
+
   CreateOutcome(obj: any) {
-    const headers = this.headers
-    return this.http.post<IResult>(this.baseURL + ASSET.OutCome.OutComes + ASSET.OutCome.CreateOutCome, obj, { headers });
+    return this.http.post<IResult>(this.baseURL + ASSET.OutCome.OutComes + ASSET.OutCome.CreateOutCome, obj);
   }
   GetOutcomes(pageSize: number, pageNumber: number, filters: any) {
-    const headers = this.headers
     let params = new HttpParams()
       .set('pageSize', pageSize)
       .set('pageNumber', pageNumber);
@@ -31,10 +26,9 @@ export class PaymentsManagementServices {
     });
     const url = `${this.baseURL}${ASSET.OutCome.OutComes}${ASSET.OutCome.GetOutComes}`;
 
-    return this.http.get<GetOutComesRoot>(url, { headers, params });
+    return this.http.get<GetOutComesRoot>(url, {  params });
   }
   GetOutcomeByID(id: string) {
-    const headers = this.headers
-    return this.http.get<OutComeDetailesRoot>(this.baseURL + ASSET.OutCome.OutComes + '/' + id + ASSET.OutCome.GetOutComeByID, { headers });
+    return this.http.get<OutComeDetailesRoot>(this.baseURL + ASSET.OutCome.OutComes + '/' + id + ASSET.OutCome.GetOutComeByID);
   }
 }

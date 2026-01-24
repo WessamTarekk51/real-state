@@ -11,14 +11,10 @@ import { environment } from 'src/environments/environment';
 export class ManagementWorkerServices {
   constructor(private http: HttpClient) {}
   baseURL = environment.baseURL;
-  token = ASSET.token;
-  headers = new HttpHeaders({
-    Authorization: `Bearer ${this.token}`, // <-- add Bearer token
-  });
+
 
   //worker
   GetWorkers(pageSize: number, pageNumber: number, filters: any) {
-    const headers = this.headers;
     let params = new HttpParams()
       .set('pageSize', pageSize)
       .set('pageNumber', pageNumber);
@@ -29,51 +25,41 @@ export class ManagementWorkerServices {
     });
     const url = `${this.baseURL}${ASSET.worker.workers}`;
 
-    return this.http.get<GetEmployeeRoot>(url, { headers, params });
+    return this.http.get<GetEmployeeRoot>(url, {  params });
   }
   GetWorkerByID(id: string) {
-    const headers = this.headers;
-    return this.http.get<WorkerDetailesRoot>(this.baseURL + ASSET.worker.workers + '/' + id, {
-      headers,
-    });
+    return this.http.get<WorkerDetailesRoot>(this.baseURL + ASSET.worker.workers + '/' + id);
   }
   CreateWorker(obj: any) {
-    const headers = this.headers;
     return this.http.post<IResult>(
       this.baseURL + ASSET.worker.workers + ASSET.worker.CreateWorker,
-      obj,
-      { headers }
+      obj
     );
   }
   UpdateWorker(id: any, obj: any) {
-    const headers = this.headers;
     return this.http.put<IResult>(
       this.baseURL +
         ASSET.worker.workers +
         '/' +
         id +
         ASSET.worker.UpdateWorker,
-      obj,
-      { headers }
+      obj
     );
   }
   DeleteWorker(id: string) {
-    const headers = this.headers;
     return this.http.delete<IResult>(
       this.baseURL +
         ASSET.worker.workers +
         '/' +
         id +
-        ASSET.worker.DeleteWorker,
-      { headers }
+        ASSET.worker.DeleteWorker
     );
   }
   GetDropDownWorkers() {
-    const headers = this.headers;
     let params = new HttpParams()
       .set('pageSize', 0)
       .set('pageNumber', 0);
     const url = `${this.baseURL}${ASSET.worker.workers}`;
-    return this.http.get<GetEmployeeRoot>(url, { headers, params });
+    return this.http.get<GetEmployeeRoot>(url, { params });
   }
 }

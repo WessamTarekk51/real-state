@@ -69,7 +69,7 @@ export class CreateContract {
   DropDownLands: DropDownLands[];
   DropDownBuildings: DropDownBuildings[];
   DropDownUnits: DropDownUnits[];
-  DropDownClients: DropDownClients[];
+  DropDownClients = signal<DropDownClients[]>([]);
   DropDownWorkers: Employee[];
   optaionsInstallment: any[];
   attachmentsFiles: attachment[];
@@ -241,7 +241,12 @@ export class CreateContract {
           this.DropDownUnits = getDropDownUnit.value;
         }
         if (getDropDownClients.isSuccess) {
-          this.DropDownClients = getDropDownClients.value;
+          const mapped = getDropDownClients.value.map((el) => ({
+            ...el,
+            id: el.nationalId,
+          }));
+          this.DropDownClients.set(mapped);
+
         }
         if (getDropDownWorkers.isSuccess) {
           this.DropDownWorkers = getDropDownWorkers.value.items;
@@ -298,7 +303,8 @@ export class CreateContract {
     });
   }
   getvalue(event: any) {
-    event == 'true' ? (this.installment = true , this.createContract.value.isInstallmentPlan = true) : (this.installment = false, this.createContract.value.isInstallmentPlan = false);
+    event == 'true' ? (this.installment = true, this.createContract.value.isInstallmentPlan = true) : (this.installment = false, this.createContract.value.isInstallmentPlan = false);
+    console.log(this.createContract.value)
   }
   uploadDocument(file: File, index: number, code: string) {
     const formData = new FormData();
@@ -311,11 +317,24 @@ export class CreateContract {
     });
   }
 
+  getBoolaen(event: any){
+    event == 'true' ? (this.installment = true, this.createContract.value.isInstallmentPlan = true) : (this.installment = false, this.createContract.value.isInstallmentPlan = false);
+    return this.createContract.value.isInstallmentPlan;
+  }
+
   addContract() {
     if (this.createContract.valid) {
       this.newContract = {
         ...this.createContract.value,
         attachments: this.attachmentsFiles,
+        totalPrice: Number(this.createContract.value.totalPrice),
+        unitPriceAtContract: Number(this.createContract.value.unitPriceAtContract),
+        isInstallmentPlan: this.getBoolaen(this.createContract.value.isInstallmentPlan),
+        installments: this.createContract.value.installments.map((el: any) => ({
+          ...el,
+          amount: Number(el.amount)
+        }))
+
       };
       this.sales.CreateContract(this.newContract).subscribe(
         (res) => {

@@ -177,7 +177,7 @@ export class CreateLand implements AfterViewInit {
   }
   addLand() {
     if (this.createLands.valid) {
-      this.newLand = { ...this.createLands.value, attachments: this.attachmentsFiles };
+      this.newLand = { ...this.createLands.value, attachments: this.attachmentsFiles,width: Number(this.createLands.value.width),length: Number(this.createLands.value.length),latitude: Number(this.createLands.value.latitude),longitude: Number(this.createLands.value.longitude) };
       this.RealStateServices.CreateLands(this.newLand).subscribe(
         (res) => {
           if (res.isSuccess) {

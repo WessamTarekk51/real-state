@@ -11,20 +11,14 @@ import { environment } from 'src/environments/environment';
 export class CustomerManagementServices {
   constructor(private http: HttpClient) {}
   baseURL = environment.baseURL;
-  token = ASSET.token;
-  headers = new HttpHeaders({
-    Authorization: `Bearer ${this.token}`, // <-- add Bearer token
-  });
+
   CreateClient(obj: any) {
-    const headers = this.headers;
     return this.http.post<IResult>(
       this.baseURL + ASSET.client.Clients + ASSET.client.CreateClients,
-      obj,
-      { headers }
+      obj
     );
   }
   GetClient(pageSize: number, pageNumber: number, filters: any) {
-    const headers = this.headers;
     let params = new HttpParams()
       .set('pageSize', pageSize)
       .set('pageNumber', pageNumber);
@@ -35,21 +29,18 @@ export class CustomerManagementServices {
     });
     const url = `${this.baseURL}${ASSET.client.Clients}`;
 
-    return this.http.get<GetClientRoot>(url, { headers, params });
+    return this.http.get<GetClientRoot>(url, { params });
   }
   DeleteClient(id: string) {
-    const headers = this.headers;
     return this.http.delete<IResult>(
-      this.baseURL + ASSET.client.Clients + '/' + id + ASSET.client.DeleteClients,
-      { headers }
+      this.baseURL + ASSET.client.Clients + '/' + id + ASSET.client.DeleteClients
+
     );
   }
   GetClientByID(id: string) {
-    const headers = this.headers
-    return this.http.get<ClientDetailesRoot>(this.baseURL + ASSET.client.Clients + '/' + id, { headers });
+    return this.http.get<ClientDetailesRoot>(this.baseURL + ASSET.client.Clients + '/' + id);
   }
   getDropDownClients() {
-    const headers = this.headers
-    return this.http.get<DropDownClientsRoot>(this.baseURL + ASSET.client.Clients + ASSET.client.AllClients, { headers });
+    return this.http.get<DropDownClientsRoot>(this.baseURL + ASSET.client.Clients + ASSET.client.AllClients);
   }
 }

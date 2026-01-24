@@ -93,19 +93,19 @@ export class CreateUnit {
   ngOnInit(): void {
     this.attachmentsFiles = [
       {
-        elementId: 'ownership_agreement',
+        elementId: 'photo',
         attachmentId: '',
       },
       {
-        elementId: 'unit_diagram',
+        elementId: 'photo',
         attachmentId: '',
       },
       {
-        elementId: 'unit_photos',
+        elementId: 'photo',
         attachmentId: '',
       },
       {
-        elementId: 'previous_utility_bills',
+        elementId: 'photo',
         attachmentId: '',
       },
     ];
@@ -121,7 +121,7 @@ export class CreateUnit {
       UnitDiagram: this.RealStateServices.GetLookUpItemByCode('attachment_type', this.attachmentsFiles[1].elementId),
       UnitPhotos: this.RealStateServices.GetLookUpItemByCode('attachment_type', this.attachmentsFiles[2].elementId),
       PreviousUtilityBills: this.RealStateServices.GetLookUpItemByCode('attachment_type', this.attachmentsFiles[3].elementId),
-    }).subscribe(({ UnitStatus,UnitType,finishingType,getDropDownBuildings,OwnershipAgreement,UnitDiagram,UnitPhotos,PreviousUtilityBills }) => {
+    }).subscribe(({ UnitStatus, UnitType, finishingType, getDropDownBuildings, OwnershipAgreement, UnitDiagram, UnitPhotos, PreviousUtilityBills }) => {
       if (finishingType?.isSuccess) {
         const mapped = finishingType.value.items.map((el) => ({
           ...el,
@@ -184,10 +184,17 @@ export class CreateUnit {
       }
     });
   }
-  createNewUnit(){
+  createNewUnit() {
     console.log(this.createUnits)
     if (this.createUnits.valid) {
-      this.newUnit = { ...this.createUnits.value, attachments: this.attachmentsFiles };
+      this.newUnit = {
+        ...this.createUnits.value, attachments: this.attachmentsFiles, floorNumber: Number(this.createUnits.value.floorNumber),
+        numberOfRooms: Number(this.createUnits.value.numberOfRooms),
+        numberOfBatEmployeeooms: Number(this.createUnits.value.numberOfBatEmployeeooms),
+        price: Number(this.createUnits.value.price),
+        area: Number(this.createUnits.value.area)
+
+      };
       this.RealStateServices.CreateUnits(this.newUnit).subscribe(
         (res) => {
           if (res.isSuccess) {

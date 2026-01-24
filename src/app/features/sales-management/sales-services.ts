@@ -10,16 +10,12 @@ import { environment } from 'src/environments/environment';
 export class SalesServices {
   constructor(private http: HttpClient) {}
   baseURL = environment.baseURL;
-  token = ASSET.token;
-  headers = new HttpHeaders({
-    Authorization: `Bearer ${this.token}`, // <-- add Bearer token
-  });
+
   CreateContract(obj: any) {
-    const headers = this.headers;
+
     return this.http.post<IResult>(
       this.baseURL + ASSET.Contract.Contracts + ASSET.Contract.CreateContract,
-      obj,
-      { headers }
+      obj
     );
   }
 }

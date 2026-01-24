@@ -50,6 +50,7 @@ export interface DropDownClientsRoot extends IResult {
 export interface DropDownClients {
   id: string,
   name: string,
+  nationalId : string
 }
 
 

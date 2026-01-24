@@ -11,7 +11,6 @@ export class AccountSevices {
   constructor(private http: HttpClient) { }
   baseURL = environment.baseURL;
 
-
   login(user: any) {
     return this.http.post<RootLoginUser>(this.baseURL + ASSET.identity.login, user);
   }

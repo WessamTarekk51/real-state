@@ -14,13 +14,9 @@ import { environment } from 'src/environments/environment';
 export class RealStateServices {
   constructor(private http: HttpClient) { }
   baseURL = environment.baseURL;
-  token = ASSET.token;
-  headers = new HttpHeaders({
-    Authorization: `Bearer ${this.token}`, // <-- add Bearer token
-  });
+
   //buildings
   GetBuildings(pageSize: number, pageNumber: number, filters: any) {
-    const headers = this.headers
     let params = new HttpParams()
       .set('pageSize', pageSize)
       .set('pageNumber', pageNumber);
@@ -31,15 +27,13 @@ export class RealStateServices {
     });
     const url = `${this.baseURL}${ASSET.buildings.Buildings}`;
 
-    return this.http.get<GetBuildingsRoot>(url, { headers, params });
+    return this.http.get<GetBuildingsRoot>(url, { params });
   }
   GetBuildingsByID(id: string) {
-    const headers = this.headers
-    return this.http.get<BuildingDetailesRoot>(this.baseURL + ASSET.buildings.Buildings + '/' + id, { headers });
+    return this.http.get<BuildingDetailesRoot>(this.baseURL + ASSET.buildings.Buildings + '/' + id);
   }
   CreateBuildings(obj: any) {
-    const headers = this.headers
-    return this.http.post<IResult>(this.baseURL + ASSET.buildings.CreateBuildings, obj, { headers });
+    return this.http.post<IResult>(this.baseURL + ASSET.buildings.Buildings + ASSET.buildings.CreateBuildings, obj);
   }
   UpdateBuildings(id: any, obj: any) {
     return this.http.put(
@@ -48,19 +42,16 @@ export class RealStateServices {
     );
   }
   DeleteBuildings(id: string) {
-    const headers = this.headers
     return this.http.delete<IResult>(
-      this.baseURL + ASSET.buildings.Buildings + '/' + id + ASSET.buildings.DeleteBuildings, { headers }
+      this.baseURL + ASSET.buildings.Buildings + '/' + id + ASSET.buildings.DeleteBuildings
     );
   }
   getDropDownBuildings() {
-    const headers = this.headers
-    return this.http.get<DropDownBuildingsRoot>(this.baseURL + ASSET.buildings.Buildings + ASSET.buildings.AllBuildings, { headers });
+    return this.http.get<DropDownBuildingsRoot>(this.baseURL + ASSET.buildings.Buildings + ASSET.buildings.AllBuildings);
   }
 
   //lands
   GetLands(pageSize: number, pageNumber: number, filters: any) {
-    const headers = this.headers
     let params = new HttpParams()
       .set('pageSize', pageSize)
       .set('pageNumber', pageNumber);
@@ -71,37 +62,31 @@ export class RealStateServices {
     });
     const url = `${this.baseURL}${ASSET.lands.Lands}`;
 
-    return this.http.get<GetLandsRoot>(url, { headers, params });
+    return this.http.get<GetLandsRoot>(url, {  params });
   }
   GetLandsByID(id: string) {
-    const headers = this.headers
-    return this.http.get<LandDetailesRoot>(this.baseURL + ASSET.lands.Lands + '/' + id, { headers });
+    return this.http.get<LandDetailesRoot>(this.baseURL + ASSET.lands.Lands + '/' + id);
   }
   CreateLands(obj: any) {
-    const headers = this.headers
-    return this.http.post<IResult>(this.baseURL + ASSET.lands.Lands + ASSET.lands.CreateLands, obj, { headers });
+    return this.http.post<IResult>(this.baseURL + ASSET.lands.Lands + ASSET.lands.CreateLands, obj);
   }
   UpdateLands(id: any, obj: any) {
-    const headers = this.headers
     return this.http.put(
       this.baseURL + ASSET.lands.Lands + '/' + id + ASSET.lands.UpdateLands,
-      obj, { headers }
+      obj
     );
   }
   DeleteLands(id: string) {
-    const headers = this.headers
     return this.http.delete<IResult>(
-      this.baseURL + ASSET.lands.Lands + '/' + id + ASSET.lands.DeleteLands, { headers }
+      this.baseURL + ASSET.lands.Lands + '/' + id + ASSET.lands.DeleteLands
     );
   }
   getDropDownLands() {
-    const headers = this.headers
-    return this.http.get<DropDownLandsRoot>(this.baseURL + ASSET.lands.Lands + ASSET.lands.AllLands, { headers });
+    return this.http.get<DropDownLandsRoot>(this.baseURL + ASSET.lands.Lands + ASSET.lands.AllLands);
   }
 
   //units
   GetUnits(pageSize: number, pageNumber: number, filters: any) {
-    const headers = this.headers
     let params = new HttpParams()
       .set('pageSize', pageSize)
       .set('pageNumber', pageNumber);
@@ -112,10 +97,9 @@ export class RealStateServices {
     });
     const url = `${this.baseURL}${ASSET.units.Units}`;
 
-    return this.http.get<GetUnitsRoot>(url, { headers, params });
+    return this.http.get<GetUnitsRoot>(url, {  params });
   }
   GetUnitsByBuildingID(pageSize: number, pageNumber: number, filters: any) {
-    const headers = this.headers
     let params = new HttpParams()
       .set('pageSize', pageSize)
       .set('pageNumber', pageNumber);
@@ -126,14 +110,13 @@ export class RealStateServices {
     });
     const url = `${this.baseURL}${ASSET.units.Units}`;
 
-    return this.http.get<GetUnitsRoot>(url, { headers, params });
+    return this.http.get<GetUnitsRoot>(url, { params });
   }
   GetUnitsByID(id: number) {
     return this.http.get(this.baseURL + ASSET.units.Units + '/' + id);
   }
   CreateUnits(obj: any) {
-    const headers = this.headers
-    return this.http.post<IResult>(this.baseURL + ASSET.units.Units + ASSET.units.CreateUnits, obj, { headers });
+    return this.http.post<IResult>(this.baseURL + ASSET.units.Units + ASSET.units.CreateUnits, obj);
   }
   UpdateUnits(id: any, obj: any) {
     return this.http.put(
@@ -147,33 +130,28 @@ export class RealStateServices {
     );
   }
   getDropDownUnits() {
-    const headers = this.headers
-    return this.http.get<DropDownUnitRoot>(this.baseURL + ASSET.units.Units + ASSET.units.AllUnits, { headers });
+    return this.http.get<DropDownUnitRoot>(this.baseURL + ASSET.units.Units + ASSET.units.AllUnits);
   }
 
   //upload
   uploadDocument(data: any, code: string) {
-    const headers = this.headers
     const url = `${this.baseURL}${ASSET.document.documnet}/${code}${ASSET.document.createDocumnet}`;
-    return this.http.post<IStringResult>(url, data, { headers });
+    return this.http.post<IStringResult>(url, data);
   }
   //lookup
   GetLookUpSetByCode(code: string) {
-    const headers = this.headers
     const url = `${this.baseURL}${ASSET.lookup.getSetByCode}/${code}`;
 
-    return this.http.get<RootLookUp>(url, { headers });
+    return this.http.get<RootLookUp>(url);
   }
   GetLookUpItemByCode(setCode: string, ItemCode: string) {
-    const headers = this.headers
     const url = `${this.baseURL}${ASSET.lookup.getSetByCode}/${setCode}${ASSET.lookup.getItemByCode}/${ItemCode}`;
 
-    return this.http.get<RootLookUp>(url, { headers });
+    return this.http.get<RootLookUp>(url);
   }
 
   DownloadDocmument(documnetId: string) {
-    const headers = this.headers
     const url = `${this.baseURL}${ASSET.document.documnet}/${documnetId}`;
-    return this.http.get(url, { headers, responseType: 'blob' });
+    return this.http.get(url, { responseType: 'blob' });
   }
 }

@@ -106,19 +106,19 @@ export class CreateBuilding {
   ngOnInit(): void {
     this.attachmentsFiles = [
       {
-        elementId: 'buliding_permit',
+        elementId: 'photo',
         attachmentId: '',
       },
       {
-        elementId: 'buliding_safety_certificate',
+        elementId: 'photo',
         attachmentId: '',
       },
       {
-        elementId: 'buliding_completion_certificate',
+        elementId: 'photo',
         attachmentId: '',
       },
       {
-        elementId: 'architectural_and_electrical',
+        elementId: 'photo',
         attachmentId: '',
       },
     ];
@@ -168,7 +168,10 @@ export class CreateBuilding {
   createNewBuilding() {
     console.log(this.createBuilding)
     if (this.createBuilding.valid) {
-      this.newBuilding = { ...this.createBuilding.value, attachments: this.attachmentsFiles };
+      this.newBuilding = {
+        ...this.createBuilding.value, length: Number(this.createBuilding.value.length),
+        width: Number(this.createBuilding.value.width), numberOfFloors: Number(this.createBuilding.value.numberOfFloors),numberOfUnits: Number(this.createBuilding.value.numberOfUnits),attachments: this.attachmentsFiles
+      };
       this.RealStateServices.CreateBuildings(this.newBuilding).subscribe(
         (res) => {
           if (res.isSuccess) {
