@@ -22,8 +22,17 @@ export class InputUpload {
   @Input() required: boolean;
   @Input() labelTxt: string;
   @Output() inputValue = new EventEmitter<any>();
+  @Input() initialFileName: string; // إضافة Input جديدة لاسم الملف السابق
+
   value: any = '';
   disabled = false;
+  ngOnInit(): void {
+    console.log(this.initialFileName)
+    if (this.initialFileName) {
+      this.fileName = this.initialFileName;
+    }
+
+  }
   writeValue(value: any): void {
     this.value = value ?? '';
   }

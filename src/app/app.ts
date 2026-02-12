@@ -20,10 +20,10 @@ import { AsyncPipe, NgClass } from '@angular/common';
 })
 export class App {
   title: string;
-  currentUser$: Observable<boolean>;
+  Login$: Observable<boolean>;
 
   constructor(private CheckToken: CheckToken) {
-    this.currentUser$ = this.CheckToken.currentUser$;
+    this.Login$ = this.CheckToken.Login$;
   }
   getTitle(value: any) {
     this.title = value.pageTitle

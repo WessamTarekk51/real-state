@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ASSET } from 'src/app/core/api/asset.const';
-import { RootLoginUser } from 'src/app/shared/models/user/user';
+import { RootLoginUser, RootUserPermission } from 'src/app/shared/models/user/user';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -15,7 +15,10 @@ export class AccountSevices {
     return this.http.post<RootLoginUser>(this.baseURL + ASSET.identity.login, user);
   }
   getCurrentUser() {
-    return this.http.get(this.baseURL + ASSET.identity.currentUser);
+    return this.http.get<RootLoginUser>(this.baseURL + ASSET.identity.currentUser);
+  }
 
+  getUserPermissions(roleId : string){
+        return this.http.get<RootUserPermission>(this.baseURL + ASSET.role.Roles + '/'+roleId);
   }
 }

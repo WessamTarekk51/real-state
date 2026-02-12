@@ -4,6 +4,8 @@ import { AccountRoutingModule } from "src/app/features/account/account-routing-m
 import { Router, RouterLink } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { CheckToken } from '../services/check-token';
+import { Observable } from 'rxjs';
+import { LoginUser } from 'src/app/shared/models/user/user';
 
 @Component({
   selector: 'app-side-bar',
@@ -14,11 +16,20 @@ import { CheckToken } from '../services/check-token';
 export class SideBar {
   items: any[] = []
   menuItems: any[] = [];
-  constructor(private router: Router,private  CheckToken:CheckToken) { }
-  ngOnInit(): void {
-    this.getItems()
+  currentUser$: Observable<LoginUser | null>;
+  constructor(private router: Router, private CheckToken: CheckToken) {
+    this.currentUser$ = this.CheckToken.currentUser$;
+    console.log(this.currentUser$)
   }
-  getItems() {
+  ngOnInit(): void {
+    this.currentUser$.subscribe(user => {
+      if (!user) return;
+      const userPermissions = user.permissionIds; // string[]
+      this.getItems(userPermissions);
+    });
+
+  }
+  getItems(userPermissions : any) {
     this.items = [
       {
         label: 'لوحة التحكم',
@@ -31,22 +42,22 @@ export class SideBar {
         label: 'إدارة العقارات',
         icon: '',
         routerLink: "/real-state-management",
-        roles: [''],
+        roles: ['Permissions.Assets.View'],
         items: [
           {
             label: 'الاراضي',
             routerLink: "/real-state-management/lands",
-            roles: [],
+            roles: ['Permissions.Assets.View'],
           },
           {
             label: 'العمارات',
             routerLink: "/real-state-management/builings",
-            roles: [],
+            roles: ['Permissions.Assets.View'],
           },
           {
             label: 'الوحدات السكانية',
             routerLink: "/real-state-management/units",
-            roles: [],
+            roles: ['Permissions.Assets.View'],
           }
         ]
       },
@@ -54,22 +65,22 @@ export class SideBar {
         label: 'إدارة العملاء',
         icon: '',
         routerLink: "/customer-management",
-        roles: [''],
+        roles: ['Permissions.Clients.View'],
         items: [
           {
             label: 'العملاء',
             routerLink: "/customer-management/clients",
-            roles: [],
+            roles: ['Permissions.Clients.View'],
           },
           {
             label: 'اضافة عميل جديد',
             routerLink: "/customer-management/clients/create",
-            roles: [],
+            roles: ['Permissions.Clients.Create'],
           },
           {
             label: 'سجل المتابعات',
             routerLink: "/customer-management/calls",
-            roles: [],
+            roles: ['Permissions.Clients.View'],
           }
         ]
       },
@@ -188,7 +199,7 @@ export class SideBar {
       }
     ];
 
-    this.menuItems = this.filterItemsByRole(this.items);
+    this.menuItems = this.filterItemsByPermissions(this.items,userPermissions);
   }
   onMenuItemClick() {
     // if (this.innerHeight > this.innerWidth) {
@@ -197,13 +208,30 @@ export class SideBar {
     // }
 
   }
-  filterItemsByRole(items: any[]): any[] {
-    return items;
-  }
+
   isActive(menuItem: any): boolean {
     return this.router.isActive(menuItem.routerLink, true);
   }
-  logOut(){
+  logOut() {
     this.CheckToken.logout()
   }
+  filterItemsByPermissions(items: any[], userPermissions: string[]): any[] {
+    return items
+      .filter(item => {
+        // لو مفيش permissions محددة → يظهر لكل المستخدمين
+        if (!item.roles || item.roles.length === 0) return true;
+
+        // يظهر بس لو عنده أي permission مطابقة
+        return item.roles.some((p:string) => userPermissions.includes(p));
+      })
+      .map(item => {
+        const newItem = { ...item };
+        // فلترة العناصر الفرعية recursively
+        if (item.items && item.items.length) {
+          newItem.items = this.filterItemsByPermissions(item.items, userPermissions);
+        }
+        return newItem;
+      });
+  }
+
 }

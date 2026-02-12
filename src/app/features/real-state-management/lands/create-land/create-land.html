@@ -112,7 +112,7 @@
           <div class="full">
             <app-input-upload formControlName="BulidingPermit"
               (inputValue)="uploadDocument($event,0,this.BulidingPermit)" [placeholder]="'تصريح البناء'"
-              [formStyle]="true" [required]="true" [labelTxt]="'تصريح البناء'">
+              [formStyle]="true" [required]="true" [labelTxt]="'تصريح البناء'" [initialFileName]="photos[0]">
             </app-input-upload>
             <div class="errormassage">
               <app-control-messages class="form-validation-style" [control]="createLands.get('BulidingPermit')"

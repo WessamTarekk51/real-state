@@ -8,7 +8,7 @@ import { DetailesLand } from './detailes-land/detailes-land';
 const routes: Routes = [
   { path: '', component: Lands },
   { path: 'CreateLand', component: CreateLand },
-  { path: 'EditLand', component: EditLand },
+  { path: 'edit', component: CreateLand },
   { path: 'detailesLand', component: DetailesLand },
 
 ];

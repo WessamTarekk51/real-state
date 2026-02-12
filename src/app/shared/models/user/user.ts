@@ -10,9 +10,20 @@ export interface LoginUser {
   userId: string,
   userName: string,
   email: string,
+  roleName: string,
+  roleId: string,
   token: {
     accessToken: string,
     refreshToken: string
   }
-
+  permissionIds?: string[]
+}
+export interface RootUserPermission extends IResult {
+  value: UserPermission
+}
+export interface UserPermission {
+  description: string
+  id: string
+  name: string
+  permissionIds: string[]
 }

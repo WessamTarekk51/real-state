@@ -1,16 +1,16 @@
     <div id="page" >
-      @if(currentUser$ | async){
+      @if(Login$ | async){
       <div id="sideBar">
         <app-side-bar></app-side-bar>
       </div>
       }
-      <div id="routerPage" [ngClass]="{'notLogin' : currentUser$}">
-        @if(currentUser$ | async){
+      <div id="routerPage" [ngClass]="{'notLogin' : Login$}">
+        @if(Login$ | async){
         <div class="top">
           <app-top-bar [title]="title"></app-top-bar>
         </div>
         }
-        <div class="page" [@routeAnimation]="prepareRoute(outlet)" [ngClass]="{'notLogin' : currentUser$}">
+        <div class="page" [@routeAnimation]="prepareRoute(outlet)" [ngClass]="{'notLogin' : Login$}">
           <router-outlet #outlet="outlet" (activate)="getTitle($event)" />
         </div>
         <app-loading></app-loading>

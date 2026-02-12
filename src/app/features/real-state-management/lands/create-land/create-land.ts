@@ -24,6 +24,7 @@ import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { LookUpItem } from 'src/app/shared/models/real-state/lookup';
 import { attachment } from 'src/app/shared/models/real-state/attachment';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-land',
@@ -62,13 +63,18 @@ export class CreateLand implements AfterViewInit {
   OwnershipCertificate: string;
   OwnershipContract: string;
   RealStateRegistrationDocuments: string;
-  @Input() edit: boolean;
-  @Input() landEdited: LandDetailes;
+
+  landEdited: LandDetailes;
+  landId: string;
+  edit: boolean = false;
+  photos: any[] = ["photo1", "photo2", "photo3", "photo4"];
   constructor(
     private fb: UntypedFormBuilder,
     private RealStateServices: RealStateServices,
     private cd: ChangeDetectorRef,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
     this.createLands = this.fb.group({
       name: ['', Validators.required],
@@ -79,7 +85,7 @@ export class CreateLand implements AfterViewInit {
       width: [null, Validators.required],
       latitude: [0.1, Validators.required],
       longitude: [0.1, Validators.required],
-      description: ['', Validators.required],
+      description: [''],
       BulidingPermit: ['', Validators.required],
       OwnershipCertificate: ['', Validators.required],
       OwnershipContract: ['', Validators.required],
@@ -172,12 +178,12 @@ export class CreateLand implements AfterViewInit {
         this.RealStateRegistrationDocuments = RealStateRegistrationDocuments.value.id
         this.attachmentsFiles[3].attachmentId = this.RealStateRegistrationDocuments
       }
-      this.edit ? this.getEditedData() : ''
+      this.isEditRoute();
     });
   }
   addLand() {
     if (this.createLands.valid) {
-      this.newLand = { ...this.createLands.value, attachments: this.attachmentsFiles,width: Number(this.createLands.value.width),length: Number(this.createLands.value.length),latitude: Number(this.createLands.value.latitude),longitude: Number(this.createLands.value.longitude) };
+      this.newLand = { ...this.createLands.value, attachments: this.attachmentsFiles, width: Number(this.createLands.value.width), length: Number(this.createLands.value.length), latitude: Number(this.createLands.value.latitude), longitude: Number(this.createLands.value.longitude) };
       this.RealStateServices.CreateLands(this.newLand).subscribe(
         (res) => {
           if (res.isSuccess) {
@@ -223,18 +229,50 @@ export class CreateLand implements AfterViewInit {
     let id = this.Governorates().find(el => el.name == name)?.id;
     return id;
   }
-  getEditedData() {
-    this.createLands.patchValue({
-      name: this.landEdited.name,
-      length: this.landEdited.length,
-      width: this.landEdited.width,
-      latitude: this.landEdited.latitude,
-      longitude: this.landEdited.longitude,
-      description: this.landEdited.description,
-      governorateId: this.getGovernorateById(this.landEdited.governorateName.ar),
-      area: this.landEdited.length * this.landEdited.width
+  getCityById(name: string) {
+    let id = this.Cities().find(el => el.name == name)?.id;
+    return id;
+  }
+  getDistrictById(name: string) {
+    let id = this.Districtes().find(el => el.name == name)?.id;
+    return id;
+  }
 
-    });
+  isEditRoute() {
+    this.edit = this.router.url.includes('edit');
+    this.edit
+      ? [
+        (this.landId = String(
+          this.activatedRoute.snapshot.queryParamMap.get('id')
+        )),
+        this.getEditedData(),
+        this.photos = ["photo1", "photo2", "photo3", "photo4"],
+        (this.pageTitle = 'تعديل الأرض '),
+      ]
+      : (this.pageTitle = 'إضافة قطعة أرض جديدة');
+    this.cd.markForCheck();
+  }
+  getEditedData() {
+    this.RealStateServices.GetLandsByID(this.landId).subscribe(res => {
+      if (res.isSuccess) {
+        this.landEdited = res.value;
+        console.log(this.landEdited)
+        this.createLands.patchValue({
+          name: this.landEdited.name,
+          governorateId: this.getGovernorateById(this.landEdited.governorateName.ar),
+          cityId: this.getCityById(this.landEdited.cityName.ar),
+          districtId: this.getDistrictById(this.landEdited.districtName.ar),
+          length: this.landEdited.length,
+          width: this.landEdited.width,
+          latitude: this.landEdited.latitude,
+          longitude: this.landEdited.longitude,
+          description: this.landEdited.description,
+          area: this.landEdited.length * this.landEdited.width
+        });
+        this.cd.markForCheck();
+      }
+    })
+
   }
 
 

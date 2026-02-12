@@ -6,14 +6,17 @@ import { firstValueFrom } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
 
-  private router = inject(Router);
+ private router = inject(Router);
   private checkToken = inject(CheckToken);
 
-  async canActivate(): Promise<boolean> {
-    const isLoggedIn = await firstValueFrom(this.checkToken.currentUser$);
+  canActivate(): boolean {
+    const isLoggedIn = !!this.checkToken.currentUser$;
+
     if (!isLoggedIn) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/login'], { replaceUrl: true });
+      return false;
     }
-    return isLoggedIn;
+
+    return true;
   }
 }

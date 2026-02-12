@@ -39,14 +39,16 @@
         background-color: #fff;
       }
 
+      &:valid {
+        color: black;
+      }
+
       option[selected] {
         color: black;
       }
 
 
-      &:valid {
-        color: rgba(187, 187, 187, 1);
-      }
+
     }
   }
 

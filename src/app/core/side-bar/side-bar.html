@@ -2,15 +2,23 @@
   <div class="logo">
     <img src="/assets/images/logo.png" alt="">
   </div>
+
   <div class="menu">
-    <p-panelMenu [model]="items" class="nav" />
+    <!-- استخدم menuItems بعد الفلترة -->
+    <p-panelMenu [model]="menuItems" class="nav"></p-panelMenu>
+
     <ng-template let-item pTemplate="item">
       <div>
-        <span class="p-menuitem-icon" [routerLink]="item.routerLink" [ngClass]="{'active': isActive(item)}"></span>
+        <span
+          class="p-menuitem-icon"
+          [routerLink]="item.routerLink"
+          [ngClass]="{'active': isActive(item)}"
+        ></span>
         <div class="Ptext">{{ item.label }}</div>
       </div>
     </ng-template>
   </div>
+
   <div class="logout">
     <p (click)="logOut()">تسجيل الخروج</p>
   </div>

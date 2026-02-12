@@ -6,29 +6,29 @@ import { RealStateServices } from '../../real-state-services';
 
 @Component({
   selector: 'app-edit-land',
-  imports: [CreateLand],
+  imports: [],
   templateUrl: './edit-land.html',
   styleUrl: './edit-land.scss'
 })
 export class EditLand {
-  pageTitle: string = 'تعديل قطعة أرض'
-  landId: string;
-  landDetailes: LandDetailes
-  constructor(private activatedRoute: ActivatedRoute, private RealStateServices :RealStateServices,private cd:ChangeDetectorRef) { }
+  // pageTitle: string = 'تعديل قطعة أرض'
+  // landId: string;
+  // landDetailes: LandDetailes
+  // constructor(private activatedRoute: ActivatedRoute, private RealStateServices :RealStateServices,private cd:ChangeDetectorRef) { }
 
-  ngOnInit(): void {
-    this.landId = String(this.activatedRoute.snapshot.queryParamMap.get('id'))
-    this.getLandDetailes()
+  // ngOnInit(): void {
+  //   this.landId = String(this.activatedRoute.snapshot.queryParamMap.get('id'))
+  //   this.getLandDetailes()
 
-  }
+  // }
 
 
-  getLandDetailes() {
-    this.RealStateServices.GetLandsByID(this.landId).subscribe(res => {
-      if (res.isSuccess) {
-        this.landDetailes = res.value
-        this.cd.markForCheck();
-      }
-    })
-  }
+  // getLandDetailes() {
+  //   this.RealStateServices.GetLandsByID(this.landId).subscribe(res => {
+  //     if (res.isSuccess) {
+  //       this.landDetailes = res.value
+  //       this.cd.markForCheck();
+  //     }
+  //   })
+  // }
 }

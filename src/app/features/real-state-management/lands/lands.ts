@@ -120,7 +120,7 @@ export class Lands {
     });
   }
   editLand(data: Land) {
-    this.router.navigate(['/real-state-management/lands/EditLand'], {
+    this.router.navigate(['/real-state-management/lands/edit'], {
       queryParams: { id: data.id },
     });
   }
