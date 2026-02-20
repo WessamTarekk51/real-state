@@ -17,9 +17,8 @@
       </div>
       <div class="half">
         <div class="full">
-          <app-input-select [value]="createUnits.value.buildingId" formControlName="buildingId"
-            [placeholder]="'العمارة التابعة'" [options]="DropDownBuildings" [formStyle]="true" [required]="true"
-            [labelTxt]="'العمارة التابعة '">
+          <app-input-select formControlName="buildingId" [placeholder]="'العمارة التابعة'" [options]="DropDownBuildings"
+            [formStyle]="true" [required]="true" [labelTxt]="'العمارة التابعة '">
           </app-input-select>
           <div class="errormassage">
             <app-control-messages class="form-validation-style" [control]="createUnits.get('buildingId')"
@@ -94,9 +93,8 @@
     <div class="row">
       <div class="half">
         <div class="full">
-          <app-input-select [value]="createUnits.value.buildingId" formControlName="unitTypeId"
-            [placeholder]="'شقة | دوبلكس | بنتهاوس | استوديو | محل | مكتب'" [options]="UnitType()" [formStyle]="true"
-            [required]="true" [labelTxt]="'نوع الوحدة '">
+          <app-input-select formControlName="unitTypeId" [placeholder]="'شقة | دوبلكس | بنتهاوس | استوديو | محل | مكتب'"
+            [options]="UnitType()" [formStyle]="true" [required]="true" [labelTxt]="'نوع الوحدة '">
           </app-input-select>
           <div class="errormassage">
             <app-control-messages class="form-validation-style" [control]="createUnits.get('unitTypeId')"
@@ -133,9 +131,8 @@
       <div class="half">
 
         <div class="full">
-          <app-input-select [value]="createUnits.value.buildingId" formControlName="unitStatusId"
-            [placeholder]="'حالة الوحدة'" [options]="UnitStatus()" [formStyle]="true" [required]="true"
-            [labelTxt]="'حالة الوحدة'">
+          <app-input-select formControlName="unitStatusId" [placeholder]="'حالة الوحدة'" [options]="UnitStatus()"
+            [formStyle]="true" [required]="true" [labelTxt]="'حالة الوحدة'">
           </app-input-select>
           <div class="errormassage">
             <app-control-messages class="form-validation-style" [control]="createUnits.get('unitStatusId')"
@@ -148,9 +145,8 @@
       </div>
       <div class="half">
         <div class="full">
-          <app-input-select [value]="createUnits.value.buildingId" formControlName="finishingTypeId"
-            [placeholder]="'كامل | نصف تشطيب | بدون'" [options]="finishingType()" [formStyle]="true" [required]="true"
-            [labelTxt]="'تشطيب'">
+          <app-input-select formControlName="finishingTypeId" [placeholder]="'كامل | نصف تشطيب | بدون'"
+            [options]="finishingType()" [formStyle]="true" [required]="true" [labelTxt]="'تشطيب'">
           </app-input-select>
           <div class="errormassage">
             <app-control-messages class="form-validation-style" [control]="createUnits.get('finishingTypeId')"
@@ -217,7 +213,8 @@
             <!-- (inputValue)="get()" -->
             <app-input-upload formControlName="OwnershipAgreement"
               (inputValue)="uploadDocument($event,0,this.OwnershipAgreement)" [placeholder]="'عقد الملكية أو الإيجار'"
-              [formStyle]="true" [required]="true" [labelTxt]="'عقد الملكية أو الإيجار'"></app-input-upload>
+              [formStyle]="true" [required]="true" [labelTxt]="'عقد الملكية أو الإيجار'" [initialFileName]="photos[0]"
+              [edit]="edit"></app-input-upload>
             <div class="errormassage">
               <app-control-messages class="form-validation-style" [control]="createUnits.get('OwnershipAgreement')"
                 [validationMessages]="[
@@ -230,7 +227,8 @@
         <div class="half">
           <div class="full">
             <app-input-upload formControlName="UnitDiagram" (inputValue)="uploadDocument($event,1,this.UnitDiagram)"
-              [placeholder]="'مخطط الوحدة'" [formStyle]="true" [required]="true" [labelTxt]="'مخطط الوحدة'">
+              [placeholder]="'مخطط الوحدة'" [formStyle]="true" [required]="true" [labelTxt]="'مخطط الوحدة'"
+              [initialFileName]="photos[1]" [edit]="edit">
             </app-input-upload>
             <div class="errormassage">
               <app-control-messages class="form-validation-style" [control]="createUnits.get('UnitDiagram')"
@@ -246,7 +244,8 @@
         <div class="half">
           <div class="full">
             <app-input-upload formControlName="UnitPhotos" (inputValue)="uploadDocument($event,2,this.UnitPhotos)"
-              [placeholder]="'صور الوحدة'" [formStyle]="true" [required]="true" [labelTxt]="'صور الوحدة'">
+              [placeholder]="'صور الوحدة'" [formStyle]="true" [required]="true" [labelTxt]="'صور الوحدة'"
+              [initialFileName]="photos[2]" [edit]="edit">
             </app-input-upload>
             <div class="errormassage">
               <app-control-messages class="form-validation-style" [control]="createUnits.get('UnitPhotos')"
@@ -261,7 +260,8 @@
           <div class="full">
             <app-input-upload formControlName="PreviousUtilityBills"
               (inputValue)="uploadDocument($event,3,this.PreviousUtilityBills)" [placeholder]="'فواتير الخدمات السابقة'"
-              [formStyle]="true" [required]="true" [labelTxt]="'فواتير الخدمات السابقة'"></app-input-upload>
+              [formStyle]="true" [required]="true" [labelTxt]="'فواتير الخدمات السابقة'" [initialFileName]="photos[3]"
+              [edit]="edit"></app-input-upload>
             <div class="errormassage">
               <app-control-messages class="form-validation-style" [control]="createUnits.get('PreviousUtilityBills')"
                 [validationMessages]="[
@@ -275,7 +275,13 @@
     </div>
     <div class="buttons">
       <app-button [className]="'gray'" [buttonTxt]="'الغاء'"></app-button>
+      @if(!edit){
       <app-button [className]="'main'" (click)="createNewUnit()" [buttonTxt]="'اضافة'"></app-button>
+      }
+      @else {
+      <app-button [className]="'main'" (click)="editUnit()" [buttonTxt]="'حفظ التعديلات'"></app-button>
+
+      }
     </div>
   </form>
 </div>

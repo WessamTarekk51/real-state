@@ -50,7 +50,7 @@ export class Units {
     private dialog: MatDialog,
     private router: Router,
     private RealStateServices: RealStateServices
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getDataSelect();
@@ -118,7 +118,7 @@ export class Units {
       (res) => {
         if (res.isSuccess) {
           this.UnitStatus = res.value.items;
-          this.UnitStatus.forEach(el=>{
+          this.UnitStatus.forEach(el => {
             el.name = el.descriptions.ar
           })
         }
@@ -135,9 +135,12 @@ export class Units {
     });
   }
   editUnit(unit: Unit) {
-    this.router.navigate(['/real-state-management/units/createUnit'], {
-      queryParams: { id: unit.id },
+    this.router.navigate(['/real-state-management/units/editUnit'], {
+      queryParams: { id: unit.id, statusId: this.getUnitStatusById(unit.status.ar) },
     });
   }
-
+  getUnitStatusById(name: string) {
+    let id = this.UnitStatus.find(el => el.descriptions.ar == name)?.id;
+    return id;
+  }
 }

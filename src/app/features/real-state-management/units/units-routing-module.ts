@@ -8,7 +8,7 @@ import { Units } from './units';
 const routes: Routes = [
    { path: '', component: Units },
     { path: 'createUnit', component: CreateUnit },
-    { path: 'editUnit', component: EditUnit},
+    { path: 'editUnit', component: CreateUnit},
     { path: 'detailesUnit', component: DetailesUnit },
 ];
 

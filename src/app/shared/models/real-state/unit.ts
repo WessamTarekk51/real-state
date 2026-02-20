@@ -52,3 +52,39 @@ export interface DropDownUnits {
   id: string,
   name: string,
 }
+export interface UnitDetailesRoot extends IResult {
+  value: UnitDetailes
+}
+
+export interface UnitDetailes {
+  area: number,
+  attachments: Attachment[]
+  building: string,
+  description: string,
+  finishingType: {
+    ar: string,
+    en: string
+  },
+
+  floorNumber: number
+  hasBalcony: boolean,
+  hasCentralAC: boolean,
+  hasGarage: boolean,
+  id: string,
+  land: string,
+  name: string,
+  number: string,
+  numberOfBatEmployeeooms: number
+  numberOfRooms: number
+  price: number
+  unitType: {
+    ar: string,
+    en: string
+  }
+}
+export interface Attachment {
+  elementId: string;
+  attachmentId?: string;
+  attachmentIds?: string[];
+}
+

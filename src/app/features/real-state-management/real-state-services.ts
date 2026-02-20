@@ -4,7 +4,7 @@ import { ASSET } from 'src/app/core/api/asset.const';
 import { BuildingDetailesRoot, DropDownBuildingsRoot, GetBuildingsRoot } from 'src/app/shared/models/real-state/building';
 import { DropDownLandsRoot, GetLandsRoot, LandDetailesRoot } from 'src/app/shared/models/real-state/land';
 import { RootLookUp } from 'src/app/shared/models/real-state/lookup';
-import { DropDownUnitRoot, GetUnitsRoot } from 'src/app/shared/models/real-state/unit';
+import { DropDownUnitRoot, GetUnitsRoot, UnitDetailesRoot } from 'src/app/shared/models/real-state/unit';
 import { IResult, IStringResult } from 'src/app/shared/models/result';
 import { environment } from 'src/environments/environment';
 
@@ -112,14 +112,14 @@ export class RealStateServices {
 
     return this.http.get<GetUnitsRoot>(url, { params });
   }
-  GetUnitsByID(id: number) {
-    return this.http.get(this.baseURL + ASSET.units.Units + '/' + id);
+  GetUnitsByID(id: string) {
+    return this.http.get<UnitDetailesRoot>(this.baseURL + ASSET.units.Units + '/' + id);
   }
   CreateUnits(obj: any) {
     return this.http.post<IResult>(this.baseURL + ASSET.units.Units + ASSET.units.CreateUnits, obj);
   }
   UpdateUnits(id: any, obj: any) {
-    return this.http.put(
+    return this.http.put<IResult>(
       this.baseURL + ASSET.units.Units + '/' + id + '/update',
       obj
     );
