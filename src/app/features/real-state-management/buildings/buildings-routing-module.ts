@@ -8,7 +8,7 @@ import { DetailesBuilding } from './detailes-building/detailes-building';
 const routes: Routes = [
   { path: '', component: Buildings },
   { path: 'createBuilding', component: CreateBuilding },
-  { path: 'editBuilding', component: EditBuilding},
+  { path: 'editBuilding', component: CreateBuilding},
   { path: 'detailesBuilding', component: DetailesBuilding },
 ];
 

@@ -17,8 +17,9 @@
       </div>
       <div class="half">
         <div class="full">
-          <app-input-select [value]="createLands.value.governorateId" formControlName="governorateId" [placeholder]="'المحافظة'" [options]="Governorates()"
-            [formStyle]="true" [required]="true" [labelTxt]="'المحافظة'">
+          <app-input-select [value]="createLands.value.governorateId" formControlName="governorateId"
+            [placeholder]="'المحافظة'" [options]="Governorates()" [formStyle]="true" [required]="true"
+            [labelTxt]="'المحافظة'">
           </app-input-select>
           <div class="errormassage">
             <app-control-messages class="form-validation-style" [control]="createLands.get('governorateId')"
@@ -75,8 +76,8 @@
           </div>
         </div>
         <div class="half colum">
-          <app-input-num formControlName="width" (inputValue)="getcaluArea($event)" [placeholder]="'العرض'" [formStyle]="true" [required]="true"
-            [labelTxt]="'العرض (م)'">
+          <app-input-num formControlName="width" (inputValue)="getcaluArea($event)" [placeholder]="'العرض'"
+            [formStyle]="true" [required]="true" [labelTxt]="'العرض (م)'">
           </app-input-num>
           <div class="errormassage">
             <app-control-messages class="form-validation-style" [control]="createLands.get('width')"
@@ -89,8 +90,8 @@
       </div>
       <div class="half">
         <div class="full">
-          <app-input-num  formControlName="area" [placeholder]="'المساحة الكلية (م²)'" [formStyle]="true" [required]="true" [readOnly]="true"
-            [labelTxt]="'المساحة الكلية (م²)'">
+          <app-input-num formControlName="area" [placeholder]="'المساحة الكلية (م²)'" [formStyle]="true"
+            [required]="true" [readOnly]="true" [labelTxt]="'المساحة الكلية (م²)'">
           </app-input-num>
         </div>
       </div>
@@ -112,7 +113,8 @@
           <div class="full">
             <app-input-upload formControlName="BulidingPermit"
               (inputValue)="uploadDocument($event,0,this.BulidingPermit)" [placeholder]="'تصريح البناء'"
-              [formStyle]="true" [required]="true" [labelTxt]="'تصريح البناء'" [initialFileName]="photos[0]">
+              [formStyle]="true" [required]="true" [labelTxt]="'تصريح البناء'" [initialFileName]="photos[0]"
+              [edit]="edit">
             </app-input-upload>
             <div class="errormassage">
               <app-control-messages class="form-validation-style" [control]="createLands.get('BulidingPermit')"
@@ -127,7 +129,8 @@
           <div class="full">
             <app-input-upload formControlName="OwnershipCertificate"
               (inputValue)="uploadDocument($event,1,this.OwnershipCertificate)" [placeholder]="'شهادة الملكية'"
-              [formStyle]="true" [required]="true" [labelTxt]="'شهادة الملكية'">
+              [formStyle]="true" [required]="true" [labelTxt]="'شهادة الملكية'" [initialFileName]="photos[1]"
+              [edit]="edit">
             </app-input-upload>
             <div class="errormassage">
               <app-control-messages class="form-validation-style" [control]="createLands.get('OwnershipCertificate')"
@@ -144,7 +147,8 @@
           <div class="full">
             <app-input-upload formControlName="OwnershipContract"
               (inputValue)="uploadDocument($event,2,this.OwnershipContract)" [placeholder]="'عقد البيع أو التمليك '"
-              [formStyle]="true" [required]="true" [labelTxt]="'عقد البيع أو التمليك '"></app-input-upload>
+              [formStyle]="true" [required]="true" [labelTxt]="'عقد البيع أو التمليك '" [initialFileName]="photos[2]"
+              [edit]="edit"></app-input-upload>
             <div class="errormassage">
               <app-control-messages class="form-validation-style" [control]="createLands.get('OwnershipContract')"
                 [validationMessages]="[
@@ -159,7 +163,7 @@
             <app-input-upload formControlName="RealStateRegistrationDocuments"
               (inputValue)="uploadDocument($event,3,this.RealStateRegistrationDocuments)"
               [placeholder]="'مستندات الشهر العقاري'" [formStyle]="true" [required]="true"
-              [labelTxt]="'مستندات الشهر العقاري'"></app-input-upload>
+              [labelTxt]="'مستندات الشهر العقاري'" [initialFileName]="photos[3]" [edit]="edit"></app-input-upload>
             <div class="errormassage">
               <app-control-messages class="form-validation-style"
                 [control]="createLands.get('RealStateRegistrationDocuments')" [validationMessages]="[
@@ -173,7 +177,12 @@
     </div>
     <div class="buttons">
       <app-button [className]="'gray'" [buttonTxt]="'الغاء'"></app-button>
+      @if(!edit){
       <app-button [className]="'main'" [buttonTxt]="'اضافة'" (click)="addLand()"></app-button>
+      }
+      @else {
+      <app-button [className]="'main'" [buttonTxt]="'حفظ التعديلات'" (click)="editLand()"></app-button>
+      }
     </div>
   </form>
 </div>

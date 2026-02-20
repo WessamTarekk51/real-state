@@ -36,7 +36,7 @@ export class RealStateServices {
     return this.http.post<IResult>(this.baseURL + ASSET.buildings.Buildings + ASSET.buildings.CreateBuildings, obj);
   }
   UpdateBuildings(id: any, obj: any) {
-    return this.http.put(
+    return this.http.put<IResult>(
       this.baseURL + ASSET.buildings.Buildings + '/' + id + '/update',
       obj
     );
@@ -71,7 +71,7 @@ export class RealStateServices {
     return this.http.post<IResult>(this.baseURL + ASSET.lands.Lands + ASSET.lands.CreateLands, obj);
   }
   UpdateLands(id: any, obj: any) {
-    return this.http.put(
+    return this.http.put<IResult>(
       this.baseURL + ASSET.lands.Lands + '/' + id + ASSET.lands.UpdateLands,
       obj
     );

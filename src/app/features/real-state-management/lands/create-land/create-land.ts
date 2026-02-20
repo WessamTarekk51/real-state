@@ -53,12 +53,7 @@ export class CreateLand implements AfterViewInit {
   Cities = signal<LookUpItem[]>([]);
   Districtes = signal<LookUpItem[]>([]);
   newLand: CreateNewLand;
-  dataLoaded = computed(
-    () =>
-      this.Governorates().length > 0 &&
-      this.Cities().length > 0 &&
-      this.Districtes().length > 0
-  );
+  dataLoaded: boolean = false;
   BulidingPermit: string;
   OwnershipCertificate: string;
   OwnershipContract: string;
@@ -112,19 +107,19 @@ export class CreateLand implements AfterViewInit {
   ngOnInit(): void {
     this.attachmentsFiles = [
       {
-        elementId: 'photo',
+        elementId: 'buliding_permit',
         attachmentId: '',
       },
       {
-        elementId: 'photo',
+        elementId: 'ownership_certificate',
         attachmentId: '',
       },
       {
-        elementId: 'photo',
+        elementId: 'ownership_contract',
         attachmentId: '',
       },
       {
-        elementId: 'photo',
+        elementId: 'RealState_registration_documents',
         attachmentId: '',
       },
     ];
@@ -179,6 +174,8 @@ export class CreateLand implements AfterViewInit {
         this.attachmentsFiles[3].attachmentId = this.RealStateRegistrationDocuments
       }
       this.isEditRoute();
+      this.dataLoaded = true
+
     });
   }
   addLand() {
@@ -188,6 +185,8 @@ export class CreateLand implements AfterViewInit {
         (res) => {
           if (res.isSuccess) {
             this.messageService.add({ severity: 'success', summary: 'Success', detail: 'تم إنشاء الأرض بنجاح' });
+            this.createLands.reset();
+            this.GOLandHome()
           } else {
             this.messageService.add({ severity: 'error', summary: 'حدث خطأ', detail: 'حاول مرة أخري.' });
           }
@@ -196,7 +195,6 @@ export class CreateLand implements AfterViewInit {
           this.messageService.add({ severity: 'error', summary: 'حدث خطأ', detail: 'حاول مرة أخري.' });
         }
       );
-      this.createLands.reset();
     } else {
       this.validateAllFields(this.createLands);
     }
@@ -238,6 +236,18 @@ export class CreateLand implements AfterViewInit {
     return id;
   }
 
+
+
+
+  getcaluArea(length: any) {
+    this.createLands.value.width != null && this.createLands.value.length ? this.getArea() : ''
+  }
+
+  getArea() {
+    this.createLands.patchValue({
+      area: this.createLands.value.width * this.createLands.value.length
+    });
+  }
   isEditRoute() {
     this.edit = this.router.url.includes('edit');
     this.edit
@@ -267,24 +277,44 @@ export class CreateLand implements AfterViewInit {
           latitude: this.landEdited.latitude,
           longitude: this.landEdited.longitude,
           description: this.landEdited.description,
-          area: this.landEdited.length * this.landEdited.width
+          area: this.landEdited.length * this.landEdited.width,
+          BulidingPermit: this.landEdited.attachments.find(x => x.elementId === 'buliding_permit')?.attachmentId,
+          OwnershipCertificate: this.landEdited.attachments.find(x => x.elementId === 'ownership_certificate')?.attachmentId,
+          OwnershipContract: this.landEdited.attachments.find(x => x.elementId === 'ownership_contract')?.attachmentId,
+          RealStateRegistrationDocuments: this.landEdited.attachments.find(x => x.elementId === 'RealState_registration_documents')?.attachmentId
         });
+        this.attachmentsFiles = this.landEdited.attachments
         this.cd.markForCheck();
       }
     })
 
   }
 
+  editLand() {
+    if (this.createLands.valid) {
+      this.newLand = { ...this.createLands.value, attachments: this.attachmentsFiles, width: Number(this.createLands.value.width), length: Number(this.createLands.value.length), latitude: Number(this.createLands.value.latitude), longitude: Number(this.createLands.value.longitude) };
+      this.RealStateServices.UpdateLands(this.landId, this.newLand).subscribe(
+        (res) => {
+          if (res.isSuccess) {
+            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'تم تعديل الأرض بنجاح' });
+            this.createLands.reset();
+            this.GOLandHome()
+          } else {
+            this.messageService.add({ severity: 'error', summary: 'حدث خطأ', detail: 'حاول مرة أخري.' });
+          }
+        },
+        (error) => {
+          this.messageService.add({ severity: 'error', summary: 'حدث خطأ', detail: 'حاول مرة أخري.' });
+        }
+      );
+    } else {
+      this.validateAllFields(this.createLands);
+    }
 
-  getcaluArea(length: any) {
-    console.log(length)
-    this.createLands.value.width != null && this.createLands.value.length ? this.getArea() : ''
   }
 
-  getArea() {
-    this.createLands.patchValue({
-      area: this.createLands.value.width * this.createLands.value.length
-    });
+  GOLandHome() {
+    this.router.navigate(['/real-state-management/lands']);
   }
 
 

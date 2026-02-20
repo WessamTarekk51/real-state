@@ -45,4 +45,9 @@ export class DetailesLand {
       window.URL.revokeObjectURL(url);
     })
   }
+  editLand() {
+    this.router.navigate(['/real-state-management/lands/edit'], {
+      queryParams: { id: this.landId },
+    });
+  }
 }

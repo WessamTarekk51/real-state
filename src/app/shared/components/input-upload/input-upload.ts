@@ -23,12 +23,15 @@ export class InputUpload {
   @Input() labelTxt: string;
   @Output() inputValue = new EventEmitter<any>();
   @Input() initialFileName: string; // إضافة Input جديدة لاسم الملف السابق
+  @Input() edit: boolean; // إضافة Input جديدة لاسم الملف السابق
 
   value: any = '';
   disabled = false;
   ngOnInit(): void {
     console.log(this.initialFileName)
-    if (this.initialFileName) {
+    console.log("this.edit",this.edit)
+
+    if (this.initialFileName && this.edit) {
       this.fileName = this.initialFileName;
     }
 

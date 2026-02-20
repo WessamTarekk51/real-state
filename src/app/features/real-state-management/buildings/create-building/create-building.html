@@ -96,8 +96,8 @@
     <div class="row">
       <div class="half">
         <div class="half colum">
-          <app-input-num [placeholder]="'الطول'" (inputValue)="getcaluArea($event)" formControlName="length" [formStyle]="true" [required]="true"
-            [labelTxt]="'الطول (م)'">
+          <app-input-num [placeholder]="'الطول'" (inputValue)="getcaluArea($event)" formControlName="length"
+            [formStyle]="true" [required]="true" [labelTxt]="'الطول (م)'">
           </app-input-num>
           <div class="errormassage">
             <app-control-messages class="form-validation-style" [control]="createBuilding.get('length')"
@@ -108,8 +108,8 @@
           </div>
         </div>
         <div class="half colum">
-          <app-input-num [placeholder]="'العرض'" (inputValue)="getcaluArea($event)" formControlName="width" [formStyle]="true" [required]="true"
-            [labelTxt]="'العرض (م)'">
+          <app-input-num [placeholder]="'العرض'" (inputValue)="getcaluArea($event)" formControlName="width"
+            [formStyle]="true" [required]="true" [labelTxt]="'العرض (م)'">
           </app-input-num>
           <div class="errormassage">
             <app-control-messages class="form-validation-style" [control]="createBuilding.get('width')"
@@ -122,8 +122,8 @@
       </div>
       <div class="half">
         <div class="full">
-          <app-input-num formControlName="area" [placeholder]="'المساحة الكلية (م²)'" [formStyle]="true" [required]="true"
-            [labelTxt]="'المساحة الكلية (م²)'">
+          <app-input-num formControlName="area" [placeholder]="'المساحة الكلية (م²)'" [formStyle]="true"
+            [required]="true" [labelTxt]="'المساحة الكلية (م²)'">
           </app-input-num>
         </div>
       </div>
@@ -143,8 +143,10 @@
         <div class="half">
           <div class="full">
             <!-- (inputValue)="get()" -->
-            <app-input-upload formControlName="BulidingPermit" (inputValue)="uploadDocument($event,0,this.BulidingPermit)" [placeholder]="' رخصة البناء'" [formStyle]="true"
-              [required]="true" [labelTxt]="' رخصة البناء'" ></app-input-upload>
+            <app-input-upload formControlName="BulidingPermit"
+              (inputValue)="uploadDocument($event,0,this.BulidingPermit)" [placeholder]="' رخصة البناء'"
+              [formStyle]="true" [required]="true" [labelTxt]="' رخصة البناء'" [initialFileName]="photos[0]"
+              [edit]="edit"></app-input-upload>
             <div class="errormassage">
               <app-control-messages class="form-validation-style" [control]="createBuilding.get('BulidingPermit')"
                 [validationMessages]="[
@@ -156,8 +158,10 @@
         </div>
         <div class="half">
           <div class="full">
-            <app-input-upload formControlName="BulidingSafetyCertificate" (inputValue)="uploadDocument($event,1,this.BulidingSafetyCertificate)" [placeholder]="' شهادة السلامة الإنشائية'"
-              [formStyle]="true" [required]="true" [labelTxt]="' شهادة السلامة الإنشائية'"></app-input-upload>
+            <app-input-upload formControlName="BulidingSafetyCertificate"
+              (inputValue)="uploadDocument($event,1,this.BulidingSafetyCertificate)"
+              [placeholder]="' شهادة السلامة الإنشائية'" [formStyle]="true" [required]="true"
+              [labelTxt]="' شهادة السلامة الإنشائية'" [initialFileName]="photos[1]" [edit]="edit"></app-input-upload>
             <div class="errormassage">
               <app-control-messages class="form-validation-style"
                 [control]="createBuilding.get('BulidingSafetyCertificate')" [validationMessages]="[
@@ -171,8 +175,10 @@
       <div class="row">
         <div class="half">
           <div class="full">
-            <app-input-upload formControlName="BuildingCompletionCertificate" (inputValue)="uploadDocument($event,2,this.BuildingCompletionCertificate)" [placeholder]="'شهادة إتمام البناء'"
-              [formStyle]="true" [required]="true" [labelTxt]="'شهادة إتمام البناء'"></app-input-upload>
+            <app-input-upload formControlName="BuildingCompletionCertificate"
+              (inputValue)="uploadDocument($event,2,this.BuildingCompletionCertificate)"
+              [placeholder]="'شهادة إتمام البناء'" [formStyle]="true" [required]="true"
+              [labelTxt]="'شهادة إتمام البناء'" [initialFileName]="photos[2]" [edit]="edit"></app-input-upload>
             <div class="errormassage">
               <app-control-messages class="form-validation-style"
                 [control]="createBuilding.get('BuildingCompletionCertificate')" [validationMessages]="[
@@ -184,9 +190,11 @@
         </div>
         <div class="half">
           <div class="full">
-            <app-input-upload formControlName="ArchitecturalAndElectrical" (inputValue)="uploadDocument($event,3,this.ArchitecturalAndElectrical)"
+            <app-input-upload formControlName="ArchitecturalAndElectrical"
+              (inputValue)="uploadDocument($event,3,this.ArchitecturalAndElectrical)"
               [placeholder]="'المخططات المعمارية والكهربائية'" [formStyle]="true" [required]="true"
-              [labelTxt]="'المخططات المعمارية والكهربائية'"></app-input-upload>
+              [labelTxt]="'المخططات المعمارية والكهربائية'" [initialFileName]="photos[3]" [edit]="edit">
+            </app-input-upload>
             <div class="errormassage">
               <app-control-messages class="form-validation-style"
                 [control]="createBuilding.get('ArchitecturalAndElectrical')" [validationMessages]="[
@@ -200,7 +208,12 @@
     </div>
     <div class="buttons">
       <app-button [className]="'gray'" [buttonTxt]="'الغاء'"></app-button>
+      @if(!edit){
       <app-button [className]="'main'" (click)="createNewBuilding()" [buttonTxt]="'اضافة'"></app-button>
+      }@else {
+      <app-button [className]="'main'" (click)="editBuilding()" [buttonTxt]="'حفظ التعديلات'"></app-button>
+
+      }
     </div>
   </form>
 </div>
