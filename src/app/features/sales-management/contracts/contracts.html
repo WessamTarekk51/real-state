@@ -1,1 +1,45 @@
-<p>contracts works!</p>
+<div id="container-page">
+  <div class="container-filter">
+    <div class="title-filter">
+      <p>البحث</p>
+    </div>
+    <div class="content-filter">
+      <div class="thrid">
+        <app-input-txt [placeholder]="'رقم العقد'" [(ngModel)]="filters.ContractNumber"
+          (inputValue)="getFilter($event)"></app-input-txt>
+      </div>
+      <div class="thrid">
+        <app-input-txt [placeholder]="'اسم العميل'" [(ngModel)]="filters.ClientName" (inputValue)="getFilter($event)">
+        </app-input-txt>
+      </div>
+      <div class="thrid">
+        <app-input-txt [placeholder]="'رقم الوحدة'" [(ngModel)]="filters.UnitNumber" (inputValue)="getFilter($event)">
+        </app-input-txt>
+      </div>
+      <div class="thrid">
+        <app-input-date [placeholder]="'تاريخ بداية الدفع'" [(ngModel)]="filters.ContractDate"
+          (inputValue)="getFilter($event)"></app-input-date>
+      </div>
+      <div class="thrid">
+        <app-input-num [placeholder]="'قيمة العقد'" [(ngModel)]="filters.TotalPrice" (inputValue)="getFilter($event)">
+        </app-input-num>
+      </div>
+      <div class="thrid">
+        <app-input-num [placeholder]="'قيمة الوحدة'" [(ngModel)]="filters.UnitPriceAtContract"
+          (inputValue)="getFilter($event)">
+        </app-input-num>
+      </div>
+    </div>
+  </div>
+  <div class="buttons">
+    <app-button [className]="'custom'" [buttonTxt]="'تصدير إلى Excel'"></app-button>
+    <app-button [className]="'main'" [buttonTxt]="'+ إنشاء عقد جديد'" (buttonClick)="create()"></app-button>
+  </div>
+  <div class="container-table" *ngIf="contracts && contracts.items.length; else noData">
+    <app-table [cols]="cols" [items]="contracts.items" [totalPages]="totalPages" [pageSize]="pageSize"
+      (pageNumber)="GetpageNumber($event)" (view)="detailes($event)" (edit)="edit($event)"></app-table>
+  </div>
+  <ng-template #noData>
+    <p class="text-center text-gray-500 mt-4">لا توجد عقود متاحة حالياً</p>
+  </ng-template>
+</div>

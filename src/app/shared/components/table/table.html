@@ -32,20 +32,20 @@
           </div>
           }
           @if(col.controlOutcome){
-            <div class="icons">
-              <div class="icon view" (click)="viewItem(rowData)"></div>
-              <div class="icon edit" (click)="editItem(rowData)"></div>
-              @if(!col.unit){
-              <div class="icon print" (click)="printItem(rowData, 'row-' + rowData.id)"></div>
-              }
-            </div>
+          <div class="icons">
+            <div class="icon view" (click)="viewItem(rowData)"></div>
+            <div class="icon edit" (click)="editItem(rowData)"></div>
+            @if(!col.unit){
+            <div class="icon print" (click)="printItem(rowData, 'row-' + rowData.id)"></div>
             }
-            @if(col.controlInstallment){
-              <div class="icons">
-                <div class="icon edit" (click)="editItem(rowIndex)"></div>
-                <div class="icon delete" (click)="deleteItem(rowIndex)"></div>
-              </div>
-              }
+          </div>
+          }
+          @if(col.controlInstallment){
+          <div class="icons">
+            <div class="icon edit" (click)="editItem(rowIndex)"></div>
+            <div class="icon delete" (click)="deleteItem(rowIndex)"></div>
+          </div>
+          }
           @if(col.status){
           @if(rowData[col.field] == "تحت الإنشاء"){
           <div class="status red">
@@ -86,16 +86,23 @@
           }
 
           @else if(rowData[col.field] == "إعادة بيع") {
-            <div class="status red">
-              <p> إعادة بيع </p>
+          <div class="status red">
+            <p> إعادة بيع </p>
+          </div>
+          }
+          @else if(rowData[col.field] == "متاح") {
+          <div class="status red">
+            <p> متاح </p>
+          </div>
+          }
+          }
+          @if(col.controlContract){
+            <div class="icons">
+              <div class="icon view" (click)="viewItem(rowData)"></div>
+              <div class="icon edit" (click)="editItem(rowData)"></div>
+              <div class="icon print" (click)="printItem(rowData, 'row-' + rowData.id)"></div>
             </div>
             }
-            @else if(rowData[col.field] == "متاح") {
-              <div class="status red">
-                <p> متاح </p>
-              </div>
-              }
-          }
         </td>
         }
 

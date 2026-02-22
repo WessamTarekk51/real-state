@@ -88,17 +88,17 @@ export class SideBar {
         label: 'إدارة المبيعات',
         icon: '',
         routerLink: "/sales-management",
-        roles: [''],
+        roles: ['Permissions.Clients.View'],
         items: [
           {
             label: 'العقود',
             routerLink: "/sales-management/contracts",
-            roles: [],
+            roles: ['Permissions.Clients.View'],
           },
           {
             label: 'انشاء عقد جديد',
             routerLink: "/sales-management/contracts/create",
-            roles: [],
+            roles: ['Permissions.Clients.View'],
           }
         ]
       },
@@ -106,47 +106,47 @@ export class SideBar {
         label: 'إدارة المدفوعات',
         icon: '',
         routerLink: "/payments-management",
-        roles: [''],
+        roles: ['Permissions.Clients.View'],
         items: [
           {
             label: 'المدفوعات الواردة',
             routerLink: "/payments-management/incomes",
-            roles: [],
+            roles: ['Permissions.Clients.View'],
           },
           {
             label: 'اضافه مدفوع وارد',
             routerLink: "/payments-management/incomes/create",
-            roles: [],
+            roles: ['Permissions.Clients.View'],
           },
           {
             label: 'المدفوعات الخارجة',
             routerLink: "/payments-management/outcomes",
-            roles: [],
+            roles: ['Permissions.Clients.View'],
           },
           {
             label: 'اضافه مدفوع خارج',
             routerLink: "/payments-management/outcomes/create",
-            roles: [],
+            roles: ['Permissions.Clients.View'],
           },
           {
             label: 'مدفوعات خاصة',
             routerLink: "/payments-management/privateOutcomes",
-            roles: [],
+            roles: ['Permissions.Clients.View'],
           },
           {
             label: 'اضافه مدفوع خاص',
             routerLink: "/payments-management/privateOutcomes/create",
-            roles: [],
+            roles: ['Permissions.Clients.View'],
           },
           {
             label: 'الأقساط',
             routerLink: "/payments-management/installments",
-            roles: [],
+            roles: ['Permissions.Clients.View'],
           },
           {
             label: 'اضافه قسط',
             routerLink: "/payments-management/installments/create",
-            roles: [],
+            roles: ['Permissions.Clients.View'],
           },
 
         ]
@@ -155,27 +155,27 @@ export class SideBar {
         label: 'إدارة المستخدمين ',
         icon: '',
         routerLink: "/user-management",
-        roles: [''],
+        roles: ['Permissions.Clients.View'],
         items: [
           {
             label: 'الأدوار والصلاحيات',
             routerLink: "/user-management/roles",
-            roles: [],
+            roles: ['Permissions.Clients.View'],
           },
           {
             label: 'انشاء دور جديد',
             routerLink: "/user-management/roles/create",
-            roles: [],
+            roles: ['Permissions.Clients.View'],
           },
           {
             label: 'المستخدمين',
             routerLink: "/user-management/users",
-            roles: [],
+            roles: ['Permissions.Clients.View'],
           },
           {
             label: 'انشاء مستخدم جديد',
             routerLink: "/user-management/users/create",
-            roles: [],
+            roles: ['Permissions.Clients.View'],
           }
         ]
       },
@@ -183,17 +183,17 @@ export class SideBar {
         label: 'إدارة العمال والفنيين',
         icon: '',
         routerLink: "/worker-management",
-        roles: [''],
+        roles: ['Permissions.Clients.View'],
         items: [
           {
             label: 'العمال',
             routerLink: "/worker-management/workers",
-            roles: [],
+            roles: ['Permissions.Clients.View'],
           },
           {
             label: 'إضافة عامل جديد',
             routerLink: "/worker-management/workers/create",
-            roles: [],
+            roles: ['Permissions.Clients.View'],
           }
         ]
       }

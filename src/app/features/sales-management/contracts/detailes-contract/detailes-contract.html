@@ -1,0 +1,171 @@
+<div id="container-page" *ngIf="contractDetailes != undefined">
+  <div class="container-detailes" id="print-section">
+    <div class="space-between">
+      <div class="title">
+        <p>{{contractDetailes.contractNumber}}</p>
+      </div>
+      <div class="w80f">
+        <div class="buttons">
+          <app-button [className]="'orange'" (click)="edit()" [buttonTxt]="'تعديل'"></app-button>
+          <app-button [className]="'sky'" (click)="print()" [buttonTxt]="'طباعه'" [iconName]="'print'"></app-button>
+          <app-button [className]="'main'" [buttonTxt]="'تصدير إلى Excel'"></app-button>
+        </div>
+      </div>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p>قيمة العقد</p>
+      </div>
+      <div class="des w50f end">
+        <p>{{contractDetailes.unitPriceAtContract}}</p>
+      </div>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p>نوع العقد</p>
+      </div>
+      <div class="des w50f end">
+        <p>{{contractDetailes.contractTypeName}}</p>
+      </div>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p>مدة العقد</p>
+      </div>
+      <div class="des w50f end">
+        <p>?</p>
+      </div>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p>تاريخ بدء العقد</p>
+      </div>
+      <div class="des w50f end">
+        <p>{{contractDetailes.contractDate}}</p>
+      </div>
+    </div>
+
+    <div class="space-between">
+      <div class="txt w50f">
+        <p> صورة العقد</p>
+      </div>
+      <div class="file w50f end">
+        <p id="photo" (click)="downloadAttachment('photo')">Attachment</p>
+        <div class="icon"></div>
+      </div>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p> ملاحظات</p>
+      </div>
+      <div class="des w50f end">
+        <p>{{contractDetailes.notes}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="toggle-collection">
+    <div class="collection " *ngFor="let button of buttons" [ngClass]="{'active':button.active}"
+      (click)="toggleButton(button)">
+      <p>{{button.name}}</p>
+    </div>
+
+  </div>
+  <div class="container-detailes">
+    @if(activeTab == 1){
+    <div class="space-between m1b">
+      <div class="title">
+        <p>{{contractDetailes.clientName}}</p>
+      </div>
+      <div class="w80f">
+      </div>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p>رقم الهاتف</p>
+      </div>
+      <div class="des w50f end">
+        <p>{{contractDetailes.clientPhone}}</p>
+      </div>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p> الرقم القومي</p>
+      </div>
+      <div class="des w50f end">
+        <p>{{contractDetailes.clientNationalId}}</p>
+      </div>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p>البريد الالكتروني</p>
+      </div>
+      <div class="des w50f end">
+        <p>{{contractDetailes.clientEmail}}</p>
+      </div>
+    </div>
+
+    }
+    @if(activeTab == 2){
+    <div class="space-between m1b">
+      <div class="title">
+        <p>{{contractDetailes.unitName}}</p>
+      </div>
+      <div class="w80f">
+      </div>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p>العمارة التابعة</p>
+      </div>
+      <div class="des w50f end">
+        <p>{{contractDetailes.buildingName}}</p>
+      </div>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p> الأرض التابعة</p>
+      </div>
+      <div class="des w50f end">
+        <p>{{contractDetailes.landName}}</p>
+      </div>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p> المساحة</p>
+      </div>
+      <div class="des w50f end">
+        <p>{{contractDetailes.unitArea}}</p>
+      </div>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p> الدور</p>
+      </div>
+      <div class="des w50f end">
+        <p>{{contractDetailes.floorNumber}}</p>
+      </div>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p> نوع الوحدة </p>
+      </div>
+      <div class="des w50f end">
+        <p>{{contractDetailes.unitType}}</p>
+      </div>
+    </div>
+    <div class="space-between">
+      <div class="txt w50f">
+        <p> سعر الوحدة </p>
+      </div>
+      <div class="des w50f end">
+        <p>{{contractDetailes.unitPriceAtContract}}</p>
+      </div>
+    </div>
+    }
+    @if(activeTab == 3){
+      <app-table  [cols]="cols"
+      [items]="contractDetailes.installments"></app-table>
+    }
+  </div>
+</div>
