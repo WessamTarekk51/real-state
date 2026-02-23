@@ -1,4 +1,4 @@
-<div id="container-page">
+<div id="container-page" *ngIf="dataLoaded">
   <div class="toggle-collection">
     <div class="collection " *ngFor="let button of buttons" [ngClass]="{'active':button.active}"
       (click)="toggleButton(button)">
@@ -258,8 +258,9 @@
       <div class="row">
         <div class="full">
           <!-- (inputValue)="get()" -->
-          <app-input-upload (inputValue)="uploadDocument($event,0,this.BulidingPermit)" formControlName="BulidingPermit" [placeholder]="'عقد الملكية'" [formStyle]="true"
-            [required]="true" [labelTxt]="'عقد الملكية'"></app-input-upload>
+          <app-input-upload (inputValue)="uploadDocument($event,0,this.BulidingPermit)" formControlName="BulidingPermit"
+            [placeholder]="'عقد الملكية'" [formStyle]="true" [required]="true" [labelTxt]="'عقد الملكية'"
+            [initialFileName]="photos[0]" [edit]="edit"></app-input-upload>
           <div class="errormassage">
             <app-control-messages class="form-validation-style" [control]="createContract.get('BulidingPermit')"
               [validationMessages]="[

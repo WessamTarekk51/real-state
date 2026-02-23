@@ -1,5 +1,5 @@
-import { NgClass, NgFor } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { NgClass, NgFor, NgIf } from '@angular/common';
+import { ChangeDetectorRef, Component, signal } from '@angular/core';
 import { InputTxt } from 'src/app/shared/components/input-txt/input-txt';
 import { InputSelect } from 'src/app/shared/components/input-select/input-select';
 import { InputDate } from 'src/app/shared/components/input-date/input-date';
@@ -29,10 +29,11 @@ import { DropDownClients } from 'src/app/shared/models/customer/client';
 import { ManagementWorkerServices } from 'src/app/features/management-workers-technicians/management-worker-services';
 import { Employee } from 'src/app/shared/models/customer/employess';
 import { attachment } from 'src/app/shared/models/real-state/attachment';
-import { CreateNewContract } from 'src/app/shared/models/contract';
+import { ContractDetailes, CreateNewContract } from 'src/app/shared/models/contract';
 import { SalesServices } from '../../sales-services';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-contract',
@@ -49,7 +50,8 @@ import { ToastModule } from 'primeng/toast';
     InputUpload,
     ControlMessages,
     Table,
-    ToastModule
+    ToastModule,
+    NgIf
   ],
   templateUrl: './create-contract.html',
   styleUrl: './create-contract.scss',
@@ -63,7 +65,7 @@ export class CreateContract {
   installmentForm!: FormGroup;
   cols: any[];
   installment: boolean = false;
-
+  pageTitle: string = 'إنشاء عقد جديد'
   contractTypes = signal<LookUpItem[]>([]);
   unitTypes = signal<LookUpItem[]>([]);
   DropDownLands: DropDownLands[];
@@ -75,14 +77,23 @@ export class CreateContract {
   attachmentsFiles: attachment[];
   BulidingPermit: string;
   newContract: CreateNewContract;
+  dataLoaded: boolean = false;
 
+  contractEdited: ContractDetailes;
+  contractId: string;
+  edit: boolean = false;
+  photos: any[] = ["photo1"];
   constructor(
     private fb: UntypedFormBuilder,
     private RealStateServices: RealStateServices,
     private CustomerManagementServices: CustomerManagementServices,
     private ManagementWorkerServices: ManagementWorkerServices,
     private sales: SalesServices,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private cd: ChangeDetectorRef,
+    private SalesServices: SalesServices
   ) {
     this.createContract = this.fb.group({
       contractDate: ['', Validators.required],
@@ -255,6 +266,8 @@ export class CreateContract {
           this.BulidingPermit = BulidingPermit.value.id;
           this.attachmentsFiles[0].attachmentId = this.BulidingPermit;
         }
+        this.isEditRoute();
+        this.dataLoaded = true
       }
     );
   }
@@ -317,7 +330,7 @@ export class CreateContract {
     });
   }
 
-  getBoolaen(event: any){
+  getBoolaen(event: any) {
     event == 'true' ? (this.installment = true, this.createContract.value.isInstallmentPlan = true) : (this.installment = false, this.createContract.value.isInstallmentPlan = false);
     return this.createContract.value.isInstallmentPlan;
   }
@@ -364,5 +377,63 @@ export class CreateContract {
     } else {
       this.validateAllFields(this.createContract);
     }
+  }
+  isEditRoute() {
+    this.edit = this.router.url.includes('edit');
+    this.edit
+      ? [
+        (this.contractId = String(
+          this.activatedRoute.snapshot.queryParamMap.get('id')
+        )),
+        this.getEditedData(),
+        this.photos = ["photo1"],
+        (this.pageTitle = 'تعديل الأرض '),
+      ]
+      : (this.pageTitle = 'إضافة قطعة أرض جديدة');
+    this.cd.markForCheck();
+  }
+  getEditedData() {
+    this.SalesServices.GetContractsByID(this.contractId).subscribe(res => {
+      if (res.isSuccess) {
+        this.contractEdited = res.value;
+        console.log(this.contractEdited)
+        this.createContract.patchValue({
+          contractDate: this.contractEdited.contractDate,
+          totalPrice: this.contractEdited.totalPrice,
+          contractTypeId: this.contractEdited.contractTypeId,
+          notes: this.contractEdited.notes,
+          landId: this.getLandById(this.contractEdited.landName),
+          buildingId: this.getLandById(this.contractEdited.buildingName),
+          unitId: this.getUnitById(this.contractEdited.buildingName),
+          unitPriceAtContract: this.contractEdited.unitPriceAtContract,
+          clientNationalId: this.contractEdited.clientNationalId,
+          employeeId: this.contractEdited.clientNationalId,
+          isInstallmentPlan: this.contractEdited.isInstallmentPlan,
+          BulidingPermit: this.contractEdited.attachments.find(x => x.elementId === 'photo')?.attachmentId,
+          installments: this.contractEdited.installments,
+        });
+        this.attachmentsFiles = this.contractEdited.attachments
+        this.cd.markForCheck();
+      }
+    })
+  }
+  GOContractHome() {
+    this.router.navigate(['/sales-management/contracts']);
+  }
+
+
+  getLandById(name: string) {
+    console.log(this.DropDownLands)
+    let id = this.DropDownLands.find(el => el.name?.includes(name))?.id;
+    return id;
+  }
+
+  getBulidingById(name: string) {
+    let id = this.DropDownBuildings.find(el => el.name?.includes(name))?.id;
+    return id;
+  }
+  getUnitById(name: string) {
+    let id = this.DropDownUnits.find(el => el.name?.includes(name))?.id;
+    return id;
   }
 }
