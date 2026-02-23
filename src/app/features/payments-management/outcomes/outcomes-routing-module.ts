@@ -8,6 +8,8 @@ const routes: Routes = [
   { path: '', component: Outcomes },
   { path: 'create', component: CreateOutcome },
   { path: 'detailes', component: DetailesOutcome },
+  { path: 'edit', component: CreateOutcome },
+
 ];
 
 @NgModule({

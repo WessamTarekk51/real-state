@@ -89,7 +89,9 @@ export class Contracts {
     });
   }
   edit(item: any) {
-    console.log(item);
+    this.router.navigate(['/sales-management/contracts/edit'], {
+      queryParams: { id: item.id },
+    });
   }
   create(){
     this.router.navigate(['/sales-management/contracts/create']);

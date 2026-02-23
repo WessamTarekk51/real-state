@@ -1,1 +1,40 @@
-<p>private-outcomes works!</p>
+<div id="container-page">
+  <div class="container-filter">
+    <div class="title-filter">
+      <p>البحث</p>
+    </div>
+    <div class="content-filter">
+      <div class="thrid">
+        <app-input-txt [placeholder]="'رقم العملية'" [(ngModel)]="filters.Code" (inputValue)="getFilter($event)"></app-input-txt>
+      </div>
+      <div class="thrid">
+        <app-input-txt [placeholder]="'اسم العميل'" [(ngModel)]="filters.ClientName" (inputValue)="getFilter($event)"></app-input-txt>
+      </div>
+      <div class="thrid">
+        <app-input-select [placeholder]="'الوحدة'" [(ngModel)]="filters.UnitId" [options]="DropDownUnits" (inputValue)="getFilter($event)"></app-input-select>
+      </div>
+      <div class="thrid">
+        <app-input-num [placeholder]="' المبلغ'"  [(ngModel)]="filters.Amount" (inputValue)="getFilter($event)"></app-input-num>
+      </div>
+      <div class="thrid">
+        <app-input-select [placeholder]="'نوع المخرجات'" [(ngModel)]="filters.type" [options]="DropDownUnits" (inputValue)="getFilter($event)"></app-input-select>
+      </div>
+      <div class="thrid">
+        <app-input-date [placeholder]="'تاريخ  الدفع'" [(ngModel)]="filters.PaymentDate" (inputValue)="getFilter($event)"></app-input-date>
+      </div>
+    </div>
+  </div>
+  <div class="buttons">
+    <app-button [className]="'custom'" [buttonTxt]="'تصدير إلى Excel'"></app-button>
+    <app-button [className]="'main'" [buttonTxt]="'+ إضافة مدفوع وارد'" (buttonClick)="createPrivate()"></app-button>
+  </div>
+  <div class="container-table" *ngIf="privates && privates.items.length; else noData">
+    <app-table [cols]="cols" [items]="privates.items" [totalPages]="totalPages" [pageSize]="pageSize"
+      (pageNumber)="GetpageNumber($event)" ></app-table>
+      <!-- (view)="detailesIncome($event)"
+      (edit)="editIncome($event)" -->
+  </div>
+  <ng-template #noData>
+    <p class="text-center">لا يوجد مدفوعات خاصة حالياً</p>
+  </ng-template>
+</div>

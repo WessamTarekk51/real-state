@@ -90,8 +90,34 @@ export const ASSET = {
     UpdateOutCome: '/update', //PUT
     DeleteOutCome: '/delete', //DELETE
   },
+  InCome: {
+    InComes: '/api/incoming-payments', // get
+    GetInComes: '/get', // get
+    GetInComeByID: '/get', // get
+    CreateInCome: '/create', // post
+    UpdateInCome: '/update', //PUT
+    DeleteInCome: '/delete', //DELETE
+  },
+  Installment: {
+    Installments: '/api/ingoing-payments', // get
+    GetInstallments: '/get', // get
+    GetInstallmentByID: '/get', // get
+    CreateInstallment: '/create', // post
+    UpdateInstallment: '/update', //PUT
+    DeleteInstallment: '/delete', //DELETE
+  },
+  Privates: {
+    Privates: '/api/ingoing-payments', // get
+    GetPrivates: '/get', // get
+    GetPrivateByID: '/get', // get
+    CreatePrivate: '/create', // post
+    UpdatePrivate: '/update', //PUT
+    DeletePrivate: '/delete', //DELETE
+  },
   Contract: {
     Contracts: '/api/contracts',
     CreateContract: '/create', // post
+    AllContracts: '/dropdown',
+
   },
 } as const;

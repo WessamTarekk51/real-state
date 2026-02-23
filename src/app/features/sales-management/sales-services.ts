@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ASSET } from 'src/app/core/api/asset.const';
-import { ContractDetailesRoot, GetContractsRoot } from 'src/app/shared/models/contract';
+import { ContractDetailesRoot, DropDownContractsRoot, GetContractsRoot } from 'src/app/shared/models/contract';
 import { IResult } from 'src/app/shared/models/result';
 import { environment } from 'src/environments/environment';
 
@@ -35,5 +35,9 @@ export class SalesServices {
 
   GetContractsByID(id: string) {
     return this.http.get<ContractDetailesRoot>(this.baseURL + ASSET.Contract.Contracts + '/' + id);
+  }
+
+  getDropDownContracts() {
+    return this.http.get<DropDownContractsRoot>(this.baseURL + ASSET.Contract.Contracts + ASSET.Contract.AllContracts);
   }
 }

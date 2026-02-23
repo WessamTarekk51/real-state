@@ -1,1 +1,41 @@
-<p>installments works!</p>
+<div id="container-page">
+  <div class="container-filter">
+    <div class="title-filter">
+      <p>البحث</p>
+    </div>
+    <div class="content-filter">
+
+      <div class="thrid">
+        <app-input-txt [placeholder]="'رقم العقد'" [(ngModel)]="filters.ContractNumber" (inputValue)="getFilter($event)"></app-input-txt>
+      </div>
+      <div class="thrid">
+        <app-input-txt [placeholder]="'اسم العميل'" [(ngModel)]="filters.ClientName" (inputValue)="getFilter($event)"></app-input-txt>
+      </div>
+      <div class="thrid">
+        <app-input-select [placeholder]="'الوحدة'" [(ngModel)]="filters.UnitId" [options]="DropDownUnits" (inputValue)="getFilter($event)"></app-input-select>
+      </div>
+      <div class="thrid">
+        <app-input-num [placeholder]="' المقدم'"  [(ngModel)]="filters.mokadam" (inputValue)="getFilter($event)"></app-input-num>
+      </div>
+      <div class="thrid">
+        <app-input-num [placeholder]="'قيمة العقد'"  [(ngModel)]="filters.Amount" (inputValue)="getFilter($event)"></app-input-num>
+      </div>
+      <div class="thrid">
+        <app-input-date [placeholder]="'تاريخ بداية الدفع'" [(ngModel)]="filters.PaymentDate" (inputValue)="getFilter($event)"></app-input-date>
+      </div>
+    </div>
+  </div>
+  <div class="buttons">
+    <app-button [className]="'custom'" [buttonTxt]="'تصدير إلى Excel'"></app-button>
+    <app-button [className]="'main'" [buttonTxt]="'+ إضافة قسط جديد'" (buttonClick)="createInstallment()"></app-button>
+  </div>
+  <div class="container-table" *ngIf="Installments && Installments.items.length; else noData">
+    <app-table [cols]="cols" [items]="Installments.items" [totalPages]="totalPages" [pageSize]="pageSize"
+      (pageNumber)="GetpageNumber($event)" ></app-table>
+      <!-- (view)="detailesIncome($event)"
+      (edit)="editIncome($event)" -->
+  </div>
+  <ng-template #noData>
+    <p class="text-center">لا يوجد أقساط حالياً</p>
+  </ng-template>
+</div>

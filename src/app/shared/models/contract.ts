@@ -96,3 +96,11 @@ export interface ContractDetailes {
 
 
 
+export interface DropDownContractsRoot extends IResult {
+  value: DropDownContracts[]
+}
+
+export interface DropDownContracts {
+  id: string,
+  name: string,
+}

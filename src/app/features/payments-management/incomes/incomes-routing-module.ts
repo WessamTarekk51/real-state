@@ -8,6 +8,7 @@ const routes: Routes = [
     { path: '', component: Incomes },
     { path: 'create', component: CreateIncome },
     { path: 'detailes', component: DetailesIncome },
+    { path: 'edit', component: CreateIncome },
 
 ];
 

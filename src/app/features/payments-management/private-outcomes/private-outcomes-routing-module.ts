@@ -8,6 +8,8 @@ const routes: Routes = [
   { path: '', component: PrivateOutcomes },
   { path: 'create', component: CreatePrivateOutcome },
   { path: 'detailes', component: DetailesPrivateOutcome },
+  { path: 'edit', component: CreatePrivateOutcome },
+
 ];
 
 @NgModule({
