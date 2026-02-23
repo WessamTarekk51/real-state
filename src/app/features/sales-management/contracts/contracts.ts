@@ -17,12 +17,13 @@ import { InputDate } from 'src/app/shared/components/input-date/input-date';
   imports: [FormsModule, InputTxt, NgIf, InputNum, InputDate, Button, Table],
   templateUrl: './contracts.html',
   styleUrl: './contracts.scss',
+  standalone:true
 })
 export class Contracts {
   pageTitle: string = 'جدول عقود البيع';
   cols: any[];
   contracts: GetContracts;
-  pageSize: number = 4;
+  pageSize: number = 10;
   totalPages: number;
   pageNumber: number = 1;
   filters = {

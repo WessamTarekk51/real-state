@@ -10,14 +10,24 @@ import {
 import { InputTxt } from 'src/app/shared/components/input-txt/input-txt';
 import { ControlMessages } from 'src/app/shared/components/control-messages/control-messages';
 import { Button } from 'src/app/shared/components/button/button';
-import { CreateNewClient } from 'src/app/shared/models/customer/client';
+import {
+  ClientDetailes,
+  CreateNewClient,
+} from 'src/app/shared/models/customer/client';
 import { MessageService } from 'primeng/api';
 import { CustomerManagementServices } from '../../customer-management-services';
 import { ToastModule } from 'primeng/toast';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-client',
-  imports: [ToastModule,ReactiveFormsModule, InputTxt, ControlMessages, Button],
+  imports: [
+    ToastModule,
+    ReactiveFormsModule,
+    InputTxt,
+    ControlMessages,
+    Button,
+  ],
   templateUrl: './create-client.html',
   styleUrl: './create-client.scss',
   providers: [MessageService],
@@ -29,10 +39,15 @@ export class CreateClient {
   createClient!: FormGroup;
   newClient: CreateNewClient;
 
+  ClientEdited: ClientDetailes;
+  ClientId: string;
+  edit: boolean = false;
   constructor(
     private fb: UntypedFormBuilder,
     private cd: ChangeDetectorRef,
     private messageService: MessageService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
     private CustomerManagementServices: CustomerManagementServices
   ) {
     this.createClient = this.fb.group({
@@ -41,7 +56,7 @@ export class CreateClient {
       email: [''],
       nationalId: ['', Validators.required],
       address: [''],
-      attachments:[[{}]]
+      attachments: [[{}]],
     });
     this.newClient = {
       name: '',
@@ -54,6 +69,9 @@ export class CreateClient {
   }
   ngAfterViewInit() {
     this.cd.detectChanges();
+  }
+  ngOnInit(): void {
+    this.isEditRoute();
   }
 
   createNewClient() {
@@ -98,5 +116,78 @@ export class CreateClient {
         this.validateAllFields(control);
       }
     });
+  }
+
+  isEditRoute() {
+    this.edit = this.router.url.includes('edit');
+    this.edit
+      ? [
+          (this.ClientId = String(
+            this.activatedRoute.snapshot.queryParamMap.get('id')
+          )),
+          this.getEditedData(),
+          (this.pageTitle = 'تعديل العميل '),
+        ]
+      : (this.pageTitle = 'إضافة  عميل جديد');
+    this.cd.markForCheck();
+  }
+  getEditedData() {
+    this.CustomerManagementServices.GetClientByID(this.ClientId).subscribe(
+      (res) => {
+        if (res.isSuccess) {
+          this.ClientEdited = res.value;
+          console.log(this.ClientEdited);
+          this.createClient.patchValue({
+            name: this.ClientEdited.name,
+            phone: this.ClientEdited.phone,
+            email: this.ClientEdited.email,
+            nationalId: this.ClientEdited.nationalId,
+            address: this.ClientEdited.address,
+          });
+          this.cd.markForCheck();
+        }
+      }
+    );
+  }
+
+  editClient() {
+    if (this.createClient.valid) {
+      this.newClient = { ...this.createClient.value };
+      this.CustomerManagementServices.UpdateClient(
+        this.ClientId,
+        this.newClient
+      ).subscribe(
+        (res) => {
+          if (res.isSuccess) {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: 'تم تعديل العميل بنجاح',
+            });
+            this.createClient.reset();
+            this.GOHome();
+          } else {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'حدث خطأ',
+              detail: 'حاول مرة أخري.',
+            });
+          }
+        },
+        (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'حدث خطأ',
+            detail: 'حاول مرة أخري.',
+          });
+        }
+      );
+    } else {
+      this.validateAllFields(this.createClient);
+    }
+  }
+
+  GOHome() {
+    this.router.navigate(['/customer-management/clients']);
   }
 }

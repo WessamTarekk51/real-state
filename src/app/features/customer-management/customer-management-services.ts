@@ -43,4 +43,10 @@ export class CustomerManagementServices {
   getDropDownClients() {
     return this.http.get<DropDownClientsRoot>(this.baseURL + ASSET.client.Clients + ASSET.client.AllClients);
   }
+  UpdateClient(id: any, obj: any) {
+    return this.http.put<IResult>(
+      this.baseURL + ASSET.client.Clients + '/' + id + '/update',
+      obj
+    );
+  }
 }

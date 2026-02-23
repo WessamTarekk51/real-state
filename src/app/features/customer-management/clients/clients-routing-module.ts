@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: '', component: Clients },
   { path: 'create', component: CreateClient },
   { path: 'detailes', component: DetailesClient },
+  { path: 'edit', component: CreateClient },
 
 ];
 

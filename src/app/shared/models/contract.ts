@@ -3,7 +3,7 @@ import { IResult, Pagination } from "./result"
 
 export interface CreateNewContract{
   contractDate: string,
-  totalPrice: number,
+  totalPrice: string,
   contractTypeId: string,
   clientNationalId: string,
   notes: string,

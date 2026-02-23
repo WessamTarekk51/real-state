@@ -102,7 +102,7 @@ export class Clients {
     });
   }
   editClient(client: Client) {
-    this.router.navigate(['/customer-management/clients/create'], {
+    this.router.navigate(['/customer-management/clients/edit'], {
       queryParams: { id: client.id },
     });
   }

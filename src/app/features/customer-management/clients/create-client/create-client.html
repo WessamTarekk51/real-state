@@ -64,7 +64,14 @@
     </div>
     <div class="buttons">
       <app-button [className]="'gray'" [buttonTxt]="'الغاء'"></app-button>
+    @if(!edit){
       <app-button [className]="'main'"  [buttonTxt]="'اضافة'" (click)="createNewClient()" ></app-button>
+
+    }
+    @else {
+      <app-button [className]="'main'"  [buttonTxt]="'حفظ التعديلات'" (click)="editClient()" ></app-button>
+
+    }
     </div>
   </form>
 </div>

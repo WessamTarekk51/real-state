@@ -178,7 +178,6 @@
     </div>
     @if(installment == true){
     <div class="sub-form" [formGroup]="installmentForm">
-
       <div class="row">
         <div class="half">
           <div class="full">
@@ -242,9 +241,9 @@
       <div class="buttons">
         <app-button [className]="'main'" (click)="addInstallment()" [buttonTxt]="'إضافة'"></app-button>
       </div>
-      @if(createContract.value.installments.length != 0){
+      @if(installments.controls.length > 0){
       <app-table (delete)="deleteInstallment($event)" (edit)="editInstallment($event)" [cols]="cols"
-        [items]="createContract.value.installments"></app-table>
+        [items]="installments.value"></app-table>
       }
 
     </div>
@@ -283,7 +282,12 @@
         </app-button>
         }
         @if(activeTab == 5){
+        @if(!edit){
         <app-button [className]="'main'" [buttonTxt]="'حفظ'" (click)="addContract()"></app-button>
+        }
+        @else {
+        <app-button [className]="'main'" [buttonTxt]="'حفظ التعديلات'" (click)="editContract()"></app-button>
+        }
         }
 
     </div>

@@ -40,4 +40,10 @@ export class SalesServices {
   getDropDownContracts() {
     return this.http.get<DropDownContractsRoot>(this.baseURL + ASSET.Contract.Contracts + ASSET.Contract.AllContracts);
   }
+  UpdateContract(id: any, obj: any) {
+    return this.http.put<IResult>(
+      this.baseURL + ASSET.Contract.Contracts + '/' + id + '/update',
+      obj
+    );
+  }
 }
